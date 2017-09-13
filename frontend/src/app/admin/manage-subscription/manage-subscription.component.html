@@ -1,0 +1,215 @@
+  <!-- Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-sm-5 col-xs-5"><img src="images/login.jpg" alt="signin" class="img-responsive"/></div>
+            <div class="col-sm-7 col-xs-7 form-area">
+            	<button class="close" data-dismiss="modal">X</button>
+            	<h3>Login</h3>
+                <form>
+                	<div class="form-group">
+                    	<input type="text" placeholder="Enter Username" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                    	<input type="password" placeholder="Enter Password" class="form-control"/>
+                    </div>
+                    <div class="checkbox form-group">
+                        <label>
+                          <input type="checkbox"> <span style="font-weight:300;">Remember me</span>
+                        </label>
+                       <a href="#" class="pull-right color-blue">Forgot Password</a>
+                    </div>
+                    <div class="checkbox form-group">
+                        <button class="btn btn-default">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row">
+        	<div class="col-sm-5 col-xs-5 imag-ht"><img src="images/register.jpg" alt="signin" class="img-responsive"/></div>
+            <div class="col-sm-7 col-xs-7 form-area">
+            	<button class="close" data-dismiss="modal">X</button>
+            	<h3>Register</h3>
+                <div class="rgister-tab">
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                    	<form>
+                            <div class="form-group">
+                                <input type="text" placeholder="Enter Username" class="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Enter Password" class="form-control"/>
+                            </div>
+                             <div class="form-group">
+                                <input type="text" placeholder="Enter Phone Number" class="form-control"/>
+                            </div>
+                             <div class="form-group">
+                                <input type="email" placeholder="Enter Email" class="form-control"/>
+                            </div>
+                             <div class="form-group">
+                                <input type="text" placeholder="Enter Address" class="form-control"/>
+                            </div>
+                           
+                            <div class="checkbox form-group">
+                                <button class="btn btn-default">Register</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<header class="bs-docs-nav navbar navbar-static-top" id="top">
+      <div class="container">
+        <div class="navbar-header">
+          <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a href="#" class="navbar-brand"><img src="images/logo.png" alt="logo"/></a> </div>
+        <nav class="collapse navbar-collapse" id="bs-navbar">
+          <ul class="nav navbar-nav navbar-right">                    
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">FAQ,s</a></li>
+            <li class="signin"><a href="#" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+            <li class="getstrted"><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+<!--======================navigation ends here=========================-->
+
+<section class="admin-dashbord">
+	<div class="container-fluid">
+    	<div class="col-sm-3 left-side"><aside>
+        	<ul>
+            	<li class="active"><i><img src="images/admin-.png" alt="icon"/></i><a href="#">Admin Reports</a></li>
+                <li><i><img src="images/manage.png" alt="icon"/></i><a href="#">Manage Subscription Plan</a></li>
+                <li class="manage-user"><i><img src="images/manage.png" alt="icon"/></i><a href="#">Manage User</a><span class="pull-right" style="margin-right:15px;"><img src="images/plus.png" alt="img"/></span>
+                <ul>
+                	<li><a href="#">Manage user1</a></li>
+                    <!-- looping here -->
+                </ul>
+                </li>
+                <li><i><img src="images/manage-template.png" alt="icon"/></i><a href="#">Manage Template</a></li>
+                <li><i><img src="images/catagory.png" alt="icon"/></i><a href="#">Manage Category</a></li>
+                <li><i><img src="images/view.png" alt="icon"/></i><a href="#">View contracts</a></li>
+            </ul>
+        </aside></div>
+        
+        <div class="col-sm-9 right-side">
+        	<div class="top-content">
+            	<h4>Dashboard</h4>
+                <p>Welcome to Smart Contract Generator Admin Panel</p>
+            </div>
+           <div class="subscription-plan">
+           
+           <!-- Modal -->
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Subscription Plan</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                    	<div class="form-group">
+                        	<input type="text" class="form-control" placeholder="Package Name"/>
+                        </div>
+                        <div class="form-group">
+                        	<input type="text" class="form-control" placeholder="Package Price"/>
+                        </div>
+                        <div class="form-group">
+                        	<input type="text" class="form-control" placeholder="Number of Contracts"/>
+                        </div>
+                        <div class="form-group">
+                        	<input type="text" class="form-control" placeholder="Renewal Frequency"/>
+                        </div>
+                        <div class="form-group addbtn">
+                        	<button class="btn btn-default">Add</button>
+                        </div>
+                        
+                    </form>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
+           	 <div class="text-right subscrip-btn"><button class="btn btn-default" data-toggle="modal" data-target="#myModal3">Add Subscription Plan</button></div>
+             <div class="table-responsive">
+      	<table class="table table-bordered">
+        	<thead>
+                <tr class="active">
+                    <th>SNo</th>
+                    <th>Package Name</th>
+                    <th>Package Price</th>
+                    <th>Number Of Contracts</th>
+                    <th>Renewal Frequency</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            	<tr class="bg-wht">
+                	<td>#110011</td>
+                    <td>Lump Sum Contract</td>
+                    <td>ETH 13542</td>
+                    <td>Construction Company</td>
+                    <td>Building material</td>
+                    <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+      	    </div>
+        </div>
+    </div>
+        <a href="#" class="footer-logo"><img src="images/footer-logo.png" alt="logo-footer"/></a>
+</section>
+
+<!--======================Footer start here=========================-->
+<footer>
+	<div class="container">
+    	<div class="footer-nav text-center">  
+        	<a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Hot it works</a>
+            <a href="#">Benefits</a>
+            <a href="#">Payments Plans</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Blog</a>
+            <a href="#">FAQ,s</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="text-center social-icon">
+        	<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</footer>
+
+<div class="copy-right">
+	<p class="text-center">© Copyright 2017 Smart Contract Generator. All rights reserved.</p>
+</div>

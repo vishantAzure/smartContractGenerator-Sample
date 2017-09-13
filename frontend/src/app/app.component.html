@@ -1,0 +1,39 @@
+<router-outlet></router-outlet>
+<!-- <div class="container">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" formControlName="name">
+            <small *ngIf="!myForm.controls.name.valid" class="text-danger">
+                Name is required (minimum 5 characters).
+            </small>
+        </div>
+        <div formArrayName="addresses">
+            <div *ngFor="let address of myForm.controls.addresses.controls; let i=index">
+                <div>
+                    <span *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">
+                        -
+                    </span>
+                </div>
+                <div [formGroupName]="i">
+                    <div>
+                        <label>street</label>
+                        <input type="text" formControlName="street">
+                        <small [hidden]="myForm.controls.addresses.controls[i].controls.street.valid">
+                            Street is required
+                        </small>
+                    </div>
+                    <div>
+                        <label>postcode</label>
+                        <input type="text" formControlName="postcode">
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button (click)="addAddress()">Add Milestone</button>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!myForm.valid">Submit</button>
+    </form>
+    <button type="submit" (click)="getEmbark()">Get Embark</button>
+</div> -->
