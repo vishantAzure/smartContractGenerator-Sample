@@ -1,0 +1,1 @@
+# smartContractGenerator-Sample
