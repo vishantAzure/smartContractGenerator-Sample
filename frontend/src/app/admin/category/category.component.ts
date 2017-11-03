@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router}  from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Contract } from '../../modal';
-import { ToasterService} from 'angular2-toaster';
 import * as config from '../../../../../config/config';
 import {NgForm} from '@angular/forms';
 
@@ -12,7 +10,6 @@ declare var $;
   templateUrl: './category.component.html',
 })
 export class CategoryComponent implements OnInit {
-  private toasterService: ToasterService;
 addCategory;
 radio;
 contract;
@@ -23,9 +20,9 @@ cnfrmDeleteID;
 dashboard;
 ParentCategory;
 CategoryStatus;
-  constructor(public router: Router,public http: Http,toasterService: ToasterService) { 
-    this.toasterService = toasterService;
-    this.contract = new Contract();
+  constructor(public router: Router,public http: Http) { 
+    this.contract = {};
+    this.ParentCategory = [];
   }
 
   ngOnInit() {
@@ -40,6 +37,12 @@ CategoryStatus;
       let result = JSON.parse(res._body);
       if(result.status==200) {
         self.Category = result.res;
+        for(var i=0;i<result.res.length;i++) {
+          if(result.res[i].parent_category==0) {
+            self.ParentCategory.push(result.res[i]);
+            console.log(self.ParentCategory);
+          }
+        }
       }
       },(err)=>{
       this.message='Data Not Found';
@@ -48,22 +51,6 @@ CategoryStatus;
         $('#message').modal('toggle');
       }, 1000);
       });
-
-    this.http.post('//'+config.global_ip+'/ApI/retrieveParentCategory',obj).subscribe((res:any)=>{
-
-      let result = JSON.parse(res._body);
-      if(result.status==200) {
-        self.ParentCategory = result.res;
-      }
-      },(err)=>{
-        this.message='Data Not Found';
-      $('#message').modal('toggle');
-      setTimeout(function(){ 
-        $('#message').modal('toggle');
-      }, 1000);
-
-      });
-
   }else{
       console.log('ll');
   }
@@ -73,58 +60,12 @@ CategoryStatus;
     let self = this;
     $('#myModal1').modal('toggle');
     
-     if(!this.addCategory) {
+    this.http.post('//'+config.global_ip+'/ApI/addCategory',this.contract).subscribe((res:any)=>{
+      this.contract = {};
+      var result = JSON.parse(res._body);
 
-      this.contract['status']= this.CategoryStatus;
-      this.contract['icon']='jpg';
-      this.http.post('//'+config.global_ip+'/ApI/addParentCategory',this.contract).subscribe((res:any)=>{
-        this.contract = {};
-        var result = JSON.parse(res._body);
-        
-          if(result.status==200) {
-            this.message='Category Inserted';
-            $('#message').modal('toggle');
-            setTimeout(function(){ 
-              window.location.reload();
-            }, 1000);
-          }else{
-            this.message='Table Not Found';
-            $('#message').modal('toggle');
-            setTimeout(function(){ 
-              $('#message').modal('toggle');
-            }, 1000);
-          }
-          },(err)=>{
-          this.contract = {};
-          this.message='Table Not Found';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
-          }, 1000);
-
-          });
-
-    }else{
-
-      this.contract['parentCategory']= this.addCategory;
-      this.contract['status']= this.CategoryStatus;
-      this.contract['icon']='jpg';
-      this.http.post('//'+config.global_ip+'/ApI/addCategory',this.contract).subscribe((res:any)=>{
-        this.contract = {};
-        var result = JSON.parse(res._body);
-      
         if(result.status==200) {
-          this.message='Category Inserted';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            window.location.reload();
-          }, 1000);
-        }else{
-          this.message='Table Not Found';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
-          }, 1000);
+          this.ngOnInit();
         }
         },(err)=>{
         this.contract = {};
@@ -133,8 +74,8 @@ CategoryStatus;
         setTimeout(function(){ 
           $('#message').modal('toggle');
         }, 1000);
-        });
-    }
+
+    });
   }
 
   formreset(f:NgForm) {
@@ -142,27 +83,14 @@ CategoryStatus;
   }
 
   EditCategory() {
-    $('#myModal2').modal('toggle');
+    $('#myModal3').modal('toggle');
 
-      this.contract['parentCategory']= this.addCategory;
-      this.contract['status']= this.CategoryStatus;
-      this.contract['icon']='jpg';
       this.http.post('//'+config.global_ip+'/ApI/editCategory',this.contract).subscribe((res:any)=>{
         this.contract = {};
         var result = JSON.parse(res._body);
       
         if(result.status==200) {
-          this.message='Category Updated';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            window.location.reload();
-          }, 1000);
-        }else{
-          this.message='Table Not Found';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
-          }, 1000);
+          this.ngOnInit();
         }
         },(err)=>{
         this.contract = {};
@@ -187,17 +115,7 @@ CategoryStatus;
       var result = JSON.parse(res._body);
       
       if(result.status==200) {
-        this.message='Category Deleted';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          window.location.reload();
-        }, 1000);
-      }else{
-        this.message='Table Not Found';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
+        this.ngOnInit();
       }
       },(err)=>{
       this.message='Table Not Found';
@@ -210,15 +128,19 @@ CategoryStatus;
 
 
   changeModal(e) {
-    this.addCategory =e.Parent_Category;
-    this.contract['icon']= e.Icon;
-    this.contract['status']= e.Status;
+    this.addCategory = e.name;
+    this.contract.name = e.name;
+    this.contract.ID = e.id_template_category;
+    if(e.Status==0) {
+      this.contract.status = 'InActive';
+    }else{
+      this.contract.status = 'Active';
+    }
     var $radios = $('input:radio[name=categorystatus]');
     if($radios.is(':checked') === false) {
-        $radios.filter('[value='+e.Status+']').prop('checked', true);
+        $radios.filter('[value='+this.contract.status +']').prop('checked', true);
     }
-    this.contract.Name = e.Category_Name;
-    this.contract['id'] = e.idTemplateCategory;
+    this.contract.parentcategoryname = e.parent_category_name;
   }
 
 }

@@ -64,14 +64,6 @@ export class CreateTemplateComponent implements OnInit {
           $('#message').modal('toggle');
           self.router.navigate(['/admin/manageTemplate']);
         }, 1000);
-      }else{
-        this.message = 'Table Not Found';
-        var heroFormmmmmmmmmm :NgForm;
-        heroFormmmmmmmmmm.resetForm();
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       }
       },(err)=>{
         this.message = 'Table Not Found';

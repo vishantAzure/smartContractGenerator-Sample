@@ -53,18 +53,7 @@ export class ManageCustomerComponent implements OnInit {
       this.model = {};
       var result = JSON.parse(res._body);
       if(result.status==200) {
-        this.message='Registration Sucessfull';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
           self.ngOnInit();
-        }, 1000);
-      }else{
-        this.message='Registration UnSucessfull';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       }
     },(err)=>{
       this.message='Registration UnSucessfull';
@@ -84,17 +73,7 @@ export class ManageCustomerComponent implements OnInit {
       var result = JSON.parse(res._body);
 
       if(result.status==200) {
-        this.message='User Updated';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
           self.ngOnInit();
-        }, 1000);
-      }else{
-        this.message='Table Not Found';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       }
       },(err)=>{
         this.message='Table Not Found';
@@ -119,17 +98,7 @@ export class ManageCustomerComponent implements OnInit {
       var result = JSON.parse(res._body);
       
       if(result.status==200) {
-        this.message='User Updated';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
           self.ngOnInit();
-        }, 2000);
-      }else{
-        this.message='Table Not Found';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       }
       },(err)=>{
         this.message='Table Not Found';

@@ -56,17 +56,7 @@ export class ManageTemplatesComponent implements OnInit {
       var result = JSON.parse(res._body);
       
       if(result.status==200) {
-        this.message='User Updated';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          window.location.reload();
-        }, 2000);
-      }else{
-        this.message='Table Not Found';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
+        this.ngOnInit();
       }
       },(err)=>{
         this.message='Table Not Found';

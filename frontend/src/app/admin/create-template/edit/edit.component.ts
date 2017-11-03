@@ -73,14 +73,6 @@ export class EditComponent implements OnInit {
             $('#message').modal('toggle');
             self.router.navigate(['/admin/manageTemplate']);
           }, 1000);
-        }else{
-          var heroFormmmmmmmmmm :NgForm;
-          heroFormmmmmmmmmm.resetForm();
-          this.message = 'Table Not Found';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
-          }, 1000);
         }
         },(err)=>{
           var heroFormmmmmmmmmm :NgForm;

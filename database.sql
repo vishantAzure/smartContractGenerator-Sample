@@ -132,62 +132,6 @@ INSERT INTO `TEMPLATE_INPUT` VALUES (1,'f6599cbdf099b21d47d43d41890925c8','Contr
 UNLOCK TABLES;
 
 --
--- Table structure for table `TemplateCategory`
---
-
-DROP TABLE IF EXISTS `TemplateCategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `TemplateCategory` (
-  `idTemplateCategory` int(11) NOT NULL AUTO_INCREMENT,
-  `Category_Name` varchar(45) NOT NULL,
-  `Parent_Category` varchar(45) DEFAULT NULL,
-  `Status` varchar(45) NOT NULL,
-  `Icon` varchar(45) NOT NULL,
-  PRIMARY KEY (`idTemplateCategory`),
-  UNIQUE KEY `idTemplateCategory_UNIQUE` (`idTemplateCategory`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `TemplateCategory`
---
-
-LOCK TABLES `TemplateCategory` WRITE;
-/*!40000 ALTER TABLE `TemplateCategory` DISABLE KEYS */;
-INSERT INTO `TemplateCategory` VALUES (1,'Sub Category 1','parent category 1','Active','jpg');
-/*!40000 ALTER TABLE `TemplateCategory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `TemplateParentCategory`
---
-
-DROP TABLE IF EXISTS `TemplateParentCategory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `TemplateParentCategory` (
-  `idTemplateCategory` int(11) NOT NULL AUTO_INCREMENT,
-  `Category_Name` varchar(45) NOT NULL,
-  `Status` varchar(45) NOT NULL,
-  `Icon` varchar(45) NOT NULL,
-  PRIMARY KEY (`idTemplateCategory`),
-  UNIQUE KEY `idTemplateCategory_UNIQUE` (`idTemplateCategory`),
-  UNIQUE KEY `Category_Name_UNIQUE` (`Category_Name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `TemplateParentCategory`
---
-
-LOCK TABLES `TemplateParentCategory` WRITE;
-/*!40000 ALTER TABLE `TemplateParentCategory` DISABLE KEYS */;
-INSERT INTO `TemplateParentCategory` VALUES (1,'parent category 1','Active','jpg');
-/*!40000 ALTER TABLE `TemplateParentCategory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Templates`
 --
 
@@ -248,6 +192,37 @@ LOCK TABLES `Users` WRITE;
 INSERT INTO `Users` VALUES ('14c9da0d6d016a629b84daa5af4a6f95','$2a$10$S8vMTd2ZSEn/UsOHUjlo3e0LQiiUp2u4JYG9lVDT/k4WN99zYovJW','vishant.singh@sofocle.com',2147483647,'Company;','05b3b5aff93d0f684535e52f506f5d8d',0,NULL,'0000-00-00',NULL,'vv','Active'),('2731f4eac82403980269c8547d2d5212','$2a$10$2BXzmJ2/t6av5a.7Z12gUOQ80B4S8h7DzJEHf2FZ38O/RTGkajKLy','service@gmail.com',2147483647,'Admin','d874bf96c5086aed7d1b5b27935eca18',0,NULL,'0000-00-00','provider','Service','Active'),('2ceb42278c214d710b9334d0518a15a7','$2a$10$S8vMTd2ZSEn/UsOHUjlo3eEmSW1I6.Gr4.ZZwCYjsdVmO1mMNsnpu','vsteotiaccccc19@gmail.com',2147483647,'Company','57de3cd2a8e79799c368f5884395e693',0,NULL,'0000-00-00',NULL,'vvvvvvvvvvvvvvvvv','Active'),('4499e9904f99acd452fcb4dac6891b5f','$2a$10$S8vMTd2ZSEn/UsOHUjlo3epPNOqwV824YOWT81Jea1kUTSQCRTi5C','vishanddddvvvvt@gmail.com',2147483647,'Service Provider','b9e5463705d7fc46149d6b52c0b99b37',0,NULL,'0000-00-00','singh','vccccccccc','Active'),('561bd9fe6505b135b113f31e1a865f67','$2a$10$vJ/rm8CIR0azI12IsryIUucXfCSEdxt8eKlWNs6u3STx.ZFCf1ub6','vishanteotia@gmail.com',2147483647,'Company','564b0a09c6cacf7af021f615acd455a5',0,NULL,'0000-00-00',NULL,'Company 3','Active'),('9092797094c62b9815ae310f8dd16a62','$2a$10$S8vMTd2ZSEn/UsOHUjlo3eVG5pyZychyAFZ9iWqo1OBh4UpwLDrNG','fff@fff.com',2147483647,'Customer','12d041cf4f52d975fefcbc9ff32083ad',0,NULL,'0000-00-00','fffffffffffffffffff','fffffffffffff','Active'),('98a0d2f4eab4d970505fb3b28fc3b0d0','$2a$10$S8vMTd2ZSEn/UsOHUjlo3eHIgtrGYaBZtyOebrxr.QCAu3i8qG2W6','customeccccccccccr@gmail.com',2147483647,'Customer','df0aa6c697db6546891f309cf1de20ea',0,NULL,'0000-00-00','cccccccccccc','ccccccccccccc','Active'),('9bbde3d46a41b5c3cdaad1140610c3ef','$2a$10$2BXzmJ2/t6av5a.7Z12gUO/LOyxmT.yVuuHWST.3sp.dKPMaglg.i','company1@gmail.com',2147483647,'Company','1e04c9d007da115863e516ecf517c71f',0,NULL,'0000-00-00','lastname','Company 1 ','Active'),('c91a6096294100cd49064333903909a5','$2a$10$2BXzmJ2/t6av5a.7Z12gUOFJt2xRIcsJcf3e.ZYvZxrog/2Ji6YLO','customer1@gmail.com',2147483647,'Customer','27e8471dfe92b213075cbb71cf0e1016',0,NULL,'0000-00-00','last name','Customer 1 ','Active');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `template_category`
+--
+
+DROP TABLE IF EXISTS `template_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `template_category` (
+  `id_template_category` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `parent_category` int(2) NOT NULL,
+  `parent_category_name` varchar(30) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `Status` int(2) NOT NULL,
+  `deleted` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id_template_category`),
+  UNIQUE KEY `id_template_category_UNIQUE` (`id_template_category`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `template_category`
+--
+
+LOCK TABLES `template_category` WRITE;
+/*!40000 ALTER TABLE `template_category` DISABLE KEYS */;
+INSERT INTO `template_category` VALUES (1,'cccccccccc',1,'vvvvvvvvvvv','2017-11-03','2017-11-03',1,0),(2,'cccccccccc',1,'vvvvvvvvvvv','2017-11-03','2017-11-03',0,0),(3,'active category',0,NULL,'2017-11-03',NULL,1,0);
+/*!40000 ALTER TABLE `template_category` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -258,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-03 12:57:13
+-- Dump completed on 2017-11-03 17:44:22
