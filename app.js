@@ -9,14 +9,25 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Mailgun = require('mailgun').Mailgun;
 var Authentication = require('./routes/Auth');
+var Subscription = require('./routes/Admin');
 var app = express();
 var busboy = require('connect-busboy');
+var PDF = require('./routes/PDF');
+
+// For XSS Security 
+var helmet = require('helmet')
+app.use(helmet())
+const config = require('./config/config.js');
+
+// From config Please
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "vishant@123",
-  database: "myapp"
+  host: config.mysql_host,
+  user: config.mysql_user,
+  password: config.mysql_pass,
+  database: config.mysql_db
 });
+
+global.IP = config.global_ip;
 
 app.use(logger('dev'));
 app.use(busboy()); 
@@ -28,14 +39,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/embark', express.static('embark'));
 app.get('/embark', (req, res) => {
+  res.sendFile(path.join(__dirname, '/embark/index.html'));
+});
+app.use('/pdf', PDF);
+app.use('/ApI',Subscription);
+app.use('/auth', Authentication);
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
-app.use('/auth', Authentication);
 con.connect(function(err) {
   if(err) return console.log(err);
   global.con = con;
-  console.log('App Started at Port:'+3000);
+  console.log('App Started at Port:'+config.serveport);
 })
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -44,7 +61,7 @@ app.use(function(req, res, next) {
 });
 app.use(function(err, req, res, next) {
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get('env') === config.appmode ? err : {};
 
   res.status(err.status || 500);
   res.send(err);

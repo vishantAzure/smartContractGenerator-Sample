@@ -1,5 +1,50 @@
-html
+doctype html
+html(lang='en')
   head
-    title= title
+    meta(charset='utf-8')
+    title Reset Password
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script.
+      $(document).ready(function(){
+      $("button").click(function(){
+      var pass1 = $('#pass1').val();
+      var pass2 = $('#pass2').val();
+      if(pass1==pass2 && pass1!="") {
+        if(localStorage.getItem("User")) {
+          var abc = JSON.parse(localStorage.getItem("User"));
+          $.post("changepass",
+          {
+          pass: pass1,
+          id: abc.idUsers
+          },
+          function(data,status){
+          alert("Data: " + data + "\\nStatus: " + status);
+          });
+        }else{
+          $.post("changepass",
+          {
+          pass: pass1,
+          hash: "#{value}"
+          },
+          function(data,status){
+          alert("Data: " + data + "\\nStatus: " + status);
+          });
+        }
+      }else{
+      alert('password do not match');
+      }
+      });
+      });
   body
-    h1= message
+    section.admin-dashbord(style='min-height: 698px;')
+      .container
+        .row(style='padding:250px 700px;')
+          h3 Reset Password
+          .form-group
+            label  New Password
+            input#pass1.form-control(type='password')
+          .form-group
+            label  Confirm Password
+            input#pass2.form-control(type='password')
+          .checkbox.form-group
+            button.btn.btn-success Submit

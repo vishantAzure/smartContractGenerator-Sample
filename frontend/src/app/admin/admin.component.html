@@ -1,118 +1,7 @@
-<!--======================navigation start here=========================-->
-  <!-- Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-     
-      <div class="modal-body">
-        <div class="row">
-        	<div class="col-sm-5 col-xs-5"><img src="assets/images/login.jpg" alt="signin" class="img-responsive"/></div>
-            <div class="col-sm-7 col-xs-7 form-area">
-            	<button class="close" data-dismiss="modal">X</button>
-            	<h3>Login</h3>
-                <form>
-                	<div class="form-group">
-                    	<input type="text" placeholder="Enter Username" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                    	<input type="password" placeholder="Enter Password" class="form-control"/>
-                    </div>
-                    <div class="checkbox form-group">
-                        <label>
-                          <input type="checkbox"> <span style="font-weight:300;">Remember me</span>
-                        </label>
-                       <a href="#" class="pull-right color-blue">Forgot Password</a>
-                    </div>
-                    <div class="checkbox form-group">
-                        <button class="btn btn-default">Sign in</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-        	<div class="col-sm-5 col-xs-5 imag-ht"><img src="assets/images/register.jpg" alt="signin" class="img-responsive"/></div>
-            <div class="col-sm-7 col-xs-7 form-area">
-            	<button class="close" data-dismiss="modal">X</button>
-            	<h3>Register</h3>
-                <div class="rgister-tab">
-                  <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">
-                    	<form>
-                            <div class="form-group">
-                                <input type="text" placeholder="Enter Username" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Enter Password" class="form-control"/>
-                            </div>
-                             <div class="form-group">
-                                <input type="text" placeholder="Enter Phone Number" class="form-control"/>
-                            </div>
-                             <div class="form-group">
-                                <input type="email" placeholder="Enter Email" class="form-control"/>
-                            </div>
-                             <div class="form-group">
-                                <input type="text" placeholder="Enter Address" class="form-control"/>
-                            </div>
-                            <div class="checkbox form-group">
-                                <button class="btn btn-default">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-    <header class="bs-docs-nav navbar navbar-static-top" id="top">
-      <div class="container">
-        <div class="navbar-header">
-          <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a href="#" class="navbar-brand"><img src="assets/images/logo.png" alt="logo"/></a> </div>
-        <nav class="collapse navbar-collapse" id="bs-navbar">
-          <ul class="nav navbar-nav navbar-right">                    
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQ,s</a></li>
-            <li class="signin"><a href="#" data-toggle="modal" data-target="#myModal">Sign in</a></li>
-            <li class="getstrted"><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
-          </ul>
-        </nav>
-        
-      
-      </div>
-    </header>
-<!--======================navigation ends here=========================-->
+<app-header></app-header>
 <section class="admin-dashbord">
 	<div class="container-fluid">
-    	<div class="col-sm-3 left-side"><aside>
-        	<ul>
-            	<li class="active"><i><img src="assets/images/admin-.png" alt="icon"/></i><a href="#">Admin Reports</a></li>
-                <li><i><img src="assets/images/manage.png" alt="icon"/></i><a routerLink="/managesubscription">Manage Subscription Plan</a></li>
-                <li class="manage-user"><i><img src="assets/images/manage.png" alt="icon"/></i><a href="#">Manage User</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
-                <ul>
-                	<li><a href="#">Manage user1</a></li>
-                    <!-- looping here -->
-                </ul>
-                </li>
-                <li><i><img src="assets/images/manage-template.png" alt="icon"/></i><a href="#">Manage Template</a></li>
-                <li><i><img src="assets/images/catagory.png" alt="icon"/></i><a href="#">Manage Category</a></li>
-                <li><i><img src="assets/images/view.png" alt="icon"/></i><a href="#">View contracts</a></li>
-            </ul>
-        </aside></div>
-        
+            <app-sidemenu></app-sidemenu>
         <div class="col-sm-9 right-side">
         	<div class="top-content">
             	<h4>Dashboard</h4>
@@ -141,14 +30,11 @@
                 <div id="home" class="tab-pane fade in active">
                   <span><img src="assets/images/graph.jpg" alt="image"/></span>
                 </div>
-                
                 <div id="menu1" class="tab-pane fade">
                   <span><img src="assets/images/graph.jpg" alt="image"/></span>
                 </div>
-                
               </div>
               	</div>
-  
                 </div>
                 <div class="col-sm-6">
                 	<div class="message-box">
@@ -168,33 +54,9 @@
             </div>
         </div>
     </div>
-        <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+        <a class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
 </section>
 <!--======================Footer start here=========================-->
-<footer>
-	<div class="container">
-    	<div class="footer-nav text-center">  
-        	<a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Hot it works</a>
-            <a href="#">Benefits</a>
-            <a href="#">Payments Plans</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Blog</a>
-            <a href="#">FAQ,s</a>
-            <a href="#">Contact Us</a>
-        </div>
-        <div class="text-center social-icon">
-        	<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        </div>
-    </div>
-</footer>
-<div class="copy-right">
-	<p class="text-center">© Copyright 2017 Smart Contract Generator. All rights reserved.</p>
-</div>
+<app-footer></app-footer>
 
 

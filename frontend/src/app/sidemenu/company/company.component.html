@@ -1,0 +1,15 @@
+<div class="col-sm-3 left-side" style="min-height: 698px;"><aside>
+    <ul>
+        <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/{{dashboard}}'>Dashboard</a></li>
+        <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink="/{{dashboard}}/ViewContract">Manage contracts</a></li>
+        <li><i><img src="assets/images/view.png" alt="icon"/></i><a>Ether Wallet</a></li>
+        <li id="settings1" (click)="Toggle('settings')"><i><img src="assets/images/manage.png" alt="icon"/></i><a style="cursor:pointer;">Settings</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
+        </li>
+        <li id="settings" style="padding:0px; border:none;">
+            <ul>
+                <li (click)="Routing('settings')"><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink="/{{dashboard}}/changepassword">Change Password</a></li>
+                <li (click)="Routing('settings')"><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink="/{{dashboard}}/upgrade">Upgrade Subscription</a></li>
+            </ul>
+        </li>
+    </ul>
+</aside></div>

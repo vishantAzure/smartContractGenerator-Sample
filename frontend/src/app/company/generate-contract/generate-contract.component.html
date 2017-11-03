@@ -1,3 +1,236 @@
-<p>
-  generate-contract works!
-</p>
+<app-header></app-header>
+<section class="admin-dashbord">
+    <div class="container-fluid">
+            <app-company-sidemenu></app-company-sidemenu>
+          <div class="col-sm-9 right-side">
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>Generate Contract</h3>
+              </div>
+            </div>
+        <div class="row">
+          <div class="tab-content" style="padding:30px;">
+                <form #heroFormxxxx="ngForm">  
+
+                    <div class="form-group">
+                    <label>Select Customer<span style="color:red">*</span></label>
+                    <select  class="form-control" id="customeremail" [(ngModel)]="CustomerEmailAddress" name="customeremail"
+                    #customeremail="ngModel">
+                        <option [ngValue]="null" disabled>--Select--</option>
+                        <option *ngFor="let c of customers">{{c.Email}}</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group">
+                    <label  for="ContractName">Contract Name<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" id="ContractName"
+                    required
+                    maxlength="20" 
+                    [(ngModel)]="Template.ContractName" name="ContractName"
+                    #ContractName="ngModel">
+                    <div [hidden]="ContractName.valid || ContractName.pristine"
+                        class="alert alert-danger" style="margin-top:10px;">
+                        <div [hidden]="!ContractName.hasError('required')">Contract Name is required</div>
+                    </div>
+                    </div>
+
+
+                    <div class="form-group">
+                    <label for="email">Email<span style="color:red">*</span></label>
+                    <input type="text" class="form-control" id="email"
+                    required
+                    maxlength="50" 
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                    [(ngModel)]="Template.email" name="email"
+                    #email="ngModel">
+                    <div [hidden]="email.valid || email.pristine"
+                        class="alert alert-danger" style="margin-top:10px;">
+                        <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
+                        <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Date">Date<span style="color:red">*</span></label>
+                        <input type="date" class="form-control" id="Date"
+                        required
+                        [(ngModel)]="Template.Date" name="Date"
+                        #Date="ngModel">
+                        <div [hidden]="Date.valid || Date.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!Date.hasError('required')">This Field is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Price">Price<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="Price"
+                        required
+                        pattern="[0-9]*"
+                        maxlength="10" 
+                        [(ngModel)]="Template.Price" name="Price"
+                        #Price="ngModel">
+                        <div [hidden]="Price.valid || Price.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div class="ddddddd" [hidden]="!Price.hasError('required')">This Field is required</div>
+                            <div class="ddddddd" [hidden]="!Price.hasError('pattern')">Only Numbers Are Allowed</div>
+                            <div [hidden]="!Price.hasError('minlength')">Only 10 Numbers</div>
+                        </div>
+                    </div>
+
+
+                    <div *ngFor="let u of Milestones" style="margin-bottom:20px; background-color:blanchedalmond">
+                        <li class="btn btn-success" style="margin-left:90%;" (click)="RemoveMilestone()">Remove</li>
+                        <h4>Milestone {{u.ID}}</h4>
+
+                        <div class="form-group">
+                        <label for="EOW">Execution oF Work<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="EOW"
+                        required
+                        [(ngModel)]="u.WorkExecution" name="EOW"
+                        #EOW="ngModel">
+                        <div [hidden]="EOW.valid || EOW.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!EOW.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="schedule">Schedule<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="schedule"
+                        required
+                        [(ngModel)]="u.Schedule" name="schedule"
+                        #schedule="ngModel">
+                        <div [hidden]="schedule.valid || schedule.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!schedule.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="taxes">Taxes<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="taxes"
+                        required
+                        [(ngModel)]="u.Taxes" name="taxes"
+                        #taxes="ngModel">
+                        <div [hidden]="taxes.valid || taxes.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!taxes.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="fees">Fees<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="fees"
+                        required
+                        pattern="[0-9]*"
+                        maxlength="10" 
+                        [(ngModel)]="u.Fees" name="fees"
+                        #fees="ngModel">
+                        <div [hidden]="fees.valid || fees.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div class="ddddddd" [hidden]="!fees.hasError('required')">This Field is required</div>
+                            <div class="ddddddd" [hidden]="!fees.hasError('pattern')">Only Numbers Are Allowed</div>
+                            <div [hidden]="!fees.hasError('minlength')">Only 10 Numbers</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="penalty">Penalties<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="penalty"
+                        required
+                        [(ngModel)]="u.Penalties" name="penalty"
+                        #penalty="ngModel">
+                        <div [hidden]="penalty.valid || penalty.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!penalty.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="SDate">Start Date<span style="color:red">*</span></label>
+                        <input type="date" class="form-control" id="SDate"
+                        required
+                        [(ngModel)]="u.StartDate" name="SDate"
+                        #SDate="ngModel">
+                        <div [hidden]="SDate.valid || SDate.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!SDate.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="EDate">End Date<span style="color:red">*</span></label>
+                        <input type="date" class="form-control" id="EDate"
+                        required
+                        [(ngModel)]="u.EndDate" name="EDate"
+                        #EDate="ngModel">
+                        <div [hidden]="EDate.valid || EDate.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!EDate.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <li class="btn btn-success" (click)="AddMilestone()">Add Milestone</li>
+                    </div>
+
+                    <div *ngFor="let u of Fields">
+                        <div class="form-group" *ngIf="u.INPUT_FIELD!=='ContractName' && u.INPUT_FIELD!=='ContractEmail' && u.INPUT_FIELD!=='ContractPrice' && u.INPUT_FIELD!=='ContractDate'">
+                        <label for="{{u.INPUT_FIELD}}">{{u.INPUT_FIELD}}<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="{{u.INPUT_FIELD}}"
+                        required
+                        [(ngModel)]="u.Value_Input" name="{{u.INPUT_FIELD}}"
+                        #u.INPUT_FIELD="ngModel">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" (click)= "CreatePDF()" [disabled]="!heroFormxxxx.form.valid">Submit</button>
+                    <button type="submit" class="btn btn-success" (click)= "PreviewContract()" [disabled]="!heroFormxxxx.form.valid">Preview</button>
+                </form>
+          </div>
+        </div>
+          </div>
+    </div>      
+</section>
+<app-footer></app-footer>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="myModal222222" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+            <p>{{preview}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+<div class="modal fade" id="message" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Message! {{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+
+

@@ -1,215 +1,254 @@
-  <!-- Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-        	<div class="col-sm-5 col-xs-5"><img src="images/login.jpg" alt="signin" class="img-responsive"/></div>
-            <div class="col-sm-7 col-xs-7 form-area">
-            	<button class="close" data-dismiss="modal">X</button>
-            	<h3>Login</h3>
-                <form>
-                	<div class="form-group">
-                    	<input type="text" placeholder="Enter Username" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                    	<input type="password" placeholder="Enter Password" class="form-control"/>
-                    </div>
-                    <div class="checkbox form-group">
-                        <label>
-                          <input type="checkbox"> <span style="font-weight:300;">Remember me</span>
-                        </label>
-                       <a href="#" class="pull-right color-blue">Forgot Password</a>
-                    </div>
-                    <div class="checkbox form-group">
-                        <button class="btn btn-default">Sign in</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="row">
-        	<div class="col-sm-5 col-xs-5 imag-ht"><img src="images/register.jpg" alt="signin" class="img-responsive"/></div>
-            <div class="col-sm-7 col-xs-7 form-area">
-            	<button class="close" data-dismiss="modal">X</button>
-            	<h3>Register</h3>
-                <div class="rgister-tab">
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">
-                    	<form>
-                            <div class="form-group">
-                                <input type="text" placeholder="Enter Username" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Enter Password" class="form-control"/>
-                            </div>
-                             <div class="form-group">
-                                <input type="text" placeholder="Enter Phone Number" class="form-control"/>
-                            </div>
-                             <div class="form-group">
-                                <input type="email" placeholder="Enter Email" class="form-control"/>
-                            </div>
-                             <div class="form-group">
-                                <input type="text" placeholder="Enter Address" class="form-control"/>
-                            </div>
-                           
-                            <div class="checkbox form-group">
-                                <button class="btn btn-default">Register</button>
-                            </div>
-                            
-                        </form>
-                    </div>
-                  </div>
+<app-header></app-header>
+<section class="admin-dashbord">
+<div class="container-fluid">
+    <app-sidemenu></app-sidemenu>
+        <div class="col-sm-9 right-side">
+        <div class="graph-tab customer-das manage-dash-temp">
+            <div class="row mnage-user-forms">
+                <div class="col-sm-9">
+                        <h3>Manage Subscription</h3>
+                </div>
+                <div class="col-sm-3">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="width:150px;" (click)="formreset(heroFormyyyyy)">Create</button>
                 </div>
             </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="active">
+                            <th>SNo</th>
+                            <th>Package Name</th>
+                            <th>Package Price</th>
+                            <th>Number Of Contracts</th>
+                            <th>Renewal Frequency</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-wht"  *ngFor="let u of ViewSubscription">
+                            <td>{{u.idSubscriptions}}</td>
+                            <td>{{u.packageName}}</td>
+                            <td>{{u.packagePrice}}</td>
+                            <td>{{u.numberOfContract}}</td>
+                            <td>{{u.renewalFrequency}}</td>
+                            <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" data-toggle="modal" data-target="#myModal4" (click)="changeModal(u)" type="clcikable;"></i><i class="fa fa-trash" aria-hidden="true" (click)="ConfrmDelete(u.idSubscriptions)"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+        <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+</section>
+<app-footer></app-footer>
+<div class="modal fade" id="message" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Message! {{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+<div class="modal fade" id="cnfrmDelete" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Do you Want To Delete</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="DeleteSubscription()">Delete</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<div class="modal fade" id="myModal4">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="Close()"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit Subscription Plan</h4>
+            </div>
+            <div class="modal-body">
+            <form (ngSubmit)="EditSubscription()" #heroFormxxxxx="ngForm">  
+                <div class="form-group">
+                <label  for="Packagename">Package Name</label>
+                <input type="text" class="form-control" id="Packagename"
+                required
+                [(ngModel)]=subscriptionPlan.packageName name="Packagename"
+                #Packagename="ngModel">
+                <div [hidden]="Packagename.valid || Packagename.pristine"
+                    class="alert alert-danger" style="margin-top:10px;">
+                    <div [hidden]="!Packagename.hasError('required')">Package name is required</div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                <label  for="PackagePrice">Package Price</label>
+                <input type="text" class="form-control" id="PackagePrice"
+                required
+                pattern="[0-9]*"
+                maxlength="10" 
+                [(ngModel)]=subscriptionPlan.packagePrice name="PackagePrice"
+                #PackagePrice="ngModel">
+                <div [hidden]="PackagePrice.valid || PackagePrice.pristine"
+                    class="alert alert-danger" style="margin-top:10px;">
+                    <div class="ddddddd" [hidden]="!PackagePrice.hasError('required')">Package Price is required</div>
+                    <div class="ddddddd" [hidden]="!PackagePrice.hasError('pattern')">Only Numbers Are Allowed</div>
+                    <div [hidden]="!PackagePrice.hasError('maxlength')">Only 10 Numbers</div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                <label  for="noOfcontract">Number Of Contracts</label>
+                <input type="text" class="form-control" id="noOfcontract"
+                required
+                pattern="[0-9]*"
+                maxlength="10" 
+                [(ngModel)]=subscriptionPlan.numberOfContract name="noOfcontract"
+                #noOfcontract="ngModel">
+                <div [hidden]="noOfcontract.valid || noOfcontract.pristine"
+                    class="alert alert-danger" style="margin-top:10px;">
+                    <div class="ddddddd" [hidden]="!noOfcontract.hasError('required')">Number of Contract is required</div>
+                    <div class="ddddddd" [hidden]="!noOfcontract.hasError('pattern')">Only Numbers Are Allowed</div>
+                    <div [hidden]="!noOfcontract.hasError('maxlength')">Only 10 Numbers</div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                <label  for="renewalfrequency">Renewal Frequency</label>
+                <input type="text" class="form-control" id="renewalfrequency"
+                required
+                pattern="[0-9]*"
+                maxlength="10" 
+                [(ngModel)]=subscriptionPlan.renewalFrequency name="renewalfrequency"
+                #renewalfrequency="ngModel">
+                <div [hidden]="renewalfrequency.valid || renewalfrequency.pristine"
+                    class="alert alert-danger" style="margin-top:10px;">
+                    <div class="ddddddd" [hidden]="!renewalfrequency.hasError('required')">Renewal Frequency is required</div>
+                    <div class="ddddddd" [hidden]="!renewalfrequency.hasError('pattern')">Only Numbers Are Allowed</div>
+                    <div [hidden]="!renewalfrequency.hasError('maxlength')">Only 10 Numbers</div>
+                </div>
+                </div>
+
+                <div class="form-group">
+                <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
+                <input type="radio"  name="status" value="Active"
+                id="statusactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">Active<i style="margin-right:20px;"></i>
+                <input type="radio"  name="status" value="InActive"
+                id="statusinactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">InActive
+                </div>
+    
+                <button type="submit" class="btn btn-success" [disabled]="!heroFormxxxxx.form.valid">Submit</button>
+            </form>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="modal fade" id="myModal3" >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="Close()"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" >Add Subscription Plan</h4>
+                </div>
+                <div class="modal-body">
+                      <form (ngSubmit)="AddSubscriptionPlan()" #heroFormyyyyy="ngForm">  
+                              <div class="form-group">
+                              <label  for="Packagename1">Package Name</label>
+                              <input type="text" class="form-control" id="Packagename1"
+                              required
+                              [(ngModel)]=subscriptionPlan.packageName name="Packagename1"
+                              #Packagename1="ngModel">
+                              <div [hidden]="Packagename1.valid || Packagename1.pristine"
+                                  class="alert alert-danger">
+                                  <div [hidden]="!Packagename1.hasError('required')">Packagename is required</div>
+                              </div>
+                              </div>
       
-    </div>
-  </div>
-</div>
+      
+                              <div class="form-group">
+                              <label  for="PackagePrice1">Package Price</label>
+                              <input type="text" class="form-control" id="PackagePrice1"
+                              required
+                              pattern="[0-9]*"
+                              maxlength="10" 
+                              [(ngModel)]=subscriptionPlan.packagePrice name="PackagePrice1"
+                              #PackagePrice1="ngModel">
+                              <div [hidden]="PackagePrice1.valid || PackagePrice1.pristine"
+                                  class="alert alert-danger">
+                                  <div [hidden]="!PackagePrice1.hasError('required')">PackagePrice is required</div>
+                                  <div [hidden]="!PackagePrice1.hasError('pattern')">Only Numbers Are Allowed</div>
+                                  <div [hidden]="!PackagePrice1.hasError('maxlength')">Only 10 Numbers</div>
+                              </div>
+                              </div>
+      
+      
+                              <div class="form-group">
+                              <label  for="noOfcontract1">Number Of Contracts</label>
+                              <input type="text" class="form-control" id="noOfcontract1"
+                              required
+                              pattern="[0-9]*"
+                              maxlength="10" 
+                              [(ngModel)]=subscriptionPlan.numberOfContract name="noOfcontract1"
+                              #noOfcontract1="ngModel">
+                              <div [hidden]="noOfcontract1.valid || noOfcontract1.pristine"
+                                  class="alert alert-danger">
+                                  <div [hidden]="!noOfcontract1.hasError('required')">Number of Contract is required</div>
+                                  <div [hidden]="!noOfcontract1.hasError('pattern')">Only Numbers Are Allowed</div>
+                                  <div [hidden]="!noOfcontract1.hasError('maxlength')">Only 10 Numbers</div>
+                              </div>
+                              </div>
+      
+      
+                              <div class="form-group">
+                              <label  for="renewalfrequency1">Renewal Frequency</label>
+                              <input type="text" class="form-control" id="renewalfrequency1"
+                              required
+                              pattern="[0-9]*"
+                              maxlength="10" 
+                              [(ngModel)]=subscriptionPlan.renewalFrequency name="renewalfrequency1"
+                              #renewalfrequency1="ngModel">
+                              <div [hidden]="renewalfrequency1.valid || renewalfrequency1.pristine"
+                                  class="alert alert-danger">
+                                  <div [hidden]="!renewalfrequency1.hasError('required')">Renewal Frequency is required</div>
+                                  <div [hidden]="!renewalfrequency1.hasError('pattern')">Only Numbers Are Allowed</div>
+                                  <div [hidden]="!renewalfrequency1.hasError('maxlength')">Only 10 Numbers</div>
+                              </div>
+                              </div>
 
-<header class="bs-docs-nav navbar navbar-static-top" id="top">
-      <div class="container">
-        <div class="navbar-header">
-          <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a href="#" class="navbar-brand"><img src="images/logo.png" alt="logo"/></a> </div>
-        <nav class="collapse navbar-collapse" id="bs-navbar">
-          <ul class="nav navbar-nav navbar-right">                    
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQ,s</a></li>
-            <li class="signin"><a href="#" data-toggle="modal" data-target="#myModal">Sign in</a></li>
-            <li class="getstrted"><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-<!--======================navigation ends here=========================-->
-
-<section class="admin-dashbord">
-	<div class="container-fluid">
-    	<div class="col-sm-3 left-side"><aside>
-        	<ul>
-            	<li class="active"><i><img src="images/admin-.png" alt="icon"/></i><a href="#">Admin Reports</a></li>
-                <li><i><img src="images/manage.png" alt="icon"/></i><a href="#">Manage Subscription Plan</a></li>
-                <li class="manage-user"><i><img src="images/manage.png" alt="icon"/></i><a href="#">Manage User</a><span class="pull-right" style="margin-right:15px;"><img src="images/plus.png" alt="img"/></span>
-                <ul>
-                	<li><a href="#">Manage user1</a></li>
-                    <!-- looping here -->
-                </ul>
-                </li>
-                <li><i><img src="images/manage-template.png" alt="icon"/></i><a href="#">Manage Template</a></li>
-                <li><i><img src="images/catagory.png" alt="icon"/></i><a href="#">Manage Category</a></li>
-                <li><i><img src="images/view.png" alt="icon"/></i><a href="#">View contracts</a></li>
-            </ul>
-        </aside></div>
-        
-        <div class="col-sm-9 right-side">
-        	<div class="top-content">
-            	<h4>Dashboard</h4>
-                <p>Welcome to Smart Contract Generator Admin Panel</p>
-            </div>
-           <div class="subscription-plan">
-           
-           <!-- Modal -->
-            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Subscription Plan</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                    	<div class="form-group">
-                        	<input type="text" class="form-control" placeholder="Package Name"/>
-                        </div>
-                        <div class="form-group">
-                        	<input type="text" class="form-control" placeholder="Package Price"/>
-                        </div>
-                        <div class="form-group">
-                        	<input type="text" class="form-control" placeholder="Number of Contracts"/>
-                        </div>
-                        <div class="form-group">
-                        	<input type="text" class="form-control" placeholder="Renewal Frequency"/>
-                        </div>
-                        <div class="form-group addbtn">
-                        	<button class="btn btn-default">Add</button>
-                        </div>
-                        
-                    </form>
-                  </div>
+                            <div class="form-group">
+                            <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
+                            <input type="radio"  name="status" value="Active"
+                            id="statusactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">Active<i style="margin-right:20px;"></i>
+                            <input type="radio"  name="status" value="InActive"
+                            id="statusinactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">InActive
+                            </div>
                   
+                              <button type="submit" class="btn btn-success" [disabled]="!heroFormyyyyy.form.valid">Submit</button>
+                          </form>
                 </div>
               </div>
             </div>
-
-           	 <div class="text-right subscrip-btn"><button class="btn btn-default" data-toggle="modal" data-target="#myModal3">Add Subscription Plan</button></div>
-             <div class="table-responsive">
-      	<table class="table table-bordered">
-        	<thead>
-                <tr class="active">
-                    <th>SNo</th>
-                    <th>Package Name</th>
-                    <th>Package Price</th>
-                    <th>Number Of Contracts</th>
-                    <th>Renewal Frequency</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            	<tr class="bg-wht">
-                	<td>#110011</td>
-                    <td>Lump Sum Contract</td>
-                    <td>ETH 13542</td>
-                    <td>Construction Company</td>
-                    <td>Building material</td>
-                    <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-                </tr>
-            </tbody>
-        </table>
-      </div>
-      	    </div>
-        </div>
-    </div>
-        <a href="#" class="footer-logo"><img src="images/footer-logo.png" alt="logo-footer"/></a>
-</section>
-
-<!--======================Footer start here=========================-->
-<footer>
-	<div class="container">
-    	<div class="footer-nav text-center">  
-        	<a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Hot it works</a>
-            <a href="#">Benefits</a>
-            <a href="#">Payments Plans</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Blog</a>
-            <a href="#">FAQ,s</a>
-            <a href="#">Contact Us</a>
-        </div>
-        <div class="text-center social-icon">
-        	<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        </div>
-    </div>
-</footer>
-
-<div class="copy-right">
-	<p class="text-center">© Copyright 2017 Smart Contract Generator. All rights reserved.</p>
-</div>
+          </div>

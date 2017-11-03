@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router}  from '@angular/router';
 
 @Component({
   selector: 'app-customer',
@@ -6,15 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerComponent implements OnInit {
 web3;
-  constructor() { }
+User_data;
+dashboard;
+  constructor(public router: Router) { }
 
   ngOnInit() {
-    this.web3 = new window['Web3']('http://localhost:8545');
-    console.warn('You are connected to MetaMask');
-    window['web3'].version.getNetwork((err, netId) => {
-      if (!err) {
-          console.log(netId);
-      }
-  });
+    this.User_data = JSON.parse(localStorage.getItem('User'));
   }
+
 }

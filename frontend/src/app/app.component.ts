@@ -3,58 +3,49 @@ import { Router}  from '@angular/router';
 import { Customer} from './modal';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { Modal } from './modal';
+import { ToasterService} from 'angular2-toaster';
+import * as config from '../../../config/config';
 
-declare var Web3;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit{
-public myForm: FormGroup; 
-model;
-    constructor(private router: Router, private _fb: FormBuilder,public http: Http) {
-    let currUser = JSON.parse(localStorage.getItem("User"));
-    if(currUser){
-      switch(currUser.type){
-      case "admin":
-          this.router.navigate(['/admin']);
-          break;
+    private toasterService: ToasterService;
+    model;
+    file;
+    User_data;
+    dashboard;
+    User = ['Select User','Customer','Service Provider','Company'];
+        constructor(public http: Http,public router: Router ,toasterService: ToasterService) { 
+          this.toasterService = toasterService;
+          this.model = new Modal();
+        }
+
+    ngOnInit() {
+    this.User_data = JSON.parse(localStorage.getItem('User'));
+    if(this.User_data) {
+        switch(this.User_data.User_Type){
+        case "Customer":
+            this.dashboard='customer';
+            break;
+        case "Service Provider":
+            this.dashboard='serviceprovider';
+            break;
+        case "Company":
+            this.dashboard='company';
+            break;
+        case "Admin":
+            this.dashboard='admin';
+            break;
+        }
+    }else{
+        console.log('ll');
     }
     }
-  }
 
-  ngOnInit() {
-    this.myForm = this._fb.group({
-            name: ['', [Validators.required, Validators.minLength(5)]],
-            addresses: this._fb.array([
-                this.initAddress(),
-            ])
-        });
+    getEmbark() {
+        window.open('http://localhost:3000/embark');
     }
-
-    initAddress() {
-      return this._fb.group({
-          street: ['', Validators.required],
-          postcode: ['']
-      });
-  }
-
-  addAddress() {
-    const control = <FormArray>this.myForm.controls['addresses'];
-    control.push(this.initAddress());
-}
-
-removeAddress(i: number) {
-    const control = <FormArray>this.myForm.controls['addresses'];
-    control.removeAt(i);
-}
-
-getEmbark() {
-  window.open('http://localhost:3000/embark');
-}
-
-save(model: any) {
-  console.log(model.value);
-}
-
 }

@@ -1,0 +1,84 @@
+<app-header></app-header>  
+  <section>
+    <section class="admin-dashbord">
+      <div class="container-fluid">
+            <app-sidemenu></app-sidemenu>
+            
+            <div class="col-sm-9 right-side">
+              <div class="graph-tab customer-das manage-dash-temp">
+                <div class="row mnage-user-forms">
+                    <div class="col-sm-9">
+                      <h3>Edit Template</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tab-content" style="padding:30px;">
+                    <form (ngSubmit)="CreateTemplate()" #heroFormmmmmmmmmm="ngForm">  
+                        <div class="form-group">
+                        <label  for="Templatename">Template Name</label>
+                        <input type="text" class="form-control" id="Templatename"
+                        required
+                        [(ngModel)]="contract.Name" name="Templatename"
+                        #Templatename="ngModel">
+                        <div [hidden]="Templatename.valid || Templatename.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!Templatename.hasError('required')">Template name is required</div>
+                        </div>
+                        </div>
+            
+                        <div class="form-group">
+                        <label>Select Category<span style="color:red">*</span></label>
+                        <select  class="form-control" id="contractcategory" [(ngModel)]="contractcategoryname" name="contractcategory"
+                        #contractcategory="ngModel">
+                            <option [ngValue]="null" disabled>--Select--</option>
+                            <option *ngFor="let u of Category">{{u.Category_Name}}</option>
+                        </select>
+                        </div>
+
+                        <div class="form-group">
+                        <label  for="Description">Description</label>
+                        <input type="textarea" class="form-control" id="Description"
+                        required
+                        [(ngModel)]="contract.Description" name="Description"
+                        #Description="ngModel">
+                        <div [hidden]="Description.valid || Description.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!Description.hasError('required')">Description is required</div>
+                        </div>
+                        </div>
+            
+                        <div class="form-group">
+                        <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
+                        <input type="radio"  name="statustemplate" value="Active"
+                        id="statustemplateactive" #categorystatus="ngModel" required [(ngModel)]="templatestatus">Active<i style="margin-right:20px;"></i>
+                        <input type="radio"  name="statustemplate" value="InActive"
+                        id="statustemplateinactive" #categorystatus="ngModel" required [(ngModel)]="templatestatus">InActive
+                        </div>
+
+                        <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+                    </form>
+                    </div>
+              </div>
+              </div>
+            </div>
+        </div>
+            <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+    </section>
+  </section>
+  <app-footer></app-footer>
+  <div class="modal fade" id="message" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Message! {{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>

@@ -1,166 +1,5 @@
-  <!-- Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-     
-      <div class="modal-body">
-        <div class="row">
-        	<div class="col-sm-5 col-xs-5"><img src="assets/images/login.jpg" alt="signin" class="img-responsive"/></div>
-            <div class="col-sm-7 col-xs-7 form-area">
-            	<button class="close" data-dismiss="modal">X</button>
-            	<h3>Login</h3>
-                <form (ngSubmit)="Login()" #heroForm="ngForm">
-
-                    <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" id="email"
-                        required
-                        [(ngModel)]="model.email" name="email" #name="ngModel">
-                        <div [hidden]="name.valid || name.pristine"
-                            class="alert alert-danger">
-                        Email is required
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" class="form-control" id="password"
-                        required
-                        [(ngModel)]="model.password" name="password" #name="ngModel">
-                        <div [hidden]="name.valid || name.pristine"
-                            class="alert alert-danger">
-                        Password is required
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                    <label>Select User Type</label>
-                    <select (change)="onChange($event.target.value)">
-                        <option *ngFor="let u of User">{{u}}</option>
-                    </select>
-                    </div>
-
-                    <div class="checkbox form-group">
-                        <label>
-                          <input type="checkbox"> <span style="font-weight:300;">Remember me</span>
-                        </label>
-                       <a href="#" class="pull-right color-blue">Forgot Password</a>
-                    </div>
-                    <div class="checkbox form-group">
-                        <button type="submit" class="btn btn-success">Sign In</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-     
-      <div class="modal-body">
-        <div class="row">
-        	<div class="col-sm-5 col-xs-5 imag-ht"><img src="assets/images/register.jpg" alt="signin" class="img-responsive"/></div>
-            <div class="col-sm-7 col-xs-7 form-area">
-            	<button class="close" data-dismiss="modal">X</button>
-            	<h3>Register</h3>
-                <div class="rgister-tab">
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">
-                    	<form (ngSubmit)="Register()" #heroForm="ngForm">
-                            <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" id="name"
-                                    required
-                                    [(ngModel)]="model.name" name="name"
-                                    #name="ngModel">
-                            <div [hidden]="name.valid || name.pristine"
-                                    class="alert alert-danger">
-                                Name is required
-                            </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" class="form-control" id="email"
-                                required
-                                [(ngModel)]="model.email" name="email" #name="ngModel">
-                                <div [hidden]="name.valid || name.pristine"
-                                    class="alert alert-danger">
-                                Email is required
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label>Password</label>
-                            <input type="text" class="form-control" id="password"
-                                required
-                                [(ngModel)]="model.password" name="password" #name="ngModel">
-                                <div [hidden]="name.valid || name.pristine"
-                                    class="alert alert-danger">
-                                Password is required
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="text" class="form-control" id="phone"
-                                required
-                                [(ngModel)]="model.phone" name="phone" #name="ngModel">
-                                <div [hidden]="name.valid || name.pristine"
-                                    class="alert alert-danger">
-                                Password is required
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label>Select User Type</label>
-                            <select (change)="onChange($event.target.value)">
-                                <option *ngFor="let u of User">{{u}}</option>
-                            </select>
-                            </div>
-
-                            <div class="checkbox form-group">
-                                    <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                  </div>
-                
-                </div>
-            </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
+<app-header></app-header>
 <section class="top-header">
-    <header class="bs-docs-nav navbar navbar-static-top" id="top">
-      <div class="container">
-        <div class="navbar-header">
-          <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-          <a href="#" class="navbar-brand"><img src="assets/images/logo.png" alt="logo"/></a> </div>
-        <nav class="collapse navbar-collapse" id="bs-navbar">
-          <ul class="nav navbar-nav navbar-right">                    
-            <li><a href="http://localhost:3000/embark">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQ,s</a></li>
-            <li class="signin"><a href="#" data-toggle="modal" data-target="#myModal">Sign in</a></li>
-            <li class="getstrted"><a href="#" data-toggle="modal" data-target="#myModal2">Register</a></li>
-          </ul>
-        </nav>
-        
-      
-      </div>
-    </header>
-    
     <div class="banner">
     	<div class="container">
         	<div class="row">
@@ -171,25 +10,21 @@
             </div>
             <div class="col-xs-4 col-sm-4 col-md-5"><img src="assets/images/top-banner-1.png" alt="image" class="img-responsive"/></div>
             </div>
-            
         </div>
     </div>
 </section>
 
 <!--======================navigation ends here=========================-->
 
-
 <section class="services-box">
 	<div class="container">
     	<h2>How it Works</h2>
-        
         <div class="services-tabs">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Service Provider</a></li>
             <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Customer</a></li>
           </ul>
-        
           <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
@@ -367,10 +202,8 @@
              </div>
              <p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lacus dui, laoreet placerat sodales sit amet, sodales in purus. Nunc id maximus turpis. Phasellus condimentum felis at imperdiet lacinia. Aenean in leo non sem scelerisque sodales in sit amet nisi. In cursus volutpat risus, vel faucibus orci vehicula id. ”</p>
             </div>
-           
           </div>
           </div>
-          
         </div>
     </section>
  
@@ -443,31 +276,4 @@
         <a href="#"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
     </div>
 </section>
-
-<footer>
-	<div class="container">
-    	<div class="footer-nav text-center">  
-        	<a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Hot it works</a>
-            <a href="#">Benefits</a>
-            <a href="#">Payments Plans</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Blog</a>
-            <a href="#">FAQ,s</a>
-            <a href="#">Contact Us</a>
-        </div>
-        <div class="text-center social-icon">
-        	<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        </div>
-    </div>
-</footer>
-
-<div class="copy-right">
-	<p class="text-center">© Copyright 2017 Smart Contract Generator. All rights reserved.</p>
-</div>
-
+<app-footer></app-footer>

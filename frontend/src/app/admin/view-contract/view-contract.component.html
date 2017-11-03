@@ -1,0 +1,50 @@
+<app-header></app-header>
+<section class="admin-dashbord">
+  <div class="container-fluid">
+      <app-company-sidemenu></app-company-sidemenu>
+          <div class="col-sm-9 right-side">
+          <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                      <h3>Manage Contract List</h3>
+                  </div>
+                  <div class="col-sm-3">
+                      <button class="btn btn-default" routerLink="/Template" style="width:150px;">Create</button>
+              </div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr class="active">
+                              <th>Contract Name</th>
+                              <th>Customer Name</th>
+                              <th>Start Date</th>
+                              <th>Price (in Ether)</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let u of Contracts">
+                            <td>{{u.Contract_Name}}</td>
+                            <td>{{u.Customer_Name}}</td>
+                            <td>{{u.Contract_StartDate | dateFilter}}</td>
+                            <td>{{u.Contract_Price}}</td>
+                            <td>
+                              <i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;" (click)="ContractDetail(u.ContractPDF_ID)"></i>
+                              <i class="fa fa-download" aria-hidden="true" (click)="DownloadPDF(u.ContractPDF_ID)"></i>
+                            </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+<app-footer></app-footer>
+
+
+
+
+

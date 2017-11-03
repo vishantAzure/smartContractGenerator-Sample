@@ -1,3 +1,42 @@
-<p>
-  company works!
-</p>
+<app-header></app-header>
+    <section class="admin-dashbord">
+        <div class="container-fluid">
+                <app-company-sidemenu></app-company-sidemenu>
+              <div class="col-sm-9 right-side" style="margin-bottom: 100px;">
+                <div class="graph-tab customer-das manage-dash-temp">
+                  <div class="row mnage-user-forms">
+                    <div class="col-sm-9">
+                            <h3>Company Dashboard</h3>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                      <table class="table" style="border: 1px solid #ccc;">
+                          <thead>
+                              <tr class="active">
+                                  <th>SNo</th>
+                                  <th width= "25%">User Name</th>
+                                  <th width= "56%">Contract Description</th>
+                                  <th width= "100px">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr class="bg-wht">
+                                  <td>#</td>
+                                  <td>Construction Company</td>
+                                  <td>The terms and conditions are defined step-wise and has confirm step/job completion,..</td>
+                                  <td><i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;" (click)="popup()"></i></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+              <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+      </section>
+      <app-footer></app-footer>
+
+
+
+
+

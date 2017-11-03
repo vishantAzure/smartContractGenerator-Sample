@@ -1,0 +1,168 @@
+<app-header></app-header>
+  <section class="admin-dashbord">
+    <div class="container-fluid">
+        <app-sidemenu></app-sidemenu>
+          <div class="col-sm-9 right-side">
+            <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                    <h3>Manage Category</h3>
+                  </div>
+                  <div class="col-sm-3">
+                      <button class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="width:150px;" (click)="formreset(heroFormmmmmmmmmm)">Create</button>
+                </div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                          <tr class="active">
+                              <th>SNo</th>
+                              <th>Category Name</th>
+                              <th>Parent category</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="bg-wht"  *ngFor="let u of Category">
+                            <td>{{u.idTemplateCategory}}</td>
+                              <td>{{u.Category_Name}}</td>
+                              <td>{{u.Parent_Category}}</td>
+                              <td>{{u.Status}}</td>
+                              <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" data-toggle="modal" data-target="#myModal3" (click)="changeModal(u)"></i><i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.idTemplateCategory)"></i></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+<app-footer></app-footer>
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////   modals   //////////////////////////////////////////////////////////
+..////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="myModal1"  role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal" (click)="formreset(heroFormmmmmmmmmm)">X</button>
+        <h4 class="modal-title" id="myModalLabel">Add Category</h4>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="CreateCategory()" #heroFormmmmmmmmmm="ngForm">  
+            <div class="form-group">
+            <label  for="Contractname">Category Name<span style="color:red">*</span></label>
+            <input type="text" class="form-control" id="Contractname"
+            required
+            [(ngModel)]="contract.Name" name="Contractname"
+            #Contractname="ngModel">
+            <div [hidden]="Contractname.valid || Contractname.pristine"
+                class="alert alert-danger" style="margin-top:10px;">
+                <div [hidden]="!Contractname.hasError('required')">Category name is required</div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label>Parent Category</label>
+            <select  class="form-control" id="parentcategory" [(ngModel)]="addCategory" name="parentcategory"
+            #parentcategory="ngModel">
+                <option [ngValue]="null" disabled>--Select--</option>
+                <option *ngFor="let u of ParentCategory">{{u.Category_Name}}</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+            <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
+            <input type="radio"  name="categorystatus" value="Active"
+            id="categorystatusactive" #categorystatus="ngModel" required [(ngModel)]="CategoryStatus">Active<i style="margin-right:20px;"></i>
+            <input type="radio"  name="categorystatus" value="InActive"
+            id="categorystatusinactive" #categorystatus="ngModel" required [(ngModel)]="CategoryStatus">InActive
+            </div>
+        
+            <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal3" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+    <button class="close" data-dismiss="modal" (click)="formreset(heroForm2222)">X</button>
+      <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="EditCategory()" #heroForm2222="ngForm">  
+            <div class="form-group">
+            <label  for="Contractname1">Category Name<span style="color:red">*</span></label>
+            <input type="text" class="form-control" id="Contractname1"
+            required
+            [(ngModel)]="contract.Name" name="Contractname1"
+            #Contractname1="ngModel">
+            <div [hidden]="Contractname1.valid || Contractname1.pristine"
+                class="alert alert-danger" style="margin-top:10px;">
+                <div [hidden]="!Contractname1.hasError('required')">Category name is required</div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label>Parent Category</label>
+            <select  class="form-control" id="parentcategory" [(ngModel)]="addCategory" name="parentcategory"
+            #parentcategory="ngModel">
+                <option [ngValue]="null" disabled>--Select--</option>
+                <option *ngFor="let u of ParentCategory" [selected]="u.Category_Name == addCategory">{{u.Category_Name}}</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+            <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
+            <input type="radio"  name="categorystatus" value="Active"
+            id="categorystatusactive" #categorystatus="ngModel" required [(ngModel)]="CategoryStatus">Active<i style="margin-right:20px;"></i>
+            <input type="radio"  name="categorystatus" value="InActive"
+            id="categorystatusinactive" #categorystatus="ngModel" required [(ngModel)]="CategoryStatus">InActive
+            </div>
+        
+            <button type="submit" class="btn btn-success" [disabled]="!heroForm2222.form.valid">Submit</button>
+        </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="message" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        {{message}}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+<div class="modal fade" id="cnfrmDelete" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Do you Want To Delete</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="DeleteCategory()">Delete</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>

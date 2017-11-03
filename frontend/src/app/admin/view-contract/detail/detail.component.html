@@ -1,0 +1,55 @@
+<app-header></app-header>
+<section class="admin-dashbord">
+  <div class="container-fluid">
+      <app-company-sidemenu></app-company-sidemenu>
+          <div class="col-sm-9 right-side">
+          <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                      <h3>Contract Detail</h3>
+                  </div>
+                  <div class="col-sm-3">
+                      <!-- <button class="btn btn-default" routerLink="/Template" style="width:150px;">Create</button> -->
+              </div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr class="active">
+                              <th>Milestone</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              <th>Milestone Fees</th>
+                              <th>Payment Status</th>
+                              <th>Task Status</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let u of ContractDetails">
+                            <td>Milestone{{u.idMilestone}}</td>
+                            <td>{{u.Start_Date | dateFilter}}</td>
+                            <td>{{u.End_Date | dateFilter}}</td>
+                            <td>{{u.Milestone_fee}}</td>
+                            <td>{{u.Payment_Status}}</td>
+                            <td>{{u.Task_Status}}</td>
+                            <td>
+                              <li class="btn btn-success" aria-hidden="true" (click)="MarkMilestoneComplete(Contract_ID)">Complete</li>
+                              <li class="btn btn-success" aria-hidden="true" (click)="CancelMilestone(Contract_ID)">Cancel</li>
+                            </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+<app-footer></app-footer>
+
+
+
+
+
+

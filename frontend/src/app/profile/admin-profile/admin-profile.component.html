@@ -1,0 +1,75 @@
+<app-header></app-header>  
+<section>
+  <section class="admin-dashbord">
+    <div class="container-fluid">
+            <app-sidemenu></app-sidemenu>
+          <div class="col-sm-9 right-side">
+            <h3>Manage Profile</h3>
+            <form (ngSubmit)="Update()" #heroFormzzzzzz="ngForm">  
+                <div class="form-group">
+                <label  for="firstname">First Name</label>
+                <input type="text" class="form-control" id="firstname"
+                required
+                [(ngModel)]="model.first_name" name="firstname"
+                #firstname="ngModel">
+                <div [hidden]="firstname.valid || firstname.pristine"
+                    class="alert alert-danger">
+                    <div [hidden]="!firstname.hasError('required')">FirstName is required</div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" class="form-control" id="lastname"
+                required
+                [(ngModel)]="model.last_name" name="lastname"
+                #lastname="ngModel">
+                <div [hidden]="lastname.valid || lastname.pristine"
+                    class="alert alert-danger">
+                    <div [hidden]="!lastname.hasError('required')">LastName is required</div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email"
+                required
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                [(ngModel)]="model.Email" name="email"
+                #email="ngModel">
+                <div [hidden]="email.valid || email.pristine"
+                    class="alert alert-danger">
+                    <div [hidden]="!email.hasError('required')">Email is required</div>
+                    <div [hidden]="!email.hasError('pattern')">Only alphabetsallowed</div>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone"
+                required
+                pattern="[0-9]*"
+                minlength="10"
+                maxlength="10" 
+                [(ngModel)]="model.Phone" name="phone"
+                #phone="ngModel">
+                <div [hidden]="phone.valid || phone.pristine"
+                    class="alert alert-danger">
+                    <div [hidden]="!phone.hasError('required')">Phone is required</div>
+                    <div [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
+                    <div [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
+                </div>
+                </div>
+
+                <button type="submit" class="btn btn-success" [disabled]="!heroFormzzzzzz.form.valid">Update</button>
+            </form>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+</section>
+<app-footer></app-footer> 
+

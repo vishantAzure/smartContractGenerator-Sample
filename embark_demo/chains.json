@@ -1,0 +1,11 @@
+{
+  "0xb6cfeab83614da04c03db0fb8a6787a45d0be8d576fcc6f8f457a5a816d22ab3": {
+    "contracts": {
+      "0xad0d6b71f43de36950fb2d3872f8ce2f555564cf4b0a60b239d5f6df82c34e1b": {
+        "name": "MileStoneTracker",
+        "address": "0xc6f1ce6f6c7551c8ba830912d2378fddd24efcd2"
+      }
+    },
+    "name": "development"
+  }
+}

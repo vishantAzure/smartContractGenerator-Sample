@@ -1,0 +1,24 @@
+<div class="col-sm-3 left-side" style="min-height: 698px;"><aside>
+    <ul>
+        <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/{{dashboard}}'>Dashboard</a></li>
+        <li id="manageuser1" (click)="Toggle('manageuser')"><i><img src="assets/images/manage.png" alt="icon"/></i><a style="cursor:pointer;">Manage User</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
+        </li>
+        <li id="manageuser" style="padding:0px; border:none;">
+          <ul>
+            <li><i><img src="assets/images/admin-.png" alt="icon"/></i><a routerLink="/admin/manageservice" >Manage Service Provider</a></li>
+            <li><i><img src="assets/images/manage.png" alt="icon"/></i><a routerLink="/admin/managecustomer">Manage Customer</a></li>
+            <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/admin/managecompany'>Manage Company</a></li>
+          </ul>
+        </li>
+        <li><i><img src="assets/images/admin-.png" alt="icon"/></i><a routerLink="/admin/reports" >Admin Reports</a></li>
+        <li id="settings1" (click)="Toggle('settings')"><i><img src="assets/images/manage.png" alt="icon"/></i><a style="cursor:pointer;">Settings</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
+        </li>
+        <li id="settings" style="padding:0px; border:none;">
+          <ul>
+              <li><i><img src="assets/images/manage.png" alt="icon"/></i><a routerLink="/admin/managesubscription">Manage Subscription Plan</a></li>
+              <li><i><img src="assets/images/manage-template.png" alt="icon"/></i><a routerLink="/admin/manageTemplate">Manage Template</a></li> 
+              <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/admin/addCategory'>Manage Category</a></li>
+          </ul>
+        </li>
+    </ul>
+</aside></div>

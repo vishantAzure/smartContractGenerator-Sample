@@ -1,0 +1,73 @@
+<app-header></app-header>
+<section class="admin-dashbord">
+<div class="container-fluid">
+    <app-sidemenu></app-sidemenu>
+        <div class="col-sm-9 right-side">
+        <div class="graph-tab customer-das manage-dash-temp">
+            <div class="row mnage-user-forms">
+                <div class="col-sm-9">
+                    <h3>Manage Template</h3>
+                </div>
+                <div class="col-sm-3">
+                        <button class="btn btn-default" routerLink="/admin/createTemplate" style="width:150px;">Create</button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="active">
+                            <th>Template Name</th>
+                            <th>Template Category</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-wht" *ngFor="let u of ViewTemplate">
+                            <td>{{u.Template_Name}}</td>
+                            <td>{{u.Category_Name}}</td>
+                            <td>{{u.Status}}</td>
+                            <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" (click)="changePage(u)"></i> <i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.idTemplates)"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+        <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+</section>
+<app-footer></app-footer>
+<div class="modal fade" id="message" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Message! {{message}}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+<div class="modal fade" id="cnfrmDelete" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Message</h4>
+    </div>
+    <div class="modal-body">
+        <h4>Do you Want To Delete</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="DeleteTemplate()">Delete</button>
+        <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>

@@ -13,11 +13,22 @@
   <link href="assets/css/owl.theme.default.min.css" rel="stylesheet"/>
   <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="assets/css/style.css" rel="stylesheet"/>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/owl.carousel.min.js"></script>
+  <link rel="stylesheet" href="assets/js/JqueryUI.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="assets/js/JqueryUi.js"></script>
+  <script>
+      $( function() {
+        $( "#datepicker" ).datepicker();
+      } );
+  </script>
+  <script>
+      $( function() {
+        $( "#datepicker1" ).datepicker();
+      } );
+  </script>
 </head>
 <body>
   <app-root></app-root>
@@ -51,21 +62,9 @@ margin: 20
 })
 });  
 $('#myTabs a').click(function (e) {
-e.preventDefault()
-$(this).tab('show')
+  e.preventDefault()
+  $(this).tab('show')
 });
-</script>
-<script>
-	$(document).ready(function(){
-		var date_input=$('input[name="date"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		date_input.datepicker({
-			format: 'mm/dd/yyyy',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-	})
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 export class Modal {
-    userName: string;
+    firstname: string;
+    lastname : string;
     email: string;
     password : string;
     companyName : string;
@@ -20,4 +21,41 @@ export interface Customer {
 export interface Address {
     street: string; 
     postcode: string;
+}
+
+export class subscriptionPlan {
+    packageName: string;
+    packagePrice: Number;
+    numberOfContract: Number;
+    renewalFrequency: Number;
+}
+
+export class Templates {
+    Template_Name: string;
+    User_Type: string;
+    CategoryOfServices: string;
+}
+
+export class Contract {
+    Name: string;
+    Description: string;
+    Date:Date;
+}
+
+export class Template {
+    ContractName: string;
+    email: string;
+    Date:Date;
+    Price:number;
+}
+
+export class Milestone {
+    ID: number;
+    StartDate: Date;
+    EndDate:Date;
+    WorkExecution:string;
+    Schedule:string;
+    Taxes:string;
+    Fees:number;
+    Penalties:number;
 }

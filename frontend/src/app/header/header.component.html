@@ -1,0 +1,279 @@
+<div class="modal fade" id="myModal1111">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-5 col-xs-5"><img src="assets/images/login.jpg" alt="signin" class="img-responsive"/></div>
+            <div class="col-sm-7 col-xs-7 form-area">
+                <button class="close" data-dismiss="modal" (click)="formreset(heroForm1)">X</button>
+                <h3>Login</h3>
+                <form (ngSubmit)="Login()" #heroForm1="ngForm">  
+                    <div class="form-group">
+                    <label for="lemail">Email</label>
+                    <input type="text" class="form-control" id="lemail"
+                    required
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                    [(ngModel)]="model.email" name="lemail"
+                    #lemail="ngModel">
+                    <div [hidden]="lemail.valid || lemail.pristine"
+                        class="alert alert-danger" style="margin-top:10px;">
+                        <div class="ddddddd" [hidden]="!lemail.hasError('required')">Email is required</div>
+                        <div [hidden]="!lemail.hasError('pattern')">Only alphabetsallowed</div>
+                    </div>
+                    </div>
+
+
+                    <div class="form-group">
+                    <label for="lpassword">Password</label>
+                    <input type="password" class="form-control" id="lpassword"
+                    required
+                    [(ngModel)]="model.password" name="password"
+                    #password="ngModel">
+                    <div [hidden]="password.valid || password.pristine"
+                        class="alert alert-danger" style="margin-top:10px;">
+                        <div [hidden]="!password.hasError('required')">Password is required</div>
+                    </div>
+                    </div>
+
+
+                    <div class="checkbox form-group">
+                        <label>
+                            <input type="checkbox"> <span style="font-weight:300;">Remember me</span>
+                        </label>
+                        <a routerLink='/forgot' data-dismiss="modal" aria-label="Close" class="pull-right color-blue">Forgot Password</a>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-success" [disabled]="!heroForm1.form.valid" >Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+      
+<div class="modal fade" id="myModal2222" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-5 col-xs-5 imag-ht"><img src="assets/images/register.jpg" alt="signin" class="img-responsive"/></div>
+                <div class="col-sm-7 col-xs-7 form-area">
+                    <button class="close" data-dismiss="modal" (click)="formreset(heroForm)">X</button>
+                    <h3>Register</h3>
+                    <div class="rgister-tab">
+                        <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <form (ngSubmit)="Register()" #heroForm="ngForm">  
+
+                                <div class="form-group">
+                                <label>Select User Type<span style="color:red">*</span></label>
+                                <select  class="form-control" id="UserType" required [(ngModel)]="model.user_type" name="UserType"
+                                #UserType="ngModel">
+                                    <option [ngValue]="null" disabled>Select User</option>
+                                    <option *ngFor="let u of User">{{u}}</option>
+                                </select>
+                                </div>
+
+                                <div *ngIf="model.user_type=='Customer' || model.user_type=='Service Provider'">
+
+                                        <div class="form-group">
+                                                <label  for="firstname">First Name<span style="color:red">*</span></label>
+                                                <input type="text" class="form-control" id="firstname"
+                                                required
+                                                maxlength="20" 
+                                                [(ngModel)]="model.firstname" name="firstname"
+                                                #firstname="ngModel">
+                                                <div [hidden]="firstname.valid || firstname.pristine"
+                                                    class="alert alert-danger" style="margin-top:10px;">
+                                                    <div [hidden]="!firstname.hasError('required')">FirstName is required</div>
+                                                </div>
+                                                </div>
+                
+                
+                                                <div class="form-group">
+                                                <label for="lastname">Last Name<span style="color:red">*</span></label>
+                                                <input type="text" class="form-control" id="lastname"
+                                                required
+                                                maxlength="20" 
+                                                [(ngModel)]="model.lastname" name="lastname"
+                                                #lastname="ngModel">
+                                                <div [hidden]="lastname.valid || lastname.pristine"
+                                                    class="alert alert-danger" style="margin-top:10px;">
+                                                    <div [hidden]="!lastname.hasError('required')">LastName is required</div>
+                                                </div>
+                                                </div>
+                
+                
+                                                <div class="form-group">
+                                                <label for="email">Email<span style="color:red">*</span></label>
+                                                <input type="text" class="form-control" id="email"
+                                                required
+                                                maxlength="50" 
+                                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                                                [(ngModel)]="model.email" name="email"
+                                                #email="ngModel">
+                                                <div [hidden]="email.valid || email.pristine"
+                                                    class="alert alert-danger" style="margin-top:10px;">
+                                                    <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
+                                                    <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
+                                                </div>
+                                                </div>
+                
+                
+                                                <div class="form-group">
+                                                <label for="password">Password<span style="color:red">*</span></label>
+                                                <input type="password" class="form-control" id="password"
+                                                required
+                                                maxlength="50" 
+                                                [(ngModel)]="model.password" name="password"
+                                                #password="ngModel">
+                                                <div [hidden]="password.valid || password.pristine"
+                                                    class="alert alert-danger" style="margin-top:10px;">
+                                                    <div [hidden]="!password.hasError('required')">Password is required</div>
+                                                </div>
+                                                </div>
+                
+                
+                                                <div class="form-group">
+                                                <label for="phone">Phone<span style="color:red">*</span></label>
+                                                <input type="text" class="form-control" id="phone"
+                                                required
+                                                pattern="[0-9]*"
+                                                minlength="10"
+                                                maxlength="10" 
+                                                [(ngModel)]="model.phone" name="phone"
+                                                #phone="ngModel">
+                                                <div [hidden]="phone.valid || phone.pristine"
+                                                    class="alert alert-danger" style="margin-top:10px;">
+                                                    <div class="ddddddd" [hidden]="!phone.hasError('required')">Phone is required</div>
+                                                    <div class="ddddddd" [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
+                                                    <div [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
+                                                </div>
+                                                </div>
+
+                                </div>
+
+                                <div *ngIf="model.user_type=='Company'">
+                                        
+                                            <div class="form-group">
+                                            <label for="firstname">Company Name<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="firstname"
+                                            required
+                                            maxlength="20" 
+                                            [(ngModel)]="model.firstname" name="firstname"
+                                            #firstname="ngModel">
+                                            <div [hidden]="firstname.valid || firstname.pristine"
+                                                class="alert alert-danger" style="margin-top:10px;">
+                                                <div [hidden]="!firstname.hasError('required')">Company name is required</div>
+                                            </div>
+                                            </div>
+            
+            
+                                            <div class="form-group">
+                                            <label for="email">Email<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="email"
+                                            required
+                                            maxlength="50" 
+                                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                                            [(ngModel)]="model.email" name="email"
+                                            #email="ngModel">
+                                            <div [hidden]="email.valid || email.pristine"
+                                                class="alert alert-danger" style="margin-top:10px;">
+                                                <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
+                                                <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
+                                            </div>
+                                            </div>
+            
+            
+                                            <div class="form-group">
+                                            <label for="password">Password<span style="color:red">*</span></label>
+                                            <input type="password" class="form-control" id="password"
+                                            required
+                                            maxlength="50" 
+                                            [(ngModel)]="model.password" name="password"
+                                            #password="ngModel">
+                                            <div [hidden]="password.valid || password.pristine"
+                                                class="alert alert-danger" style="margin-top:10px;">
+                                                <div [hidden]="!password.hasError('required')">Password is required</div>
+                                            </div>
+                                            </div>
+            
+            
+                                            <div class="form-group">
+                                            <label for="phone">Phone<span style="color:red">*</span></label>
+                                            <input type="text" class="form-control" id="phone"
+                                            required
+                                            pattern="[0-9]*"
+                                            minlength="10"
+                                            maxlength="10" 
+                                            [(ngModel)]="model.phone" name="phone"
+                                            #phone="ngModel">
+                                            <div [hidden]="phone.valid || phone.pristine"
+                                                class="alert alert-danger" style="margin-top:10px;">
+                                                <div class="ddddddd" [hidden]="!phone.hasError('required')">Phone is required</div>
+                                                <div class="ddddddd" [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
+                                                <div class="ddddddd" [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
+                                            </div>
+                                            </div>
+
+                            </div>
+
+                                
+
+                                <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+<header class="bs-docs-nav navbar navbar-static-top" id="top">
+    <div class="container">
+      <div class="navbar-header">
+        <button aria-controls="bs-navbar" aria-expanded="false" class="collapsed navbar-toggle" data-target="#bs-navbar" data-toggle="collapse" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a routerLink='/' class="navbar-brand"><img src="assets/images/logo.png" alt="logo"/></a> </div>
+      <nav class="collapse navbar-collapse" id="bs-navbar">
+        <ul class="nav navbar-nav navbar-right">                    
+        <li><a routerLink="/about" >About</a></li>
+        <li><a routerLink="/blog" >Blog</a></li>
+        <li><a routerLink="/faq" >FAQ,s</a></li>
+        <li *ngIf="User_data"><a><span style="color:black;">Welcome!</span> {{User_data.first_name}}</a></li>
+        <li *ngIf="!User_data" class="signin"><a href="#" data-toggle="modal" data-target="#myModal1111" (click)="formreset(heroForm1)">Sign in</a></li>
+        <li *ngIf="!User_data" class="getstrted"><a href="#" data-toggle="modal" data-target="#myModal2222" (click)="formreset(heroForm)">Register</a></li>
+        <li *ngIf="User_data" class="getstrted">
+            <button class="btn btn-success" (click)="Toggle()">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+            </button>
+            <ul id="dropdown" style="position:absolute; display:none;">
+                <li><a routerLink='/{{dashboard}}'><button class="btn btn-success" style="width:150px;">Dashboard</button></a></li>
+                <li><a routerLink='/{{dashboard}}/profile'><button class="btn btn-success" style="width:150px;">My Profile</button></a></li>
+                <li><a (click)="Logout()" ><button class="btn btn-success" style="width:150px;">Logout</button></a></li>
+            </ul>
+        </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="modal fade" id="messageheader" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Message</h4>
+        </div>
+        <div class="modal-body">
+            <h4>Message! {{message}}</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal" aria-label="Close">Cancel</button>
+        </div>
+        </div>
+    </div>
+    </div>
