@@ -15,44 +15,42 @@
                     <div class="tab-content" style="padding:30px;">
                     <form (ngSubmit)="CreateTemplate()" #heroFormmmmmmmmmm="ngForm">  
                         <div class="form-group">
-                        <label  for="Templatename">Template Name<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="Templatename"
+                        <label  for="Name">Template Name<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="Name"
                         required
-                        [(ngModel)]="contract.Name" name="Templatename"
-                        #Templatename="ngModel">
-                        <div [hidden]="Templatename.valid || Templatename.pristine"
+                        [(ngModel)]="contract.Name" name="Name"
+                        #Name="ngModel">
+                        <div [hidden]="Name.valid || Name.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
-                            <div [hidden]="!Templatename.hasError('required')">Template name is required</div>
+                            <div [hidden]="!Name.hasError('required')">Template name is required</div>
                         </div>
                         </div>
             
                         <div class="form-group">
                         <label>Select Category<span style="color:red">*</span></label>
-                        <select  class="form-control" id="contractcategory" [(ngModel)]="contractcategoryname" name="contractcategory"
-                        #contractcategory="ngModel">
-                            <option [ngValue]="null" disabled>--Select--</option>
-                            <option *ngFor="let u of Category">{{u.Category_Name}}</option>
+                        <select  class="form-control" id="categoryName" [(ngModel)]="contract.categoryName" name="categoryName"
+                        #categoryName="ngModel">
+                            <option [ngValue]="null">--Select Category--</option>
+                            <option *ngFor="let u of Category" [ngValue]="u.id">{{u.name}}</option>
                         </select>
                         </div>
 
-                        <div class="form-group">
+                        <ckeditor [(ngModel)]="myContent" debounce="500" [ngModelOptions]="{standalone: true}"></ckeditor>
+                        <!-- <div class="form-group">
                         <label  for="Description">Description<span style="color:red">*</span></label>
-                        <input type="textarea" class="form-control" id="Description"
-                        required
-                        [(ngModel)]="contract.Description" name="Description"
-                        #Description="ngModel">
-                        <div [hidden]="Description.valid || Description.pristine"
+                        ​<textarea name="editor1"></textarea> -->
+                        <!-- <div [hidden]="Description.valid || Description.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
                             <div [hidden]="!Description.hasError('required')">Description is required</div>
-                        </div>
-                        </div>
+                        </div>-->
+                        <!-- </div>  -->
             
                         <div class="form-group">
                         <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
-                        <input type="radio"  name="statustemplate" value="Active"
-                        id="statustemplateactive" #categorystatus="ngModel" required [(ngModel)]="templatestatus">Active<i style="margin-right:20px;"></i>
-                        <input type="radio"  name="statustemplate" value="InActive"
-                        id="statustemplateinactive" #categorystatus="ngModel" required [(ngModel)]="templatestatus">InActive
+                        <input type="radio" name = "statustemplate" value="1" [ngModelOptions]="{standalone: true}"
+                         required [(ngModel)]="contract.status">Active<i style="margin-right:20px;"></i>
+                        <input type="radio" name = "statustemplate" value="0" [ngModelOptions]="{standalone: true}"
+                        required [(ngModel)]="contract.status">InActive
                         </div>
 
                         <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>

@@ -198,7 +198,7 @@ router.post('/serviceProvider', function(req, res) {
 
   var sql = 'SELECT * FROM Users WHERE User_Type = ? AND Status = ?';
 
-    global.con.query(sql,['Service Provider','Active'],function(err,result) {
+    global.con.query(sql,['Service_Provider','Active'],function(err,result) {
     if(err) return res.status(500).send();
 
     return res.json({status:200,res:result});

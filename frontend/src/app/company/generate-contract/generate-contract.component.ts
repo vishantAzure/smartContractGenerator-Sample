@@ -76,45 +76,57 @@ export class GenerateContractComponent implements OnInit {
 
   PreviewContract() {
     
-    
-    let self = this;
-    this.ContractEmail[0].Value_Input = this.Template.email;
-    this.ContractName[0].Value_Input = this.Template.ContractName;
-    this.ContractPrice[0].Value_Input = this.Template.Price;
-    this.ContractDate[0].Value_Input = this.Template.Date;
-    let obj = {TemplateID:this.ContractEmail[0].IDTemplate,UID:this.User_data.idUsers,
-      ContractName:this.Template.ContractName,CustomerEmail:this.CustomerEmailAddress,
-      ContractPrice:this.Template.Price, ContractDate:this.Template.Date
-    };
-    
-    this.Fields.push(this.ContractDate[0] ,this.ContractEmail[0] ,this.ContractName[0] ,this.ContractPrice[0] );
-    console.log({fields:this.Fields,ID:obj,milestone:this.Milestones});
-    this.http.post('//'+config.global_ip+'/pdf/preview',{fields:this.Fields,ID:obj,milestone:this.Milestones}).subscribe((res:any)=>{
-      var result = JSON.parse(res._body);
-
-      if(result.status==200) {
-        console.log(result.res);
-        this.preview = result.res;
-        $('#myModal222222').modal('toggle');
-      }else{
-        this.message='UnSucessfull';
+    if(this.Milestones.length==0) {
+      this.message='Please Add A Milestone';
+      $('#message').modal('toggle');
+    }else{
+      if(this.CustomerEmailAddress == null) {
+        this.message='Please Select Customer Email';
+        $('#message').modal('toggle');
+      }
+      let self = this;
+      this.ContractEmail[0].Value_Input = this.Template.email;
+      this.ContractName[0].Value_Input = this.Template.ContractName;
+      this.ContractPrice[0].Value_Input = this.Template.Price;
+      this.ContractDate[0].Value_Input = this.Template.Date;
+      let obj = {TemplateID:this.ContractEmail[0].IDTemplate,UID:this.User_data.idUsers,
+        ContractName:this.Template.ContractName,CustomerEmail:this.CustomerEmailAddress,
+        ContractPrice:this.Template.Price, ContractDate:this.Template.Date
+      };
+      
+      this.Fields.push(this.ContractDate[0] ,this.ContractEmail[0] ,this.ContractName[0] ,this.ContractPrice[0] );
+      console.log({fields:this.Fields,ID:obj,milestone:this.Milestones});
+      this.http.post('//'+config.global_ip+'/pdf/preview',{fields:this.Fields,ID:obj,milestone:this.Milestones}).subscribe((res:any)=>{
+        var result = JSON.parse(res._body);
+  
+        if(result.status==200) {
+          console.log(result.res);
+          this.preview = result.res;
+          $('#myModal222222').modal('toggle');
+        }else{
+          this.message='UnSucessfull';
+          $('#message').modal('toggle');
+          setTimeout(function(){ 
+            $('#message').modal('toggle');
+          }, 1000);
+        }
+      },(err)=>{
+        this.message=err;
         $('#message').modal('toggle');
         setTimeout(function(){ 
           $('#message').modal('toggle');
         }, 1000);
-      }
-    },(err)=>{
-      this.message=err;
-      $('#message').modal('toggle');
-      setTimeout(function(){ 
-        $('#message').modal('toggle');
-      }, 1000);
-    });
+      });
+    }
 
   }
 
   CreatePDF() {
 
+  if(this.Milestones.length==0) {
+      this.message='Please Add A Milestone';
+      $('#message').modal('toggle');
+    }else{
       let self = this;
       this.ContractEmail[0].Value_Input = this.Template.email;
       this.ContractName[0].Value_Input = this.Template.ContractName;
@@ -128,7 +140,7 @@ export class GenerateContractComponent implements OnInit {
       this.Fields.push(this.ContractDate[0] ,this.ContractEmail[0] ,this.ContractName[0] ,this.ContractPrice[0] );
       console.log({fields:this.Fields,ID:obj,milestone:this.Milestones});
       this.http.post('//'+config.global_ip+'/pdf/createPDF',{fields:this.Fields,ID:obj,milestone:this.Milestones}).subscribe((res:any)=>{
-        this.Fields = [];
+        // this.Fields = [];
         var result = JSON.parse(res._body);
   
         if(result.status==200) {
@@ -148,6 +160,7 @@ export class GenerateContractComponent implements OnInit {
           $('#message').modal('toggle');
         }, 1000);
       });
+    }
     
   }
 

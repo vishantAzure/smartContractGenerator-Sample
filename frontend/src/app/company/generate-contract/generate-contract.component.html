@@ -16,7 +16,7 @@
                     <label>Select Customer<span style="color:red">*</span></label>
                     <select  class="form-control" id="customeremail" [(ngModel)]="CustomerEmailAddress" name="customeremail"
                     #customeremail="ngModel">
-                        <option [ngValue]="null" disabled>--Select--</option>
+                        <option [ngValue]="null">--Select--</option>
                         <option *ngFor="let c of customers">{{c.Email}}</option>
                     </select>
                     </div>
@@ -174,7 +174,7 @@
                     </div>
 
                     <div class="form-group">
-                        <li class="btn btn-success" (click)="AddMilestone()">Add Milestone</li>
+                        <li class="btn btn-success" (click)="AddMilestone()">Add More Milestone</li>
                     </div>
 
                     <div *ngFor="let u of Fields">

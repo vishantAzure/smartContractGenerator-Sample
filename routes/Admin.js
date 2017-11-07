@@ -7,10 +7,13 @@ var fs = require('fs');
 var Mailgun = require('mailgun').Mailgun;
 var PDFDocument = require('pdfkit');
 var mg = new Mailgun('key-001902229d1f3c9beb6653254fa477e2');
+// model configuration
+// var Model = require('../model');
 
 router.post('/AdminManageSubscription', function(req, res) {
-    var sql = "INSERT INTO Subscriptions (packageName, packagePrice, numberOfContract, renewalFrequency) VALUES ?";
-    var values = [[req.body.packageName, req.body.packagePrice, req.body.numberOfContract, req.body.renewalFrequency],];
+    console.log(req.body);
+    var sql = "INSERT INTO Subscriptions (packageName, packagePrice, numberOfContract, renewalFrequency, status) VALUES ?";
+    var values = [[req.body.packageName, req.body.packagePrice, req.body.numberOfContract, req.body.renewalFrequency, req.body.status],];
 
     global.con.query(sql,[values],function(err,result) {
       if(err) return res.status(500).send();
@@ -26,12 +29,16 @@ router.post('/AdminManageSubscription', function(req, res) {
 
 
 router.post('/AdminviewSubscription', function(req, res) {
-  var sql = 'SELECT * FROM Subscriptions WHERE Status = ?;'
-  var values = [['Active'],];
-
-  global.con.query(sql,[values],function(err,result) {
+    
+    AllSubscriptionsPromise = new Model.Subscriptions().fetchAll();
+    AllSubscriptionsPromise.then(function(subscriptions){
+        console.log(subscriptions.toJSON());       
+    });
+  var sql = 'SELECT * FROM Subscriptions ;'
+  
+  global.con.query(sql, function(err,result) {
     if(err) return res.status(500).send();
-
+    
       if(result.length>0) {
         return res.json({status:200,res:result});
       }else{
@@ -42,8 +49,8 @@ router.post('/AdminviewSubscription', function(req, res) {
 
 
 router.post('/AdminDeleteSubscription', function(req, res) {
-  var sql = 'UPDATE Subscriptions SET Status = ? WHERE idSubscriptions = ?';
-  var values = [['InActive',req.body.id],];
+  var sql = 'UPDATE Subscriptions SET status = ? WHERE id = ?';
+  var values = [['0',req.body.id],];
 
   global.con.query(sql,[values],function(err,result) {
     if(err) return res.status(500).send();
@@ -58,7 +65,7 @@ router.post('/AdminDeleteSubscription', function(req, res) {
 });
 
 router.post('/AdminUpdateSubscription', function(req, res) {
-  var sql = 'UPDATE Subscriptions SET packageName = ?, packagePrice = ?, numberOfContract = ?, renewalFrequency = ? WHERE idSubscriptions = ?';
+  var sql = 'UPDATE Subscriptions SET packageName = ?, packagePrice = ?, numberOfContract = ?, renewalFrequency = ? WHERE id = ?';
   global.con.query(sql,[req.body.packageName, req.body.packagePrice ,req.body.numberOfContract ,req.body.renewalFrequency, req.body.id],function(err,result) {
     if(err) return res.status(500).send();
     
@@ -75,12 +82,21 @@ router.post('/AdminUpdateSubscription', function(req, res) {
 //////////////////////////////// Manage Ctegory /////////////////////////////////////////////////////////
 
 router.post('/addCategory', function(req, res) {
-  var sql = "INSERT INTO TemplateCategory (Category_Name, Parent_Category, Status, Icon) VALUES ?";
-  var values = [[req.body.Name,req.body.parentCategory,req.body.status,req.body.icon],];
+  var status;
+  var createdat = new Date();
+  var sql = "INSERT INTO template_category (name, parent_category, created_at, updated_at, Status, deleted) VALUES ?";
+  if(!req.body.parentcategory) 
+  req.body.parentcategory = 0;
+  if(req.body.status=='Active') {
+    status = 1;
+  }else{
+    status = 0;
+  }
+  var values = [[req.body.name,req.body.parentcategory,createdat, ,status,false],];
 
   global.con.query(sql,[values],function(err,result) {
-    if(err) return res.status(500).send();
-    
+    if(err) return res.send(err);
+
     if(result.affectedRows==1) {
       return res.json({status:200,res:result});
     }else{
@@ -90,28 +106,22 @@ router.post('/addCategory', function(req, res) {
   });
 });
 
-
-router.post('/addParentCategory', function(req, res) {
-  var sql = "INSERT INTO TemplateParentCategory (Category_Name, Status, Icon) VALUES ?";
-  var values = [[req.body.Name,req.body.status,req.body.icon],];
-
-  global.con.query(sql,[values],function(err,result) {
-    if(err) return res.status(500).send();
-    
-    if(result.affectedRows==1) {
-      return res.json({status:200,res:result});
-    }else{
-      return res.json({status:300,res:result});
-    }
-
-  });
-});
 
 router.post('/editCategory', function(req, res) {
-  var sql = "UPDATE TemplateCategory SET  Category_Name = ?, Parent_Category = ?, Status = ?, Icon = ? WHERE idTemplateCategory = ?";
-  global.con.query(sql,[req.body.Name,req.body.parentCategory,req.body.status,req.body.icon,req.body.id],function(err,result) {
+  var status;
+  var updatedat = new Date();
+  var sql = "UPDATE template_category SET  name = ?, parent_category = ? , updated_at = ?, Status = ?, deleted = ? WHERE id = ?";
+  if(!req.body.parentcategory) 
+  req.body.parentcategory = 0;
+  if(req.body.status=='Active') {
+    status = 1;
+  }else{
+    status = 0;
+  }
+  
+  global.con.query(sql,[req.body.name,req.body.parentcategory,updatedat ,status,false,req.body.ID],function(err,result) {
     if(err) return res.status(500).send();
-    
+
     if(result.affectedRows==1) {
       return res.json({status:200,res:result});
     }else{
@@ -121,10 +131,9 @@ router.post('/editCategory', function(req, res) {
 });
 
 router.post('/DeleteCategory', function(req, res) {
-  var sql = "UPDATE TemplateCategory SET Status = ? WHERE idTemplateCategory = ?";
-  var values = [['InActive',req.body.id],];
+  var sql = "UPDATE template_category SET deleted = ? WHERE id = ? ";
 
-  global.con.query(sql,[values],function(err,result) {
+  global.con.query(sql,[true,req.body.id],function(err,result) {
     if(err) return res.status(500).send();
     
     if(result.affectedRows==1) {
@@ -136,32 +145,13 @@ router.post('/DeleteCategory', function(req, res) {
 });
 
 router.post('/retrieveCategory', function(req, res) {
-  var sql = 'SELECT * FROM TemplateCategory WHERE Status = ?;'
-  var values = [['Active'],];
+  var sql = 'SELECT * FROM template_category WHERE deleted = ?;'
+  var values = [[false],];
 
   global.con.query(sql,[values],function(err,result) {
     if(err) return res.status(500).send();
 
-      if(result.length>0) {
-        return res.json({status:200,res:result});
-      }else{
-        return res.json({status:300,res:result});
-      }
-
-  });
-});
-
-router.post('/retrieveParentCategory', function(req, res) {
-  var sql = 'SELECT * FROM TemplateParentCategory;'
-  
-  global.con.query(sql,[],function(err,result) {
-    if(err) return res.status(500).send();
-
-      if(result.length>0) {
-        return res.json({status:200,res:result});
-      }else{
-        return res.json({status:300,res:result});
-      }
+    return res.json({status:200,res:result});
 
   });
 });

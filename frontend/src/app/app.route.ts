@@ -32,7 +32,6 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangepassComponent } from './authentication/changepass/changepass.component';
 import { TemplateComponent } from './company/generate-contract/template/template.component';
-import { PreviewComponent } from './company/generate-contract/preview/preview.component';
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
 import { AdminchangepassComponent } from './authentication/adminchangepass/adminchangepass.component';
 import { DetailComponent } from './admin/view-contract/detail/detail.component';
@@ -62,7 +61,6 @@ const routes: Routes = [
     { path: 'generateContract', pathMatch: 'full', component:GenerateContractComponent ,canActivate: [ServiceProviderRouteGuard]},
     { path: 'changepassword', pathMatch: 'full', component:ChangepassComponent ,canActivate: [ServiceProviderRouteGuard]},
     { path: 'ViewContract', pathMatch: 'full', component:ViewContractComponent ,canActivate: [ServiceProviderRouteGuard]},
-    { path: 'PreviewContract', pathMatch: 'full', component:PreviewComponent ,canActivate: [ServiceProviderRouteGuard]},
     { path: 'upgrade', pathMatch: 'full', component:UpgradeComponent ,canActivate: [ServiceProviderRouteGuard]},
   ]},
   { path: 'customer', children: [
@@ -72,21 +70,19 @@ const routes: Routes = [
     { path: 'generateContract', pathMatch: 'full', component:GenerateContractComponent ,canActivate: [CustomerRouteGuard]},
     { path: 'changepassword', pathMatch: 'full', component:ChangepassComponent ,canActivate: [CustomerRouteGuard]},
     { path: 'ViewContract', pathMatch: 'full', component:ViewContractComponent ,canActivate: [CustomerRouteGuard]},
-    { path: 'PreviewContract', pathMatch: 'full', component:PreviewComponent ,canActivate: [CustomerRouteGuard]},
     { path: 'upgrade', pathMatch: 'full', component:UpgradeComponent ,canActivate: [CustomerRouteGuard]},
   ]},
   { path: 'company', children: [
-    { path: '', pathMatch: 'full', component: CompanyComponent,canActivate: [CompanyRouteGuard]},
+    { path: 'dashboard', pathMatch: 'full', component: CompanyComponent,canActivate: [CompanyRouteGuard]},
     { path: 'contract', pathMatch: 'full', component:ViewContractComponent,canActivate: [CompanyRouteGuard]},
     { path: 'profile', pathMatch: 'full', component:ProfileComponent ,canActivate: [CompanyRouteGuard]},
     { path: 'generateContract', pathMatch: 'full', component:GenerateContractComponent ,canActivate: [CompanyRouteGuard]},
     { path: 'changepassword', pathMatch: 'full', component:ChangepassComponent ,canActivate: [CompanyRouteGuard]},
     { path: 'ViewContract', pathMatch: 'full', component:ViewContractComponent ,canActivate: [CompanyRouteGuard]},
-    { path: 'PreviewContract', pathMatch: 'full', component:PreviewComponent ,canActivate: [CompanyRouteGuard]},
     { path: 'upgrade', pathMatch: 'full', component:UpgradeComponent ,canActivate: [CompanyRouteGuard]},
   ]},
   { path: 'admin', children: [
-    { path: '', pathMatch: 'full', component: AdminComponent,canActivate: [AdminRouteGuard]},
+    { path: 'dashboard', pathMatch: 'full', component: AdminComponent,canActivate: [AdminRouteGuard]},
     { path: 'managesubscription', pathMatch: 'full', component:ManageSubscriptionComponent,canActivate: [AdminRouteGuard]},
     { path: 'profile', pathMatch: 'full', component:AdminProfileComponent ,canActivate: [AdminRouteGuard]}, 
     { path: 'changepassword', pathMatch: 'full', component:AdminchangepassComponent ,canActivate: [AdminRouteGuard]},

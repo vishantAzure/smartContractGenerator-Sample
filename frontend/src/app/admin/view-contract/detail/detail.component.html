@@ -31,11 +31,11 @@
                             <td>{{u.Start_Date | dateFilter}}</td>
                             <td>{{u.End_Date | dateFilter}}</td>
                             <td>{{u.Milestone_fee}}</td>
-                            <td>{{u.Payment_Status}}</td>
-                            <td>{{u.Task_Status}}</td>
+                            <td>{{u.Payment_Status == 0 ?'Pending':'Complete'}}</td>
+                            <td>{{u.Task_Status == 0 ?'Pending':'Complete'}}</td>
                             <td>
-                              <li class="btn btn-success" aria-hidden="true" (click)="MarkMilestoneComplete(Contract_ID)">Complete</li>
-                              <li class="btn btn-success" aria-hidden="true" (click)="CancelMilestone(Contract_ID)">Cancel</li>
+                              <li class="btn btn-success" aria-hidden="true" (click)="MarkMilestoneComplete(u.Contract_ID)">Complete</li>
+                              <li class="btn btn-success" aria-hidden="true" (click)="CancelMilestone(u.Contract_ID)">Cancel</li>
                             </td>
                         </tr>
                       </tbody>

@@ -7,15 +7,24 @@ declare var $;
   templateUrl: './sidemenu.component.html',
 })
 export class SidemenuComponent implements OnInit {
-  User_data;
-  dashboard;
-  openSideMenu;
+    User_data;
+    dashboard;
+    openSideMenu;
   constructor(public sidenav :SidenavigationService) { }
-
-  ngOnInit() {
-    this.openSideMenu = this.sidenav.GetRouting();
-    for(var i=0;i<this.openSideMenu.length;i++) {
-      $('#'+this.openSideMenu[i]+ ' ul').show();
+    ngAfterViewChecked() {
+        $( document ).ready(function() {       
+            var parent_menu_li = $('.side_nav_active').parent().parent().parent();
+if ( parent_menu_li.is( "li" ) ) {
+    parent_menu_li.find('a:first').addClass('active_parent_menu');
+}
+        });
+    }
+  ngOnInit() {    
+    this.openSideMenu = this.sidenav.getActiveParentMenuId();
+   
+    
+    if(this.openSideMenu.length > 0) {
+        $('#'+this.openSideMenu + ' ul').show();
     }
     this.User_data = JSON.parse(localStorage.getItem('User'));
     if(this.User_data) {
@@ -42,5 +51,9 @@ export class SidemenuComponent implements OnInit {
     $('#'+id+ ' ul').toggle();
     this.sidenav.sidenav(id);
   }
+
+    setParentId(id) {        
+        this.sidenav.sidenav(id);
+    }
 
 }

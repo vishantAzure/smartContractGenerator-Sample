@@ -43,13 +43,13 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChangepassComponent } from './authentication/changepass/changepass.component';
 import { TemplateComponent } from './company/generate-contract/template/template.component';
-import { PreviewComponent } from './company/generate-contract/preview/preview.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { CompanyComponentSideMenu } from './sidemenu/company/company.component';
 import { AdminProfileComponent } from './profile/admin-profile/admin-profile.component';
 import { AdminchangepassComponent } from './authentication/adminchangepass/adminchangepass.component'
 import { SidenavigationService } from './sidenavigation.service';
 import { DateFilterPipe } from './date-filter.pipe';
+import { CKEditorComponent } from '../../node_modules/ng2-ckeditor/src/ckeditor.component';
 import { DetailComponent } from './admin/view-contract/detail/detail.component';
 
 @NgModule({
@@ -64,6 +64,7 @@ import { DetailComponent } from './admin/view-contract/detail/detail.component';
     GenerateContractComponent,
     AboutComponent,
     BlogComponent,
+    CKEditorComponent,
     FAQComponent,
     ReportsComponent,
     ManageTemplatesComponent,
@@ -86,7 +87,6 @@ import { DetailComponent } from './admin/view-contract/detail/detail.component';
     ProfileComponent,
     ChangepassComponent,
     TemplateComponent,
-    PreviewComponent,
     SidemenuComponent,
     CompanyComponentSideMenu,
     AdminProfileComponent,
@@ -103,6 +103,7 @@ import { DetailComponent } from './admin/view-contract/detail/detail.component';
     BrowserAnimationsModule, 
     ToasterModule
   ],
+  exports: [CKEditorComponent],
   providers: [CustomerRouteGuard,CompanyRouteGuard,AdminRouteGuard,ServiceProviderRouteGuard,SidenavigationService],
   bootstrap: [AppComponent]
 })

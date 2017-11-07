@@ -1,24 +1,26 @@
 <div class="col-sm-3 left-side" style="min-height: 698px;"><aside>
     <ul>
-        <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/{{dashboard}}'>Dashboard</a></li>
-        <li id="manageuser1" (click)="Toggle('manageuser')"><i><img src="assets/images/manage.png" alt="icon"/></i><a style="cursor:pointer;">Manage User</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
+        <li id='dashboard'>
+            <a routerLink='/{{dashboard}}/dashboard' [routerLinkActive]="['side_nav_active']" (click)="setParentId('dashboard')"><i><img src="assets/images/view.png" alt="icon"/></i> Dashboard </a>
         </li>
-        <li id="manageuser" style="padding:0px; border:none;">
+        <li id="manageuser1" >
+            <a style="cursor:pointer;" (click)="Toggle('manageuser1')"><i><img src="assets/images/manage.png" alt="icon"/></i> Manage User<span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span></a>
           <ul>
-            <li><i><img src="assets/images/admin-.png" alt="icon"/></i><a routerLink="/admin/manageservice" >Manage Service Provider</a></li>
-            <li><i><img src="assets/images/manage.png" alt="icon"/></i><a routerLink="/admin/managecustomer">Manage Customer</a></li>
-            <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/admin/managecompany'>Manage Company</a></li>
+            <li><a routerLink="/admin/manageservice" (click)="setParentId('manageuser1')" [routerLinkActive]="['side_nav_active']" id='manage_services'><i><img src="assets/images/manage.png" alt="icon"/></i> Manage Service Provider</a></li>
+            <li><a routerLink="/admin/managecustomer" (click)="setParentId('manageuser1')" [routerLinkActive]="['side_nav_active']" id='manage_customer'><i><img src="assets/images/manage.png" alt="icon"/></i> Manage Customer</a></li>
+            <li><a routerLink='/admin/managecompany'  (click)="setParentId('manageuser1')" [routerLinkActive]="['side_nav_active']" id='manage_company'><i><img src="assets/images/view.png" alt="icon"/></i> Manage Company</a></li>
           </ul>
         </li>
-        <li><i><img src="assets/images/admin-.png" alt="icon"/></i><a routerLink="/admin/reports" >Admin Reports</a></li>
-        <li id="settings1" (click)="Toggle('settings')"><i><img src="assets/images/manage.png" alt="icon"/></i><a style="cursor:pointer;">Settings</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
-        </li>
-        <li id="settings" style="padding:0px; border:none;">
-          <ul>
-              <li><i><img src="assets/images/manage.png" alt="icon"/></i><a routerLink="/admin/managesubscription">Manage Subscription Plan</a></li>
-              <li><i><img src="assets/images/manage-template.png" alt="icon"/></i><a routerLink="/admin/manageTemplate">Manage Template</a></li> 
-              <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/admin/addCategory'>Manage Category</a></li>
+        <li id="settings1">            
+            <a style="cursor:pointer;" (click)="Toggle('settings1')"><i><img src="assets/images/manage.png" alt="icon"/></i> Settings<span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span></a>
+            <ul>
+              <li><a routerLink="/admin/managesubscription" (click)="setParentId('settings1')" [routerLinkActive]="['side_nav_active']" ><i><img src="assets/images/manage.png" alt="icon"/></i> Manage Subscription Plan</a></li>
+              <li><a routerLink="/admin/manageTemplate" (click)="setParentId('settings1')" [routerLinkActive]="['side_nav_active']" ><i><img src="assets/images/manage-template.png" alt="icon"/></i> Manage Template</a></li> 
+              <li><a routerLink='/admin/addCategory' (click)="setParentId('settings1')" [routerLinkActive]="['side_nav_active']" ><i><img src="assets/images/view.png" alt="icon"/></i> Manage Category</a></li>
           </ul>
         </li>
+        <li id='reports'>
+            <a routerLink="/admin/reports" [routerLinkActive]="['side_nav_active']" (click)="setParentId('reports')" ><i><img src="assets/images/admin-.png" alt="icon"/></i> Reports</a>
+        </li>        
     </ul>
 </aside></div>

@@ -9,7 +9,7 @@
                     <h3>Manage Category</h3>
                   </div>
                   <div class="col-sm-3">
-                      <button class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="width:150px;" (click)="formreset(heroFormmmmmmmmmm)">Create</button>
+                      <button class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="width:150px;" (click)="SelectRadio()">Create</button>
                 </div>
               </div>
               <div class="table-responsive">
@@ -17,7 +17,7 @@
                     <thead>
                           <tr class="active">
                               <th>Category Name</th>
-                              <th>Parent category</th>
+                              <th>Created At</th>
                               <th>Status</th>
                               <th>Action</th>
                           </tr>
@@ -25,9 +25,9 @@
                       <tbody>
                         <tr class="bg-wht"  *ngFor="let u of Category">
                               <td>{{u.name}}</td>
-                              <td>{{u.parent_category_name}}</td>
-                              <td>{{u.Status == 0? 'InActive' : 'Active'}}</td>
-                              <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" data-toggle="modal" data-target="#myModal3" (click)="changeModal(u)"></i><i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.id_template_category)"></i></td>
+                              <td>{{u.created_at | dateFilter}}</td>
+                              <td>{{u.Status == 0 ? 'InActive' : 'Active'}}</td>
+                              <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" data-toggle="modal" data-target="#myModal3" (click)="changeModal(u)"></i><i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.id,u.parent_category)"></i></td>
                           </tr>
                       </tbody>
                   </table>
@@ -45,86 +45,89 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button class="close" data-dismiss="modal" (click)="formreset(heroFormmmmmmmmmm)">X</button>
+        <button class="close" data-dismiss="modal">X</button>
         <h4 class="modal-title" id="myModalLabel">Add Category</h4>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="CreateCategory()" #heroFormmmmmmmmmm="ngForm">  
+        <form (ngSubmit)="CreateCategory()" #addcategoryform="ngForm">  
+               
             <div class="form-group">
-            <label  for="categoryname">Category Name<span style="color:red">*</span></label>
-            <input type="text" class="form-control" id="categoryname"
-            required
-            [(ngModel)]="contract.name" name="categoryname"
-            #categoryname="ngModel">
-            <div [hidden]="categoryname.valid || categoryname.pristine"
-                class="alert alert-danger" style="margin-top:10px;">
-                <div [hidden]="!categoryname.hasError('required')">Category name is required</div>
-            </div>
+                <label for="addcategoryname">Category Name<span style="color:red">*</span></label>
+                <input type="text" class="form-control" id="addcategoryname"
+                required
+                [(ngModel)]="contract.name" name="addcategoryname"
+                #addcategoryname="ngModel">
+
+                <div [hidden]="addcategoryname.valid || addcategoryname.pristine"
+                    class="alert alert-danger" style="margin-top:10px;">
+                    <div [hidden]="!addcategoryname.hasError('required')">Category name is required</div>
+                </div>
             </div>
 
             <div class="form-group">
-            <label>Parent Category</label>
-            <select  class="form-control" id="parentcategory" [(ngModel)]="contract.parentcategoryname" name="parentcategory"
-            #parentcategory="ngModel">
-                <option [ngValue]="null" disabled>--Select--</option>
-                <option *ngFor="let u of ParentCategory">{{u.name}}</option>
-            </select>
+                <label for="addparentcategory">Parent Category</label>
+                <select  class="form-control" id="addparentcategory" 
+                    required 
+                    [(ngModel)]="contract.parencategory" name="addparentcategory"
+                    #addparentcategory="ngModel">
+                    <option [ngValue]="null">Select Parent Category</option>
+                    <option *ngFor="let u of ParentCategory" [ngValue]="u.id" [selected]="contract.selected==u.id">{{u.name}}</option>
+                </select>
             </div>
+
 
             <div class="form-group">
             <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
-            <input type="radio"  name="categorystatus" value="Active"
-            id="categorystatusactive" #categorystatus="ngModel" required [(ngModel)]="contract.status">Active<i style="margin-right:20px;"></i>
-            <input type="radio"  name="categorystatus" value="InActive"
-            id="categorystatusinactive" #categorystatus="ngModel" required [(ngModel)]="contract.status">InActive
+            <input name="addstatus" type="radio" [value]="1"  [(ngModel)]="contract.status" >Active<i style="margin-right:20px;"></i>
+            <input name="addstatus" type="radio" [value]="0"  [(ngModel)]="contract.status" >InActive
             </div>
         
-            <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+            <button type="submit" class="btn btn-success" [disabled]="!addcategoryform.form.valid">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="myModal3" role="dialog" aria-labelledby="myModalLabel">
+<!-- <div class="modal fade" id="myModal3" role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-    <button class="close" data-dismiss="modal" (click)="formreset(heroForm2222)">X</button>
+    <button class="close" data-dismiss="modal" (click)="formreset(editcategoryform)">X</button>
       <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="EditCategory()" #heroForm2222="ngForm">  
+        <form (ngSubmit)="EditCategory()" #editcategoryform="ngForm">  
             <div class="form-group">
-            <label  for="categoryname">Category Name<span style="color:red">*</span></label>
-            <input type="text" class="form-control" id="categoryname"
+            <label  for="categorynameedit">Category Name<span style="color:red">*</span></label>
+            <input type="text" class="form-control" id="categorynameedit"
             required
-            [(ngModel)]="contract.name" name="categoryname"
-            #categoryname="ngModel">
-            <div [hidden]="categoryname.valid || categoryname.pristine"
+            [(ngModel)]="contract.name" name="categorynameedit"
+            #categorynameedit="ngModel">
+            <div [hidden]="categorynameedit.valid || categorynameedit.pristine"
                 class="alert alert-danger" style="margin-top:10px;">
-                <div [hidden]="!categoryname.hasError('required')">Category name is required</div>
+                <div [hidden]="!categorynameedit.hasError('required')">Category name is required</div>
             </div>
             </div>
 
             <div class="form-group">
             <label>Parent Category</label>
-            <select  class="form-control" id="parentcategory" [(ngModel)]="contract.parentcategoryname" name="parentcategory"
-            #parentcategory="ngModel">
-                <option [ngValue]="null" disabled>--Select--</option>
-                <option *ngFor="let u of ParentCategory">{{u.name}}</option>
+            <select  class="form-control" id="parentcategoryedit" required [(ngModel)]="contract.parencategory" name="parentcategoryedit"
+            #parentcategoryedit="ngModel">
+            <option [ngValue]="null">Select Parent Category</option>
+            <option *ngFor="let u of ParentCategory" [ngValue]="u.id">{{u.name}}</option>
             </select>
             </div>
 
             <div class="form-group">
             <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
-            <input type="radio"  name="categorystatus" value="Active"
-            id="categorystatusactive" #categorystatus="ngModel" required [(ngModel)]="contract.status">Active<i style="margin-right:20px;"></i>
-            <input type="radio"  name="categorystatus" value="InActive"
-            id="categorystatusinactive" #categorystatus="ngModel" required [(ngModel)]="contract.status">InActive
+            <input type="radio"  value=1 id="editstatusactive" [(ngModel)]="contract.status" name="editstatusactive"
+            #statusactive="ngModel" >Active<i style="margin-right:20px;"></i>
+            <input type="radio"  value=0 id="editstatusinactive" [(ngModel)]="contract.status" name="editstatusactive"
+            #statusactive="ngModel" >InActive
             </div>
         
-            <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+            <button type="submit" class="btn btn-success" [disabled]="!editcategoryform.form.valid">Submit</button>
         </form>
     </div>
   </div>
@@ -163,4 +166,4 @@
     </div>
     </div>
 </div>
-</div>
+</div> -->

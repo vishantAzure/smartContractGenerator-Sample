@@ -27,7 +27,12 @@ export class DetailComponent implements OnInit {
   }
 
   MarkMilestoneComplete(id) {
-
+    this.http.post('//'+config.global_ip+'/pdf/milestoneComplete',{id:id}).subscribe((res:any)=>{
+      this.ContractDetails = JSON.parse(res._body).res;
+      this.ngOnInit();
+     },(err)=>{
+      console.log(err);
+     });
   }
 
   CancelMilestone(ig) {

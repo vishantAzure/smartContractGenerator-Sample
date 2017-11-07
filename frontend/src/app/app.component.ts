@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
           this.model = new Modal();
         }
 
-    ngOnInit() {
+    ngOnInit() {    
     this.User_data = JSON.parse(localStorage.getItem('User'));
     if(this.User_data) {
         switch(this.User_data.User_Type){

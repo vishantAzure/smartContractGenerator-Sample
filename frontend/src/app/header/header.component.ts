@@ -77,10 +77,10 @@ export class HeaderComponent implements OnInit {
               this.router.navigate(['/serviceprovider']);
               break;
           case "Company":
-              this.router.navigate(['/company']);
+              this.router.navigate(['/company/dashboard']);
               break;
           case "Admin":
-              this.router.navigate(['/admin']);
+              this.router.navigate(['/admin/dashboard']);
               break;
         }
       }else if(result.status==300) {

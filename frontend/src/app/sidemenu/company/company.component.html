@@ -1,15 +1,20 @@
 <div class="col-sm-3 left-side" style="min-height: 698px;"><aside>
     <ul>
-        <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink='/{{dashboard}}'>Dashboard</a></li>
-        <li><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink="/{{dashboard}}/ViewContract">Manage contracts</a></li>
-        <li><i><img src="assets/images/view.png" alt="icon"/></i><a>Ether Wallet</a></li>
-        <li id="settings1" (click)="Toggle('settings')"><i><img src="assets/images/manage.png" alt="icon"/></i><a style="cursor:pointer;">Settings</a><span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span>
+        <li id='dashboard'>
+            <a routerLink='/{{dashboard}}/dashboard' [routerLinkActive]="['side_nav_active']" (click)="setParentId('dashboard')"><i><img src="assets/images/view.png" alt="icon"/></i> Dashboard </a>
         </li>
-        <li id="settings" style="padding:0px; border:none;">
+        <li id="view_contract" >
+            <a routerLink="/{{dashboard}}/ViewContract" [routerLinkActive]="['side_nav_active']" style="cursor:pointer;" (click)="Toggle('view_contract')" ><i><img src="assets/images/manage.png" alt="icon"/></i> Manage contracts<span class="pull-right" style="margin-right:15px;"></span></a>
+        </li>
+        <li id="view_contract" >
+            <a href='javascript:void(0)' style="cursor:pointer;" (click)="setParentId('view_contract')" ><i><img src="assets/images/manage.png" alt="icon"/></i> Ether Wallet<span class="pull-right" style="margin-right:15px;"></span></a>
+        </li>
+        <li id="settings">            
+            <a style="cursor:pointer;" (click)="Toggle('settings')"><i><img src="assets/images/manage.png" alt="icon"/></i> Settings<span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span></a>
             <ul>
-                <li (click)="Routing('settings')"><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink="/{{dashboard}}/changepassword">Change Password</a></li>
-                <li (click)="Routing('settings')"><i><img src="assets/images/view.png" alt="icon"/></i><a routerLink="/{{dashboard}}/upgrade">Upgrade Subscription</a></li>
-            </ul>
-        </li>
+              <li><a routerLink="/{{dashboard}}/changepassword" (click)="setParentId('settings')" [routerLinkActive]="['side_nav_active']" ><i><img src="assets/images/manage.png" alt="icon"/></i> Change Password</a></li>
+              <li><a routerLink="/{{dashboard}}/upgrade" (click)="setParentId('settings')" [routerLinkActive]="['side_nav_active']" ><i><img src="assets/images/manage-template.png" alt="icon"/></i> Upgrade Subscription</a></li>               
+          </ul>
+        </li>        
     </ul>
 </aside></div>

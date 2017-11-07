@@ -19,22 +19,20 @@
   <link rel="stylesheet" href="assets/js/JqueryUI.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="assets/js/JqueryUi.js"></script>
-  <script>
-      $( function() {
-        $( "#datepicker" ).datepicker();
-      } );
-  </script>
-  <script>
-      $( function() {
-        $( "#datepicker1" ).datepicker();
-      } );
-  </script>
+  <script src="https://cdn.ckeditor.com/4.6.1/full/ckeditor.js"></script>
 </head>
 <body>
   <app-root></app-root>
 
 <script>
 $(document).ready(function() {
+$('.side_nav_active').parent().parent().show();
+var parent_menu_li = $('.side_nav_active').parent().parent().parent();
+if ( parent_menu_li.is( "li" ) ) {
+    parent_menu_li.find('a:first').addClass('active_parent_menu');
+}
+
+
 $('.manage-user').on('click',function(){
 //alert('sds')
 $(this).find('ul').slideToggle();
