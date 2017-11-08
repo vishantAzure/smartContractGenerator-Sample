@@ -13,22 +13,21 @@ router.post('/CreateTemplate', function(req, res) {
     '#ContractName#! (the “Effective Date”) between'+'#ContractEmail#! (the “Company”),a #ContractPrice#!'+'#ContractDate#!'+
     'perform other services in the future; and'+'The Parties therefore agree as follows:';
     let myStr = str1 + req.body.Description;
-    var templateID = crypto.createHash('md5').update(req.body.categoryName+req.body.Name+Date.now()).digest('hex');
-    var sql = "INSERT INTO Templates (idTemplate, Template_Name, Description, Category_Name, Status) VALUES ?";
-    var values = [[templateID,req.body.Name,myStr,req.body.categoryName,req.body.status],];
+    var sql = "INSERT INTO Templates (Template_Name, Description, Category_Name, Status) VALUES ?";
+    var values = [[req.body.Name,myStr,req.body.categoryName,req.body.status],];
 
     global.con.query(sql,[values],function(err,result) {
-        if(err) return res.status(500).send();
+        if(err) return res.send(err);
 
         let abc = myStr.split("!");
         sql = "INSERT INTO TEMPLATE_INPUT (IDTemplate, INPUT_FIELD) VALUES ?";
         for(let i=0;i<abc.length;i++) {
             Match(abc[i]).then(function(str){
                 var values = [
-                    [templateID,str],
+                    [result.insertId,str],
                   ];
                 global.con.query(sql,[values],function(err1,result1) {
-                if(err1) return res.status(500).send();
+                if(err1) return res.send(err1);
                 return;
                 });
             });
@@ -50,11 +49,10 @@ router.post('/UpdateTemplate', function(req, res) {
 });
 
 router.post('/DeleteTemplate', function(req, res) {
-    var sql = 'UPDATE Templates SET Status = ?,WHERE idTemplate = ?';
-    var values = [[req.body.id,0],];
+    var sql = 'UPDATE Templates SET Status = ? WHERE idTemplate = ?';
 
-    global.con.query(sql,[values],function(err,result) {
-      if(err) return res.status(500).send();
+    global.con.query(sql,[0,req.body.id],function(err,result) {
+      if(err) return res.send(err);
 
        if(result.affectedRows==1) {
         return res.json({status:200,res:result});
@@ -65,10 +63,9 @@ router.post('/DeleteTemplate', function(req, res) {
 });
 
 router.get('/getTemplates', function(req, res) {
-    var sql = "SELECT * FROM Templates WHERE Status = ?";
-    var values = [[1],];
+    var sql = "SELECT * FROM Templates";
 
-    global.con.query(sql,[values],function(err,result) {
+    global.con.query(sql,[],function(err,result) {
       if(err) return res.status(500).send();
 
       if(result.length>0) {

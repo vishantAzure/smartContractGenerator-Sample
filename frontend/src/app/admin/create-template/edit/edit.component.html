@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="tab-content" style="padding:30px;">
-                    <form (ngSubmit)="CreateTemplate()" #heroFormmmmmmmmmm="ngForm">  
+                    <form (ngSubmit)="CreateTemplate()" #edittemplateform="ngForm">  
                             <div class="form-group">
                             <label  for="Name">Template Name<span style="color:red">*</span></label>
                             <input type="text" class="form-control" id="Name"
@@ -31,21 +31,14 @@
                             <select  class="form-control" [(ngModel)]="contract.categoryName" [ngModelOptions]="{standalone: true}">
                                 <option [ngValue]="null">Select Category</option>
                                 <option *ngFor="let u of Category"
-                                [selected]="contract.categoryName==u.id" [ngValue]="u.id"
+                                [selected]="selected==u.id" [ngValue]="u.id"
                                 >{{u.name}}</option>
                             </select>
                             </div>
 
                             <div class="form-group">
-                            <label  for="Description">Description<span style="color:red">*</span></label>
-                            ​<textarea type="textarea" class="form-control" id="Description"  rows='10'
-                            required
-                            [(ngModel)]="contract.Description" name="Description"
-                            #Description="ngModel"></textarea>
-                            <div [hidden]="Description.valid || Description.pristine"
-                                class="alert alert-danger" style="margin-top:10px;">
-                                <div [hidden]="!Description.hasError('required')">Description is required</div>
-                            </div>
+                                <label>Description<span style="color:red">*</span></label>
+                                <ckeditor [(ngModel)]="contract.Description" debounce="500" required [ngModelOptions]="{standalone: true}"></ckeditor>
                             </div>
                 
                             <div class="form-group">
@@ -56,7 +49,7 @@
                             required [(ngModel)]="contract.status">InActive
                             </div>
     
-                            <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+                            <button type="submit" class="btn btn-success" [disabled]="!edittemplateform.form.valid">Submit</button>
                         </form>
                     </div>
               </div>

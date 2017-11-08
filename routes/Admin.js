@@ -82,17 +82,15 @@ router.post('/AdminUpdateSubscription', function(req, res) {
 //////////////////////////////// Manage Ctegory /////////////////////////////////////////////////////////
 
 router.post('/addCategory', function(req, res) {
-  var status;
+  var parentcategory;
   var createdat = new Date();
-  var sql = "INSERT INTO template_category (name, parent_category, created_at, updated_at, Status, deleted) VALUES ?";
-  if(!req.body.parentcategory) 
-  req.body.parentcategory = 0;
-  if(req.body.status=='Active') {
-    status = 1;
+  if(req.body.parentcategory==null) {
+    parentcategory = 0;
   }else{
-    status = 0;
+    parentcategory = req.body.parentcategory;
   }
-  var values = [[req.body.name,req.body.parentcategory,createdat, ,status,false],];
+  var sql = "INSERT INTO template_category (name, parent_category, created_at, updated_at, Status, deleted) VALUES ?";
+  var values = [[req.body.name,parentcategory,createdat, ,req.body.status,false],];
 
   global.con.query(sql,[values],function(err,result) {
     if(err) return res.send(err);
@@ -108,18 +106,17 @@ router.post('/addCategory', function(req, res) {
 
 
 router.post('/editCategory', function(req, res) {
-  var status;
   var updatedat = new Date();
-  var sql = "UPDATE template_category SET  name = ?, parent_category = ? , updated_at = ?, Status = ?, deleted = ? WHERE id = ?";
-  if(!req.body.parentcategory) 
-  req.body.parentcategory = 0;
-  if(req.body.status=='Active') {
-    status = 1;
+  var parentcategory;
+  var createdat = new Date();
+  if(req.body.parentcategory==null) {
+    parentcategory = 0;
   }else{
-    status = 0;
+    parentcategory = req.body.parentcategory;
   }
+  var sql = "UPDATE template_category SET  name = ?, parent_category = ? , updated_at = ?, Status = ?, deleted = ? WHERE id = ?";
   
-  global.con.query(sql,[req.body.name,req.body.parentcategory,updatedat ,status,false,req.body.ID],function(err,result) {
+  global.con.query(sql,[req.body.name,parentcategory,updatedat ,req.body.status,false,req.body.ID],function(err,result) {
     if(err) return res.status(500).send();
 
     if(result.affectedRows==1) {
@@ -145,10 +142,9 @@ router.post('/DeleteCategory', function(req, res) {
 });
 
 router.post('/retrieveCategory', function(req, res) {
-  var sql = 'SELECT * FROM template_category WHERE deleted = ?;'
-  var values = [[false],];
+  var sql = 'SELECT * FROM template_category'
 
-  global.con.query(sql,[values],function(err,result) {
+  global.con.query(sql,[],function(err,result) {
     if(err) return res.status(500).send();
 
     return res.json({status:200,res:result});

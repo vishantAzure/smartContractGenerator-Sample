@@ -59,7 +59,12 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   CreateTemplate() {
-    let self =  this;
+    console.log(this.contract);
+    if(!this.contract.Description) {
+      this.message = 'description is required';
+      $('#message').modal('toggle');
+    }else{
+      let self =  this;
       this.contract.User_id = this.User_data.idUsers;
       this.http.post('//'+config.global_ip+'/pdf/CreateTemplate',this.contract).subscribe((res:any)=>{
       this.contract={};  
@@ -69,14 +74,10 @@ export class CreateTemplateComponent implements OnInit {
           self.router.navigate(['/admin/manageTemplate']);
       }
       },(err)=>{
-        this.message = 'Table Not Found';
-      var heroFormmmmmmmmmm :NgForm;
-      heroFormmmmmmmmmm.resetForm();
+        this.message = 'Server Error';
       $('#message').modal('toggle');
-      setTimeout(function(){ 
-        $('#message').modal('toggle');
-      }, 1000);
       });
+    }
   }
 
 }

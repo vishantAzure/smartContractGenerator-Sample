@@ -26,8 +26,8 @@
                         <tr class="bg-wht" *ngFor="let u of ViewTemplate">
                             <td>{{u.Template_Name}}</td>
                             <td>{{u.Category_Name}}</td>
-                            <td>{{u.Status}}</td>
-                            <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" (click)="changePage(u)"></i> <i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.idTemplates)"></i></td>
+                            <td>{{u.Status==0 ?'InActive':'Active'}}</td>
+                            <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" (click)="changePage(u)"></i> <i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.idTemplate)"></i></td>
                         </tr>
                     </tbody>
                 </table>

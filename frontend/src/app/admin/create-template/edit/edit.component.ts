@@ -17,6 +17,7 @@ export class EditComponent implements OnInit {
     templatestatus;
     message;
     Category;
+    selected;
     constructor(public router: Router,public http: Http,public route: ActivatedRoute) { 
       this.contract = {};
       this.route.queryParams.subscribe(params => {
@@ -26,14 +27,14 @@ export class EditComponent implements OnInit {
         this.contract.Description = params["Description"];
         this.contract.status=params["Status"];
     });
+    console.log(this.contract);
     }
   
     ngOnInit() {
       var $radios = $('input:radio[name=statustemplate]');
-      if($radios.is(':checked') === false) {
-          $radios.filter('[value=1]').prop('checked', true);
-          this.contract.status = '1';
-      }
+      $radios.filter('[value=1]').prop('checked', true);
+      this.contract.status = '1';
+      this.selected = this.contract.categoryName;
       this.User_data = JSON.parse(localStorage.getItem('User'));
       if(this.User_data) {
 
@@ -45,6 +46,7 @@ export class EditComponent implements OnInit {
               this.Category.push(abc[i]);
             }
           }
+          console.log(this.Category);
          },(err)=>{
           this.message='Data Not Found';
           $('#message').modal('toggle');
@@ -58,6 +60,7 @@ export class EditComponent implements OnInit {
     }
   
     CreateTemplate() {
+      console.log(this.contract);
       let self = this;
 
       this.http.post('//'+config.global_ip+'/pdf/UpdateTemplate',this.contract).subscribe((res:any)=>{
@@ -65,12 +68,7 @@ export class EditComponent implements OnInit {
         var result = JSON.parse(res._body);
       
         if(result.status==200) {
-          this.message='Template Created';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
             self.router.navigate(['/admin/manageTemplate']);
-          }, 1000);
         }
         },(err)=>{
           this.message = 'Table Not Found';
