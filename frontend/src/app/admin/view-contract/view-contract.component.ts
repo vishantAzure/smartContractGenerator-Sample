@@ -20,6 +20,7 @@ export class ViewContractComponent implements OnInit {
       let obj = {
         id:this.User_data.idUsers
       }
+      this.Contracts=[];
       this.http.post('//'+config.global_ip+'/pdf/pdfs',obj).subscribe((res:any)=>{
         this.Contracts = JSON.parse(res._body).res;
        },(err)=>{
@@ -30,13 +31,22 @@ export class ViewContractComponent implements OnInit {
   }
   }
 
-  ContractDetail(id) {
+  viewMilestones(id) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
           "contractID": id
       }
     };
-    this.router.navigate(["/contractdetail"], navigationExtras);
+    this.router.navigate(["/viewMilestones"], navigationExtras);
+  }
+
+ viewContractDetails(id) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          "contractID": id
+      }
+    };
+    this.router.navigate(["/viewContractDetails"], navigationExtras);
   }
 
   DownloadPDF(name) {

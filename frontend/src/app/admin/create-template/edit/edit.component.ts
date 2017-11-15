@@ -25,16 +25,12 @@ export class EditComponent implements OnInit {
         this.contract.Name=params["TemplateName"];
         this.contract.categoryName= params["Category_Name"];
         this.contract.Description = params["Description"];
-        this.contract.status=params["Status"];
+        this.contract.status=parseInt(params["Status"]);
     });
-    console.log(this.contract);
     }
   
     ngOnInit() {
-      var $radios = $('input:radio[name=statustemplate]');
-      $radios.filter('[value=1]').prop('checked', true);
-      this.contract.status = '1';
-      this.selected = this.contract.categoryName;
+      console.log(this.contract);
       this.User_data = JSON.parse(localStorage.getItem('User'));
       if(this.User_data) {
 
@@ -46,10 +42,8 @@ export class EditComponent implements OnInit {
               this.Category.push(abc[i]);
             }
           }
-          console.log(this.Category);
          },(err)=>{
           this.message='Data Not Found';
-          $('#message').modal('toggle');
           setTimeout(function(){ 
             $('#message').modal('toggle');
           }, 1000);
@@ -60,7 +54,6 @@ export class EditComponent implements OnInit {
     }
   
     CreateTemplate() {
-      console.log(this.contract);
       let self = this;
 
       this.http.post('//'+config.global_ip+'/pdf/UpdateTemplate',this.contract).subscribe((res:any)=>{
@@ -72,10 +65,9 @@ export class EditComponent implements OnInit {
         }
         },(err)=>{
           this.message = 'Table Not Found';
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
+          setTimeout(function(){ 
+            $('#message').modal('toggle');
+          }, 1000);
         });
     }
   

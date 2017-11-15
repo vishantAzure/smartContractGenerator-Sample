@@ -5,9 +5,9 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-detail',
-  templateUrl: './detail.component.html',
+  templateUrl: './milestones.component.html',
 })
-export class DetailComponent implements OnInit {
+export class MilestonesComponent implements OnInit {
   ContractID;
   ContractDetails;
 
@@ -19,24 +19,39 @@ export class DetailComponent implements OnInit {
 
   ngOnInit() {
     this.http.post('//'+config.global_ip+'/pdf/Milestones',{id:this.ContractID}).subscribe((res:any)=>{
-      this.ContractDetails = JSON.parse(res._body).res;
-      console.log(this.ContractDetails);
+      this.ContractDetails = JSON.parse(res._body).res;      
      },(err)=>{
       console.log(err);
      });
   }
 
-  MarkMilestoneComplete(id) {
-    this.http.post('//'+config.global_ip+'/pdf/milestoneComplete',{id:id}).subscribe((res:any)=>{
-      this.ContractDetails = JSON.parse(res._body).res;
+  ChangeMilestoneStatus(id,status) {
+    this.http.post('//'+config.global_ip+'/pdf/UpdateMilestoneStatus',{id:id,Status:status}).subscribe((res:any)=>{
       this.ngOnInit();
      },(err)=>{
       console.log(err);
      });
   }
 
-  CancelMilestone(ig) {
 
+  viewMilestoneHistory(id) {
+    let navigationExtras = {
+      queryParams: {
+          "milestone_id": id
+      }
+    };
+    this.router.navigate(["/viewMilestoneHistory"], navigationExtras);
   }
+
+  updateMilestone(id) {
+    let navigationExtras = {
+      queryParams: {
+          "milestone_id": id
+      }
+    };
+    this.router.navigate(["/editMilestone"], navigationExtras);
+  }
+
+
 
 }

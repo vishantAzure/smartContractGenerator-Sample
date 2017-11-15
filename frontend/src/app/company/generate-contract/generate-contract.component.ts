@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute}  from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Template } from '../../modal';
+import {Location} from '@angular/common';
 import { Milestone } from '../../modal';
 import * as config from '../../../../../config/config';
 import * as _ from "lodash";
-
+import { DatepickerModule } from 'angular2-material-datepicker';
 declare var $;
 @Component({
   selector: 'app-generate-contract',
-  templateUrl: './generate-contract.component.html'
+  templateUrl: './generate-contract.component.html',
+    
 })
 export class GenerateContractComponent implements OnInit {
   User_data;
@@ -17,6 +19,7 @@ export class GenerateContractComponent implements OnInit {
   Template;
   dashboard;
   templateName;
+  MilestoneName;
   preview;
   message;
   TemplateID;
@@ -28,7 +31,8 @@ export class GenerateContractComponent implements OnInit {
   CustomerEmailAddress;
   Milestones;
   MilestoneID = 1;
-  constructor(public router: Router,public http: Http,public route: ActivatedRoute) {
+  ContractEndDate;  
+  constructor(public router: Router,public http: Http,public route: ActivatedRoute,private _location: Location) {
     this.Milestones = [];
     this.route.queryParams.subscribe(params => {
       this.TemplateID=params["TemplateID"];
@@ -37,6 +41,7 @@ export class GenerateContractComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.Template.Date = '2017-11-17';
     this.User_data = JSON.parse(localStorage.getItem('User'));
     if(this.User_data) {
       switch(this.User_data.User_Type){
@@ -55,7 +60,7 @@ export class GenerateContractComponent implements OnInit {
         }
       let obj={TempID:this.TemplateID}
 
-      this.http.post('//'+config.global_ip+'/pdf/getInputs',obj).subscribe((res:any)=>{
+      this.http.post('//'+config.global_ip+'/pdf/getInputs',obj).subscribe((res:any)=>{        
         this.ContractName =  _.filter(JSON.parse(res._body).res, function(o) { return o.INPUT_FIELD=='ContractName' });
         this.ContractEmail =  _.filter(JSON.parse(res._body).res, function(o) { return o.INPUT_FIELD=='ContractEmail'});
         this.ContractPrice =  _.filter(JSON.parse(res._body).res, function(o) { return o.INPUT_FIELD=='ContractPrice'});
@@ -74,73 +79,68 @@ export class GenerateContractComponent implements OnInit {
   }
   }
 
+  backClicked() {
+    this._location.back();
+  }
+
+
   PreviewContract() {
     
-    if(this.Milestones.length==0) {
-      this.message='Please Add A Milestone';
-      $('#message').modal('toggle');
-    }else{
       if(this.CustomerEmailAddress == null) {
         this.message='Please Select Customer Email';
         $('#message').modal('toggle');
-      }
-      let self = this;
-      this.ContractEmail[0].Value_Input = this.Template.email;
-      this.ContractName[0].Value_Input = this.Template.ContractName;
-      this.ContractPrice[0].Value_Input = this.Template.Price;
-      this.ContractDate[0].Value_Input = this.Template.Date;
-      let obj = {TemplateID:this.ContractEmail[0].IDTemplate,UID:this.User_data.idUsers,
-        ContractName:this.Template.ContractName,CustomerEmail:this.CustomerEmailAddress,
-        ContractPrice:this.Template.Price, ContractDate:this.Template.Date
-      };
-      
-      this.Fields.push(this.ContractDate[0] ,this.ContractEmail[0] ,this.ContractName[0] ,this.ContractPrice[0] );
-      console.log({fields:this.Fields,ID:obj,milestone:this.Milestones});
-      this.http.post('//'+config.global_ip+'/pdf/preview',{fields:this.Fields,ID:obj,milestone:this.Milestones}).subscribe((res:any)=>{
-        var result = JSON.parse(res._body);
-  
-        if(result.status==200) {
-          console.log(result.res);
-          this.preview = result.res;
-          $('#myModal222222').modal('toggle');
-        }else{
-          this.message='UnSucessfull';
-          $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
-          }, 1000);
-        }
-      },(err)=>{
-        this.message=err;
-        $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
-      });
-    }
+      }else{
 
+        let self = this;
+        this.ContractEmail[0].Value_Input = this.Template.email;
+        this.ContractName[0].Value_Input = this.Template.ContractName;
+        this.ContractPrice[0].Value_Input = this.Template.Price;
+        this.ContractDate[0].Value_Input = this.Template.Date;
+
+        let obj = {TemplateID:this.ContractEmail[0].IDTemplate,UID:this.User_data.idUsers,
+          ContractName:this.Template.ContractName,CustomerEmail:this.CustomerEmailAddress,
+          ContractPrice:this.Template.Price, ContractStartDate:this.Template.Date,ContractEndDate:this.Template.end_date
+        };
+        
+        this.Fields.push(this.ContractDate[0] ,this.ContractEmail[0] ,this.ContractName[0] ,this.ContractPrice[0] );      
+        this.http.post('//'+config.global_ip+'/pdf/preview',{fields:this.Fields,ID:obj,milestone:this.Milestones}).subscribe((res:any)=>{
+          var result = JSON.parse(res._body);
+    
+          if(result.status==200) {
+            console.log(result.res);
+            this.preview = result.res;
+            $('#myModal222222').modal('toggle');
+          }else{
+            this.message='UnSucessfull';
+            $('#message').modal('toggle');
+          }
+        },(err)=>{
+          this.message=err;
+          $('#message').modal('toggle');
+        });
+
+      }
   }
 
   CreatePDF() {
-
-  if(this.Milestones.length==0) {
-      this.message='Please Add A Milestone';
+    if(this.CustomerEmailAddress == null) {
+      this.message='Please Select Customer Email';
       $('#message').modal('toggle');
     }else{
+
       let self = this;
       this.ContractEmail[0].Value_Input = this.Template.email;
       this.ContractName[0].Value_Input = this.Template.ContractName;
       this.ContractPrice[0].Value_Input = this.Template.Price;
-      this.ContractDate[0].Value_Input = this.Template.Date;
+      this.ContractDate[0].Value_Input = this.Template.Date;      
+      
       let obj = {TemplateID:this.ContractEmail[0].IDTemplate,UID:this.User_data.idUsers,
         ContractName:this.Template.ContractName,CustomerEmail:this.CustomerEmailAddress,
-        ContractPrice:this.Template.Price, ContractDate:this.Template.Date
+        ContractPrice:this.Template.Price, ContractStartDate:this.Template.Date,ContractEndDate:this.Template.end_date
       };
-      
       this.Fields.push(this.ContractDate[0] ,this.ContractEmail[0] ,this.ContractName[0] ,this.ContractPrice[0] );
-      console.log({fields:this.Fields,ID:obj,milestone:this.Milestones});
+      
       this.http.post('//'+config.global_ip+'/pdf/createPDF',{fields:this.Fields,ID:obj,milestone:this.Milestones}).subscribe((res:any)=>{
-        // this.Fields = [];
         var result = JSON.parse(res._body);
   
         if(result.status==200) {
@@ -148,20 +148,12 @@ export class GenerateContractComponent implements OnInit {
         }else{
           this.message='UnSucessfull';
           $('#message').modal('toggle');
-          setTimeout(function(){ 
-            $('#message').modal('toggle');
-          }, 1000);
         }
       },(err)=>{
-        this.Fields = [];
         this.message=err;
         $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       });
     }
-    
   }
 
   AddMilestone() {

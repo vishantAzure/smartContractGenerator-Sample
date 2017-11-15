@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal1111">
+<div class="modal fade" id="loginmodal">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="modal-body">
@@ -10,7 +10,7 @@
                 <form (ngSubmit)="Login()" #heroForm1="ngForm">  
                     <div class="form-group">
                     <label for="lemail">Email</label>
-                    <input type="text" class="form-control" id="lemail"
+                    <input type="text" class="form-control" id="lemail" placeholder="abc@efg.com"
                     required
                     pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
                     [(ngModel)]="model.email" name="lemail"
@@ -18,7 +18,7 @@
                     <div [hidden]="lemail.valid || lemail.pristine"
                         class="alert alert-danger" style="margin-top:10px;">
                         <div class="ddddddd" [hidden]="!lemail.hasError('required')">Email is required</div>
-                        <div [hidden]="!lemail.hasError('pattern')">Only alphabetsallowed</div>
+                        <div [hidden]="!lemail.hasError('pattern')">Please enter a valid email address</div>
                     </div>
                     </div>
 
@@ -53,7 +53,7 @@
 </div>
 </div>
       
-<div class="modal fade" id="myModal2222" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="registermodal">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -108,7 +108,7 @@
                 
                                                 <div class="form-group">
                                                 <label for="email">Email<span style="color:red">*</span></label>
-                                                <input type="text" class="form-control" id="email"
+                                                <input type="text" class="form-control" id="email" placeholder="abc@efg.com"
                                                 required
                                                 maxlength="50" 
                                                 pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
@@ -173,7 +173,7 @@
             
                                             <div class="form-group">
                                             <label for="email">Email<span style="color:red">*</span></label>
-                                            <input type="text" class="form-control" id="email"
+                                            <input type="text" class="form-control" id="email" placeholder="abc@efg.com"
                                             required
                                             maxlength="50" 
                                             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
@@ -245,8 +245,8 @@
         <li><a routerLink="/blog" >Blog</a></li>
         <li><a routerLink="/faq" >FAQ,s</a></li>
         <li *ngIf="User_data"><a><span style="color:black;">Welcome!</span> {{User_data.first_name}}</a></li>
-        <li *ngIf="!User_data" class="signin"><a href="#" data-toggle="modal" data-target="#myModal1111" (click)="formreset(heroForm1)">Sign in</a></li>
-        <li *ngIf="!User_data" class="getstrted"><a href="#" data-toggle="modal" data-target="#myModal2222" (click)="formreset(heroForm)">Register</a></li>
+        <li *ngIf="!User_data" class="signin"><a href="#" data-toggle="modal" data-target="#loginmodal" (click)="formreset(heroForm1)">Sign in</a></li>
+        <li *ngIf="!User_data" class="getstrted"><a href="#" data-toggle="modal" data-target="#registermodal" (click)="formreset(heroForm)">Register</a></li>
         <li *ngIf="User_data" class="getstrted">
             <button class="btn btn-success" (click)="Toggle()">
                 <i class="fa fa-cog" aria-hidden="true"></i>

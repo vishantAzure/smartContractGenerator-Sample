@@ -1,0 +1,118 @@
+<app-header></app-header>  
+<section>
+  <section class="admin-dashbord">
+    <div class="container-fluid">
+           <app-company-sidemenu></app-company-sidemenu>
+          
+          <div class="col-sm-9 right-side">
+            <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                    <h3>Update Milestone</h3>
+                  </div>
+                  <div class="col-sm-3">
+                        <div class="col-sm-12"><button (click)="backClicked()">Back</button></div>
+                      </div>
+              </div>
+                <div class="row" *ngIf="MilestoneDetails">
+                  <div class="tab-content" style="padding:30px;">
+                  <form (ngSubmit)="UpdateMilestone()" #update_milestone_form="ngForm">  
+                      <div class="form-group">
+                      <label  for="Name">Name<span style="color:red">*</span></label>
+                      <input type="text" class="form-control" id="Name"
+                      required
+                      [(ngModel)]="MilestoneDetails.name" name="name"
+                      #Name="ngModel">
+                      <div [hidden]="Name.valid || Name.pristine"
+                          class="alert alert-danger" style="margin-top:10px;">
+                          <div [hidden]="!Name.hasError('required')">Milestone name is required</div>
+                      </div>
+                      </div>
+                      <div class="form-group">
+                      <label for="EOW">Execution of Work<span style="color:red">*</span></label>
+                      <input type="text" class="form-control" id="EOW"
+                      required
+                      [(ngModel)]="MilestoneDetails.Milestone_Work_execution" name="EOW"
+                      #EOW="ngModel">
+                      <div [hidden]="EOW.valid || EOW.pristine"
+                          class="alert alert-danger" style="margin-top:10px;">
+                          <div [hidden]="!EOW.hasError('required')">This Field is required</div>
+                      </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="schedule">Schedule<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="schedule"
+                        required
+                        [(ngModel)]="MilestoneDetails.Milestone_schedule" name="schedule"
+                        #schedule="ngModel">
+                        <div [hidden]="schedule.valid || schedule.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!schedule.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="taxes">Taxes ( % )<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="taxes"
+                        required
+                        [(ngModel)]="MilestoneDetails.taxes" name="taxes"
+                        #taxes="ngModel">
+                        <div [hidden]="taxes.valid || taxes.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!taxes.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="fees">Fees ( ETH )<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="fees"
+                        required
+                        pattern="[0-9]*"
+                        maxlength="10" 
+                        [(ngModel)]="MilestoneDetails.Milestone_fee" name="fees"
+                        #fees="ngModel">
+                        <div [hidden]="fees.valid || fees.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div class="ddddddd" [hidden]="!fees.hasError('required')">This Field is required</div>
+                            <div class="ddddddd" [hidden]="!fees.hasError('pattern')">Only Numbers Are Allowed</div>
+                            <div [hidden]="!fees.hasError('minlength')">Only 10 Numbers</div>
+                        </div>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="penalty">Penalties ( % )<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="penalty"
+                        required
+                        [(ngModel)]="MilestoneDetails.penalties" name="penalty"
+                        #penalty="ngModel">
+                        <div [hidden]="penalty.valid || penalty.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!penalty.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+                      <div class='row'>
+                        <div class="col-sm-6">
+                            <label for="SDate">Start Date <span style="color:red">*</span></label>
+                            <input type="date" [(ngModel)]="MilestoneDetails.Start_Date"
+                            [ngModelOptions]="{standalone: true}">
+                            
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="EDate">End Date<span style="color:red">*</span></label>
+                            <input type="date" [(ngModel)]="MilestoneDetails.End_Date" value="{{MilestoneDetails.End_Date | date:'yyyy-MM-dd'}}" 
+                            [ngModelOptions]="{standalone: true}">
+                        </div>
+                        </div>
+                      <button type="submit" class="btn btn-success" [disabled]="!update_milestone_form.form.valid">Submit</button>
+                  </form>
+                  </div>
+            </div>
+            </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+</section>
+<app-footer></app-footer>   
+          

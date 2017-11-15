@@ -32,9 +32,6 @@ export class ManageCustomerComponent implements OnInit {
       },(err)=>{
         this.message='Data Not Found';
         $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       });
   }else{
       console.log('ll');
@@ -58,9 +55,6 @@ export class ManageCustomerComponent implements OnInit {
     },(err)=>{
       this.message='Registration UnSucessfull';
       $('#message').modal('toggle');
-      setTimeout(function(){ 
-        $('#message').modal('toggle');
-      }, 1000);
     });
 
   }
@@ -78,9 +72,6 @@ export class ManageCustomerComponent implements OnInit {
       },(err)=>{
         this.message='Table Not Found';
         $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       });
   }
 
@@ -103,9 +94,6 @@ export class ManageCustomerComponent implements OnInit {
       },(err)=>{
         this.message='Table Not Found';
         $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       });
   }
 

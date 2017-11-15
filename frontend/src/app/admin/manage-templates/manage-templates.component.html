@@ -9,13 +9,14 @@
                     <h3>Manage Template</h3>
                 </div>
                 <div class="col-sm-3">
-                        <button class="btn btn-default" routerLink="/admin/createTemplate" style="width:150px;">Create</button>
+                        <button class="btn btn-default" routerLink="/admin/createTemplate" style="width:150px;">Add New Template</button>
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordeditTemplateered">
                     <thead>
                         <tr class="active">
+                            <th>S.no</th>
                             <th>Template Name</th>
                             <th>Template Category</th>
                             <th>Status</th>
@@ -23,7 +24,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-wht" *ngFor="let u of ViewTemplate">
+                        <tr class="bg-wht" *ngFor="let u of ViewTemplate; let row_no = index">
+                            <td>{{row_no + 1}}</td>
                             <td>{{u.Template_Name}}</td>
                             <td>{{u.Category_Name}}</td>
                             <td>{{u.Status==0 ?'InActive':'Active'}}</td>

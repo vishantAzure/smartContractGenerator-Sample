@@ -54,6 +54,7 @@ export class Milestone {
     StartDate: Date;
     EndDate:Date;
     WorkExecution:string;
+    MilestoneName:string;
     Schedule:string;
     Taxes:string;
     Fees:number;

@@ -50,8 +50,15 @@ import { AdminchangepassComponent } from './authentication/adminchangepass/admin
 import { SidenavigationService } from './sidenavigation.service';
 import { DateFilterPipe } from './date-filter.pipe';
 import { CKEditorComponent } from '../../node_modules/ng2-ckeditor/src/ckeditor.component';
-import { DetailComponent } from './admin/view-contract/detail/detail.component';
-
+import { MilestonesComponent } from './admin/view-contract/milestones/milestones.component';
+import { DatepickerModule } from 'angular2-material-datepicker';
+import { ViewCustomerContractComponent } from './customer/view-contract/view-contract.component';
+import { CustomerContractMilestonesComponent } from './customer/view-contract/milestones/milestones.component';
+import { ViewContractDetailComponent } from './admin/view-contract/details/details.component';
+import { ViewCustomerContractDetailComponent } from './customer/view-contract/details/details.component';
+import { ViewMilestoneHistory } from './admin/view-contract/milestones/milestone_history.component';
+import { ViewCustomerMilestoneHistory } from './customer/view-contract/milestones/milestone_history.component';
+import { EditMilestoneComponent } from './admin/view-contract/milestones/edit/edit_milestone.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,8 +98,15 @@ import { DetailComponent } from './admin/view-contract/detail/detail.component';
     CompanyComponentSideMenu,
     AdminProfileComponent,
     AdminchangepassComponent,
-    DetailComponent,
-    DateFilterPipe
+    MilestonesComponent,
+    DateFilterPipe,
+    ViewCustomerContractComponent,
+    CustomerContractMilestonesComponent,
+    ViewContractDetailComponent,
+    ViewCustomerContractDetailComponent,
+    ViewMilestoneHistory,
+    ViewCustomerMilestoneHistory,
+    EditMilestoneComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +115,8 @@ import { DetailComponent } from './admin/view-contract/detail/detail.component';
     HttpModule,
     FormsModule,
     BrowserAnimationsModule, 
-    ToasterModule
+    ToasterModule,
+    DatepickerModule
   ],
   exports: [CKEditorComponent],
   providers: [CustomerRouteGuard,CompanyRouteGuard,AdminRouteGuard,ServiceProviderRouteGuard,SidenavigationService],

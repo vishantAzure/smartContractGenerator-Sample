@@ -10,8 +10,6 @@ declare var $;
   templateUrl: './category.component.html',
 })
 export class CategoryComponent implements OnInit {
-addCategory;
-radio;
 contract;
 Category;
 User_data;
@@ -19,10 +17,8 @@ message;
 cnfrmDeleteID;
 dashboard;
 ParentCategory;
-addcategoryform:NgForm;
-CategoryStatus;
   constructor(public router: Router,public http: Http) { 
-    this.contract = {};
+    this.contract = {};    
     this.ParentCategory = [];
   }
 
@@ -46,11 +42,7 @@ CategoryStatus;
         }
       }
       },(err)=>{
-      this.message='Data Not Found';
-      $('#message').modal('toggle');
-      setTimeout(function(){ 
-        $('#message').modal('toggle');
-      }, 1000);
+      console.log(err);
       });
   }else{
       console.log('ll');
@@ -58,7 +50,6 @@ CategoryStatus;
   }
 
   CreateCategory(form:NgForm) {
-    console.log(this.contract);
     let self = this;
     $('#myModal1').modal('toggle');
     this.http.post('//'+config.global_ip+'/ApI/addCategory',this.contract).subscribe((res:any)=>{
@@ -71,11 +62,9 @@ CategoryStatus;
         },(err)=>{
         form.resetForm();
         this.message='Table Not Found';
-        $('#message').modal('toggle');
         setTimeout(function(){ 
           $('#message').modal('toggle');
         }, 1000);
-
     });
   }
 
@@ -85,18 +74,13 @@ CategoryStatus;
   }
 
   SelectRadio() {
-    if(this.ParentCategory.length>0){
-      this.contract.selected = this.ParentCategory[0].id;
-    }
-    var $radios = $('input:radio[name=addstatus]');
-    $radios.filter('[value=1]').prop('checked', true);
+    // this.contract.parentcategory = 1;
     this.contract.status=1;
   }
 
   EditCategory() {
     console.log(this.contract);
     $('#myModal3').modal('toggle');
-
       this.http.post('//'+config.global_ip+'/ApI/editCategory',this.contract).subscribe((res:any)=>{
         this.contract = {};
         var result = JSON.parse(res._body);
@@ -107,7 +91,6 @@ CategoryStatus;
         },(err)=>{
         this.contract = {};
         this.message='Table Not Found';
-        $('#message').modal('toggle');
         setTimeout(function(){ 
           $('#message').modal('toggle');
         }, 1000);
@@ -136,7 +119,6 @@ CategoryStatus;
       }
       },(err)=>{
       this.message='Table Not Found';
-      $('#message').modal('toggle');
       setTimeout(function(){ 
         $('#message').modal('toggle');
       }, 1000);
@@ -145,13 +127,10 @@ CategoryStatus;
 
 
   changeModal(e) {
-    this.contract.selected = e.parent_category;
-    this.contract.parencategory = e.parent_category;
+    this.contract.parentcategory = e.parent_category;
     this.contract.name = e.name;
     this.contract.ID = e.id;
-    var $radios = $('input:radio[name=editstatusactive]');
-    $radios.filter('[value=1]').prop('checked', true);
-    this.contract.status = '1';
+    this.contract.status = e.Status;
   }
 
 }

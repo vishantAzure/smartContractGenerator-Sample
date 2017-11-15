@@ -1,0 +1,51 @@
+<app-header></app-header>
+<section class="admin-dashbord">
+  <div class="container-fluid">
+      <app-company-sidemenu></app-company-sidemenu>
+          <div class="col-sm-9 right-side">
+          <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                      <h3>Milestone History</h3>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="col-sm-12"><button (click)="backClicked()">Back</button></div>
+              </div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr class="active">
+                              <th>S.No.</th>
+                              <th>Payment Status</th>
+                              <th>Comments</th>
+                              <th>Date</th>
+                              <th>Status</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let u of ContractDetails; let row_no = index">
+                            <td>{{row_no + 1}}</td>
+                            <td>{{u.Payment_Status == 0 ?'Pending':'Complete'}}</td>
+                            <td style='width:25%'>
+                                {{u.comments}}
+                            </td>   
+                            <td>{{u.created_at | date:'mediumDate'}}</td>
+                            <td>{{u.status_for_company}}</td>
+                            
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+<app-footer></app-footer>
+
+
+
+
+
+

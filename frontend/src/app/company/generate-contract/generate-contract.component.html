@@ -3,11 +3,10 @@
     <div class="container-fluid">
             <app-company-sidemenu></app-company-sidemenu>
           <div class="col-sm-9 right-side">
-            <div class="row">
-              <div class="col-sm-6">
-                <h3>Generate Contract</h3>
-              </div>
-            </div>
+                <div class="row">
+                    <div class="col-sm-6"><h3>Generate Contract</h3></div>
+                    <div class="col-sm-6"><button (click)="backClicked()">Back</button></div>
+                </div>
         <div class="row">
           <div class="tab-content" style="padding:30px;">
                 <form #heroFormxxxx="ngForm">  
@@ -25,7 +24,7 @@
                     <label  for="ContractName">Contract Name<span style="color:red">*</span></label>
                     <input type="text" class="form-control" id="ContractName"
                     required
-                    maxlength="20" 
+                    maxlength="150" 
                     [(ngModel)]="Template.ContractName" name="ContractName"
                     #ContractName="ngModel">
                     <div [hidden]="ContractName.valid || ContractName.pristine"
@@ -50,20 +49,27 @@
                     </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="Date">Date<span style="color:red">*</span></label>
-                        <input type="date" class="form-control" id="Date"
-                        required
-                        [(ngModel)]="Template.Date" name="Date"
-                        #Date="ngModel">
-                        <div [hidden]="Date.valid || Date.pristine"
-                            class="alert alert-danger" style="margin-top:10px;">
-                            <div [hidden]="!Date.hasError('required')">This Field is required</div>
-                        </div>
-                    </div>
+                    <div class="row">
 
+                        <div class="form-group col-sm-6">
+                            <label for="start_date">Start Date<span style="color:red">*</span></label>
+                            <input type="date" style="width:40%;" class="form-control" placeholder="Start Date" required 
+                            name="start_date" [(ngModel)]="Template.Date"
+                            #start_date="ngModel">
+                        </div>
+    
+                        <div class="form-group col-sm-6">
+                            <label for="end_date">End Date<span style="color:red">*</span></label>
+                            <input type="date" style="width:40%;" class="form-control" placeholder="Start Date" required 
+                            name="end_date" [(ngModel)]="Template.end_date" [min]="Template.Date" 
+                            end_date="ngModel">
+                        </div>
+
+                    </div>
+                    
+                    
                     <div class="form-group">
-                        <label for="Price">Price<span style="color:red">*</span></label>
+                        <label for="Price">Price ( ETH )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="Price"
                         required
                         pattern="[0-9]*"
@@ -79,15 +85,28 @@
                     </div>
 
 
-                    <div *ngFor="let u of Milestones" style="margin-bottom:20px; background-color:blanchedalmond">
+                    <div *ngFor="let u of Milestones" style="margin-bottom:20px; padding:10px;background-color:blanchedalmond">
                         <li class="btn btn-success" style="margin-left:90%;" (click)="RemoveMilestone()">Remove</li>
                         <h4>Milestone {{u.ID}}</h4>
 
                         <div class="form-group">
-                        <label for="EOW">Execution oF Work<span style="color:red">*</span></label>
+                        <label for="milestonename">Name<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="milestonename"
+                        required
+                        [(ngModel)]="u.milestonename" name="milestonename{{u.ID}}"
+                        #milestonename="ngModel">
+                        <div [hidden]="milestonename.valid || milestonename.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div [hidden]="!milestonename.hasError('required')">This Field is required</div>
+                        </div>
+                        </div>
+        
+
+                        <div class="form-group">
+                        <label for="EOW">Execution of Work<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="EOW"
                         required
-                        [(ngModel)]="u.WorkExecution" name="EOW"
+                        [(ngModel)]="u.WorkExecution" name="EOW{{u.ID}}"
                         #EOW="ngModel">
                         <div [hidden]="EOW.valid || EOW.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
@@ -99,7 +118,7 @@
                         <label for="schedule">Schedule<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="schedule"
                         required
-                        [(ngModel)]="u.Schedule" name="schedule"
+                        [(ngModel)]="u.Schedule" name="schedule{{u.ID}}"
                         #schedule="ngModel">
                         <div [hidden]="schedule.valid || schedule.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
@@ -108,10 +127,10 @@
                         </div>
 
                         <div class="form-group">
-                        <label for="taxes">Taxes<span style="color:red">*</span></label>
+                        <label for="taxes">Taxes ( % )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="taxes"
                         required
-                        [(ngModel)]="u.Taxes" name="taxes"
+                        [(ngModel)]="u.Taxes" name="taxes{{u.ID}}"
                         #taxes="ngModel">
                         <div [hidden]="taxes.valid || taxes.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
@@ -120,12 +139,12 @@
                         </div>
 
                         <div class="form-group">
-                        <label for="fees">Fees<span style="color:red">*</span></label>
+                        <label for="fees">Fees ( ETH )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="fees"
                         required
                         pattern="[0-9]*"
                         maxlength="10" 
-                        [(ngModel)]="u.Fees" name="fees"
+                        [(ngModel)]="u.Fees" name="fees{{u.ID}}"
                         #fees="ngModel">
                         <div [hidden]="fees.valid || fees.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
@@ -136,10 +155,10 @@
                         </div>
 
                         <div class="form-group">
-                        <label for="penalty">Penalties<span style="color:red">*</span></label>
+                        <label for="penalty">Penalties ( % )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="penalty"
                         required
-                        [(ngModel)]="u.Penalties" name="penalty"
+                        [(ngModel)]="u.Penalties" name="penalty{{u.ID}}"
                         #penalty="ngModel">
                         <div [hidden]="penalty.valid || penalty.pristine"
                             class="alert alert-danger" style="margin-top:10px;">
@@ -147,34 +166,28 @@
                         </div>
                         </div>
 
-                        <div class="form-group">
-                        <label for="SDate">Start Date<span style="color:red">*</span></label>
-                        <input type="date" class="form-control" id="SDate"
-                        required
-                        [(ngModel)]="u.StartDate" name="SDate"
-                        #SDate="ngModel">
-                        <div [hidden]="SDate.valid || SDate.pristine"
-                            class="alert alert-danger" style="margin-top:10px;">
-                            <div [hidden]="!SDate.hasError('required')">This Field is required</div>
-                        </div>
-                        </div>
+                        <div class="row">
 
-                        <div class="form-group">
-                        <label for="EDate">End Date<span style="color:red">*</span></label>
-                        <input type="date" class="form-control" id="EDate"
-                        required
-                        [(ngModel)]="u.EndDate" name="EDate"
-                        #EDate="ngModel">
-                        <div [hidden]="EDate.valid || EDate.pristine"
-                            class="alert alert-danger" style="margin-top:10px;">
-                            <div [hidden]="!EDate.hasError('required')">This Field is required</div>
+                            <div class="form-group col-sm-6">
+                                <label for="end_date">Start Date<span style="color:red">*</span></label>
+                                <input type="date" style="width:40%;" class="form-control" placeholder="Start Date" required 
+                                name="start_date{{u.ID}}" [(ngModel)]="u.StartDate" [min]="Template.Date" [max]="Template.end_date"
+                                end_date="ngModel">
+                            </div>
+                            
+                            <div class="form-group col-sm-6">
+                                <label for="end_date">End Date<span style="color:red">*</span></label>
+                                <input type="date" style="width:40%;" class="form-control" placeholder="End Date" required 
+                                name="end_date{{u.ID}}" [(ngModel)]="u.EndDate" [min]="u.StartDate" [max]="Template.end_date"
+                                end_date="ngModel">
+                            </div>
                         </div>
-                        </div>
+                        
 
                     </div>
 
                     <div class="form-group">
-                        <li class="btn btn-success" (click)="AddMilestone()">Add More Milestone</li>
+                        <li class="btn btn-success" (click)="AddMilestone()">Add Milestone(s)</li>
                     </div>
 
                     <div *ngFor="let u of Fields">
@@ -232,5 +245,3 @@
     </div>
 </div>
 </div>
-
-

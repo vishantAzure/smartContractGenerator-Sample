@@ -14,9 +14,9 @@ export class SidemenuComponent implements OnInit {
     ngAfterViewChecked() {
         $( document ).ready(function() {       
             var parent_menu_li = $('.side_nav_active').parent().parent().parent();
-if ( parent_menu_li.is( "li" ) ) {
-    parent_menu_li.find('a:first').addClass('active_parent_menu');
-}
+            if ( parent_menu_li.is( "li" ) ) {
+                parent_menu_li.find('a:first').addClass('active_parent_menu');
+            }
         });
     }
   ngOnInit() {    

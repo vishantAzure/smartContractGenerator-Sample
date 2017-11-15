@@ -1,0 +1,64 @@
+<app-header></app-header>
+<section class="admin-dashbord">
+  <div class="container-fluid">
+      <app-company-sidemenu></app-company-sidemenu>
+          <div class="col-sm-9 right-side">
+          <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                      <h3>Manage Contract List</h3>
+                  </div>                  
+              </div>
+              <div class="table-responsive" *ngIf="Contracts==null">
+                  <p>
+                      No Contracts found.
+                  </p>
+              </div>
+              <div class="table-responsive" *ngIf="Contracts!=null">
+                  
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr class="active">
+                              <th>S.No.</th>
+                              <th>Contract Name</th>
+                              <th>Company Name</th>
+                              <th>Start Date</th>
+                              <th>Price ( ETH )</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let u of Contracts; let row_no = index">
+                            <td>{{row_no + 1}}</td>
+                            <td>{{u.Contract_Name}}</td>
+                            <td>{{u.first_name}}</td>
+                            <td>{{u.Contract_StartDate | date: 'mediumDate'}}</td>
+                            <td>{{u.Contract_Price}}</td>
+                            <td>{{u.status==0 ? 'In Progress' : 'Completed'}}</td>
+                            <td>
+                                <a data-toggle="tooltip" title="View Milestones" (click)="viewMilestones(u.id)">
+                                    <i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;"></i>
+                                </a>
+                                <a data-toggle="tooltip" title="View Contract Details" (click)="viewContractDetails(u.id)">
+                                    <i class="fa fa-info" aria-hidden="true" style="margin-right:10px;"></i>
+                                </a>
+                                <a data-toggle="tooltip" title="View Contract PDF" (click)="DownloadPDF(u.ContractPDF_ID,u.id)">
+                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+<app-footer></app-footer>
+
+
+
+
+

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router}  from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Modal } from '../modal';
-import { ToasterService} from 'angular2-toaster';
 import * as config from '../../../../config/config';
 import {NgForm} from '@angular/forms';
 
@@ -12,14 +11,12 @@ declare var $;
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  private toasterService: ToasterService;
   model;
   User_data;
   dashboard;
   message;
   User = ['Customer','Service Provider','Company'];
-      constructor(public http: Http,public router: Router ,toasterService: ToasterService) { 
-        this.toasterService = toasterService;
+      constructor(public http: Http,public router: Router) { 
         this.model = new Modal();
       }
     
@@ -48,7 +45,7 @@ export class HeaderComponent implements OnInit {
   Logout() {
     localStorage.clear();
     this.router.navigate(['/']);
-    window.location.reload();
+    this.ngOnInit();
   }
 
   Toggle() {
@@ -60,7 +57,7 @@ export class HeaderComponent implements OnInit {
   }
 
   Login() {
-    $('#myModal1111').modal('toggle');
+    $('#loginmodal').modal('toggle');
     let obj ={email:this.model.email,password:this.model.password}
 
     this.http.post('//'+config.global_ip+'/auth/login',obj).subscribe((res:any)=>{
@@ -71,10 +68,10 @@ export class HeaderComponent implements OnInit {
         localStorage.setItem("User", JSON.stringify(result.res[0]));
         switch(result.res[0].User_Type){
           case "Customer":
-              this.router.navigate(['/customer']);
+              this.router.navigate(['/customer/dashboard']);
               break;
           case "Service Provider":
-              this.router.navigate(['/serviceprovider']);
+              this.router.navigate(['/serviceprovider/dashboard']);
               break;
           case "Company":
               this.router.navigate(['/company/dashboard']);
@@ -85,22 +82,20 @@ export class HeaderComponent implements OnInit {
         }
       }else if(result.status==300) {
         this.message='Email or Password do not Match';
-        $('#messageheader').modal('toggle');
-        setTimeout(function(){ 
+        setTimeout(function(){
           $('#messageheader').modal('toggle');
-        }, 2000);
+        }, 1000);
       }
     },(err)=>{
       this.message=err;
-      $('#messageheader').modal('toggle');
-      setTimeout(function(){ 
+      setTimeout(function(){
         $('#messageheader').modal('toggle');
-      }, 2000);
+      }, 1000);
     });
   }
 
   Register() {
-    $('#myModal2222').modal('toggle');
+    $('#registermodal').modal('toggle');
     let obj;
 
     if(this.model.user_type=='company') {
@@ -116,21 +111,18 @@ export class HeaderComponent implements OnInit {
       var result = JSON.parse(res._body);
       if(result.status==200) {
         this.message='Registration Sucessfull';
-        $('#messageheader').modal('toggle');
-        setTimeout(function(){ 
+        setTimeout(function(){
           $('#messageheader').modal('toggle');
         }, 1000);
       }else{
         this.message='Registration UnSucessfull';
-        $('#messageheader').modal('toggle');
-        setTimeout(function(){ 
+        setTimeout(function(){
           $('#messageheader').modal('toggle');
         }, 1000);
       }
     },(err)=>{
       this.message=err;
-      $('#messageheader').modal('toggle');
-      setTimeout(function(){ 
+      setTimeout(function(){
         $('#messageheader').modal('toggle');
       }, 1000);
     });

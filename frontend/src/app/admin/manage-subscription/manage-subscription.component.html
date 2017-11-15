@@ -9,14 +9,14 @@
                         <h3>Manage Subscription</h3>
                 </div>
                 <div class="col-sm-3">
-                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="width:150px;" (click)="formreset(heroFormyyyyy)">Create</button>
+                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="width:150px;" (click)="formreset(heroFormyyyyy)">Add New Subscription</button>
                 </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr class="active">
-                            <th>SNo</th>
+                            <th>S.no</th>
                             <th>Package Name</th>
                             <th>Package Price</th>
                             <th>Number Of Contracts</th>
@@ -25,8 +25,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="bg-wht"  *ngFor="let u of ViewSubscription">
-                            <td>{{u.idSubscriptions}}</td>
+                        <tr class="bg-wht"  *ngFor="let u of ViewSubscription; let row_no = index">
+                            <td>{{row_no + 1}}</td>
                             <td>{{u.packageName}}</td>
                             <td>{{u.packagePrice}}</td>
                             <td>{{u.numberOfContract}}</td>

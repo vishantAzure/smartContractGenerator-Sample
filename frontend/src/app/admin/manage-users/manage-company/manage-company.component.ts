@@ -58,9 +58,6 @@ export class ManageCompanyComponent implements OnInit {
     },(err)=>{
       this.message='Registration UnSucessfull';
       $('#message').modal('toggle');
-      setTimeout(function(){ 
-        $('#message').modal('toggle');
-      }, 1000);
     });
 
   }
@@ -79,9 +76,6 @@ export class ManageCompanyComponent implements OnInit {
       },(err)=>{
         this.message='Table Not Found';
         $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       });
   }
 
@@ -105,9 +99,6 @@ export class ManageCompanyComponent implements OnInit {
       },(err)=>{
         this.message='Table Not Found';
         $('#message').modal('toggle');
-        setTimeout(function(){ 
-          $('#message').modal('toggle');
-        }, 1000);
       });
   }
 

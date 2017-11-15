@@ -90,7 +90,8 @@ router.post('/addCategory', function(req, res) {
     parentcategory = req.body.parentcategory;
   }
   var sql = "INSERT INTO template_category (name, parent_category, created_at, updated_at, Status, deleted) VALUES ?";
-  var values = [[req.body.name,parentcategory,createdat, ,req.body.status,false],];
+  var values = [[req.body.name,parentcategory,createdat, ,req.body.status,0],];
+
 
   global.con.query(sql,[values],function(err,result) {
     if(err) return res.send(err);

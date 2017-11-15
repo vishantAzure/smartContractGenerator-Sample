@@ -6,7 +6,7 @@
           <div class="graph-tab customer-das manage-dash-temp">
               <div class="row mnage-user-forms">
                   <div class="col-sm-9">
-                      <h3>Contract Detail</h3>
+                      <h3>Contract Milestones</h3>
                   </div>
                   <div class="col-sm-3">
                       <!-- <button class="btn btn-default" routerLink="/Template" style="width:150px;">Create</button> -->
@@ -16,26 +16,34 @@
                   <table class="table table-bordered">
                       <thead>
                           <tr class="active">
-                              <th>Milestone</th>
+                              <th>S.No.</th>
                               <th>Start Date</th>
                               <th>End Date</th>
-                              <th>Milestone Fees</th>
+                              <th>Fees ( ETH )</th>
                               <th>Payment Status</th>
-                              <th>Task Status</th>
+                              <th>Comments</th>
+                              <th>Status</th>
                               <th>Action</th>
                           </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let u of ContractDetails">
-                            <td>Milestone{{u.idMilestone}}</td>
-                            <td>{{u.Start_Date | dateFilter}}</td>
-                            <td>{{u.End_Date | dateFilter}}</td>
+                        <tr *ngFor="let u of ContractDetails; let row_no = index">
+                            <td>{{row_no + 1}}</td>
+                            <td>{{u.Start_Date | date: 'mediumDate'}}</td>
+                            <td>{{u.End_Date | date: 'mediumDate'}}</td>
                             <td>{{u.Milestone_fee}}</td>
                             <td>{{u.Payment_Status == 0 ?'Pending':'Complete'}}</td>
-                            <td>{{u.Task_Status == 0 ?'Pending':'Complete'}}</td>
+                            <td>{{u.comments}}</td>
+                            <td>{{u.status_for_company}}</td>
                             <td>
-                              <li class="btn btn-success" aria-hidden="true" (click)="MarkMilestoneComplete(u.Contract_ID)">Complete</li>
-                              <li class="btn btn-success" aria-hidden="true" (click)="CancelMilestone(u.Contract_ID)">Cancel</li>
+                                <li *ngIf="u.Status==2" class="btn btn-success" aria-hidden="true" (click)="ChangeMilestoneStatus(u.id,3)">Complete</li>
+                                <a data-toggle="tooltip" title="View Milestone History" (click)="viewMilestoneHistory(u.id)">
+                                    <i class="fa fa-history" aria-hidden="true" style="margin-left:10px;"></i>
+                                </a>
+                                <a *ngIf="u.Status==6" data-toggle="tooltip" title="Update Milestone" (click)="updateMilestone(u.id)">
+                                    <i class="fa fa-edit" aria-hidden="true" style="margin-left:10px;"></i>
+                                </a>
+                                
                             </td>
                         </tr>
                       </tbody>

@@ -9,13 +9,14 @@
                   <h3>Manage Category</h3>
                 </div>
                 <div class="col-sm-3">
-                    <button class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="width:150px;" (click)="SelectRadio()">Create</button>
+                    <button class="btn btn-default" data-toggle="modal" data-target="#myModal1" style="width:150px;" (click)="SelectRadio()">Add New Category</button>
               </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered">
                   <thead>
                         <tr class="active">
+                            <th>S.No.</th>
                             <th>Category Name</th>
                             <th>Created At</th>
                             <th>Status</th>
@@ -23,9 +24,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <tr class="bg-wht"  *ngFor="let u of Category">
+                      <tr class="bg-wht"  *ngFor="let u of Category; let row_no = index">
+                            <td>{{row_no + 1}}</td>
                             <td>{{u.name}}</td>
-                            <td>{{u.created_at | dateFilter}}</td>
+                            <td>{{u.created_at | date: 'mediumDate'}}</td>
                             <td>{{u.Status == 0 ? 'InActive' : 'Active'}}</td>
                             <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" data-toggle="modal" data-target="#myModal3" (click)="changeModal(u)"></i><i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.id,u.parent_category)"></i></td>
                         </tr>
@@ -38,9 +40,7 @@
         <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
 </section>
 <app-footer></app-footer>
-<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////   modals   //////////////////////////////////////////////////////////
-..////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
 <div class="modal fade" id="myModal1"  role="dialog" aria-labelledby="myModalLabel">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
@@ -64,22 +64,21 @@
               </div>
           </div>
 
-          <div class="form-group">
-              <label for="addparentcategory">Parent Category</label>
-              <select  class="form-control" id="addparentcategory" 
-                  [(ngModel)]="contract.parentcategory" name="addparentcategory"
-                  #addparentcategory="ngModel">
-                  <option [ngValue]="null">Select Parent Category</option>
-                  <option *ngFor="let u of ParentCategory" [ngValue]="u.id">{{u.name}}</option>
-              </select>
-          </div>
-
+        <div class="form-group">
+            <label>Parent Category<span style="color:red">*</span></label>
+            <select [(ngModel)]="contract.parentcategory" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option *ngFor="let u of ParentCategory" [value]="u.id" [selected]="contract.parentcategory == u.id">{{u.name}}</option>
+            </select>
+        </div>
 
           <div class="form-group">
-          <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
-          <input name="addstatus" type="radio" [value]="1"  [(ngModel)]="contract.status" >Active<i style="margin-right:20px;"></i>
-          <input name="addstatus" type="radio" [value]="0"  [(ngModel)]="contract.status" >InActive
-          </div>
+            <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
+            <input type="radio"  [value]="1" id="idstatusactive" [(ngModel)]="contract.status" name="statusactive"
+            #statusactive="ngModel" >Active<i style="margin-right:20px;"></i>
+            
+            <input type="radio"  [value]="0" id="distatusinactive" [(ngModel)]="contract.status" name="statusactive"
+            #statusactive="ngModel" >InActive
+        </div>
       
           <button type="submit" class="btn btn-success" [disabled]="!addcategoryform.form.valid">Submit</button>
       </form>
@@ -111,20 +110,18 @@
 
           <div class="form-group">
             <label>Parent Category<span style="color:red">*</span></label>
-            <select  class="form-control" [(ngModel)]="contract.parencategory" [ngModelOptions]="{standalone: true}">
-                <option [ngValue]="null">Select Parent Category</option>
-                <option *ngFor="let u of ParentCategory"
-                [selected]="contract.selected==u.id" [ngValue]="u.id"
-                >{{u.name}}</option>
+            <select [(ngModel)]="contract.parentcategory" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option *ngFor="let u of ParentCategory" [value]="u.id" [selected]="contract.parentcategory == u.id">{{u.name}}</option>
             </select>
           </div>
 
           <div class="form-group">
           <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
-          <input type="radio"  value=1 id="editstatusactive" [(ngModel)]="contract.status" name="editstatusactive"
-          #statusactive="ngModel" >Active<i style="margin-right:20px;"></i>
-          <input type="radio"  value=0 id="editstatusinactive" [(ngModel)]="contract.status" name="editstatusactive"
-          #statusactive="ngModel" >InActive
+          <input type="radio"  [value]="1" id="editstatusactive" [(ngModel)]="contract.status" name="editstatusactive"
+          #editstatusactive="ngModel" >Active<i style="margin-right:20px;"></i>
+
+          <input type="radio"  [value]="0" id="edtstatusinactive" [(ngModel)]="contract.status" name="editstatusactive"
+          #editstatusactive="ngModel" >InActive
           </div>
       
           <button type="submit" class="btn btn-success" [disabled]="!editcategoryform.form.valid">Submit</button>

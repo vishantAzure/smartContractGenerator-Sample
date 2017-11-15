@@ -1,0 +1,76 @@
+<app-header></app-header>
+<section class="admin-dashbord">
+  <div class="container-fluid">
+      <app-company-sidemenu></app-company-sidemenu>
+          <div class="col-sm-9 right-side">
+          <div class="graph-tab customer-das manage-dash-temp">
+              <div class="row mnage-user-forms">
+                  <div class="col-sm-9">
+                      <h3>Contract Milestones</h3>
+                  </div>
+                  <div class="col-sm-3">
+                      <!-- <button class="btn btn-default" routerLink="/Template" style="width:150px;">Create</button> -->
+              </div>
+              </div>
+              <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr class="active">
+                              <th>S.No.</th>
+                              <th>Start Date</th>
+                              <th>End Date</th>
+                              <th>Milestone Fees ( ETH )</th>
+                              <th>Payment Status</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let u of ContractDetails; let row_no = index">
+                            <td>{{row_no + 1}}</td>
+                            <td>{{u.Start_Date | date: 'mediumDate'}}</td>
+                            <td>{{u.End_Date | date: 'mediumDate'}}</td>
+                            <td>{{u.Milestone_fee}}</td>
+                           <td>{{u.Payment_Status == 0 ?'Pending':'Complete'}}</td>
+                            <td>{{u.status_for_customer}}</td>
+                            <td>
+                              <li *ngIf="u.Status==1" class="btn btn-success" aria-hidden="true" (click)="ChangeMilestoneStatus(u.id,2)">Approve</li>
+                              <li *ngIf="u.Status==1" class="btn btn-success" aria-hidden="true" (click)="Cancel(u.id,6)">Disapprove</li>
+                              <li *ngIf="u.Status==3" class="btn btn-success" aria-hidden="true" (click)="ChangeMilestoneStatus(u.id,4)">Verify</li>
+                              <li *ngIf="u.Status==3" class="btn btn-success" aria-hidden="true" (click)="Cancel(u.id,5)">Reject</li>
+                               <a data-toggle="tooltip" title="View Milestone History" (click)="viewMilestoneHistory(u.id)">
+                                    <i class="fa fa-history" aria-hidden="true" style="margin-left:10px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          </div>
+      </div>
+          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+  </section>
+<app-footer></app-footer>
+
+<div class="modal fade" id="reasoncancel" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Please Enter Reason</h4>
+    </div>
+    <div class="modal-body">
+        <textarea [(ngModel)]="CancelData.ReasonCancel" rows="10" style="width:100%;height:100%;"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="ReasonUpdate()">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="Formreset()">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+
+
+
+
+

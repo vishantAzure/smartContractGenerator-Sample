@@ -10,28 +10,44 @@
                   </div>
                   <div class="col-sm-3">
                       <button class="btn btn-default" routerLink="/Template" style="width:150px;">Add New Contract</button>
+                </div>
               </div>
-              </div>
-              <div class="table-responsive">
+              <div class="table-responsive" *ngIf="Contracts.length==0">
+                    <p>
+                        No Contracts found.
+                    </p>
+                </div>
+              <div class="table-responsive" *ngIf="Contracts.length>0">
                   <table class="table table-bordered">
                       <thead>
                           <tr class="active">
+                              <th>S.No.</th>
                               <th>Contract Name</th>
                               <th>Customer Name</th>
                               <th>Start Date</th>
-                              <th>Price (in Ether)</th>
+                              <th>Price ( ETH )</th>
+                              <th>Status</th>
                               <th>Action</th>
                           </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let u of Contracts">
+                        <tr *ngFor="let u of Contracts; let row_no = index">
+                            <td>{{row_no + 1}}</td>
                             <td>{{u.Contract_Name}}</td>
-                            <td>{{u.Customer_Name}}</td>
-                            <td>{{u.Contract_StartDate | dateFilter}}</td>
+                            <td>{{u.first_name}}</td>
+                            <td>{{u.Contract_StartDate | date: 'mediumDate'}}</td>                            
                             <td>{{u.Contract_Price}}</td>
+                            <td>{{u.status==0 ? 'In Progress' : 'Completed'}}</td>
                             <td>
-                              <i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;" (click)="ContractDetail(u.ContractPDF_ID)"></i>
-                              <i class="fa fa-download" aria-hidden="true" (click)="DownloadPDF(u.ContractPDF_ID)"></i>
+                                <a data-toggle="tooltip" title="View Milestones" (click)="viewMilestones(u.id)">
+                                    <i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;"></i>
+                                </a>
+                                <a data-toggle="tooltip" title="View Contract Details" (click)="viewContractDetails(u.id)">
+                                    <i class="fa fa-info" aria-hidden="true" style="margin-right:10px;"></i>
+                                </a>
+                                <a data-toggle="tooltip" title="View Contract PDF" (click)="DownloadPDF(u.ContractPDF_ID)">
+                                    <i class="fa fa-download" aria-hidden="true" ></i>
+                                </a>
                             </td>
                         </tr>
                       </tbody>

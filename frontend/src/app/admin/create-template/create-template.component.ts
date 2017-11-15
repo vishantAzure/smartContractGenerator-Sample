@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute}  from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Contract } from '../../modal';
-import { ToasterService} from 'angular2-toaster';
 import * as config from '../../../../../config/config';
 import {NgForm} from '@angular/forms';
 
@@ -12,7 +11,6 @@ declare var $;
   templateUrl: './create-template.component.html',
 })
 export class CreateTemplateComponent implements OnInit {
-  private toasterService: ToasterService;
   contract;
   addTemplate;
   User_data;
@@ -21,14 +19,14 @@ export class CreateTemplateComponent implements OnInit {
   message;
   contractcategoryname;
   templatestatus;
-  constructor(public router: Router,public http: Http,toasterService: ToasterService,public route: ActivatedRoute) { 
-    this.toasterService = toasterService;
+  constructor(public router: Router,public http: Http,public route: ActivatedRoute) { 
     this.contract = {};
   }
 
   ngOnInit() {
     this.User_data = JSON.parse(localStorage.getItem('User'));
     if(this.User_data) {
+      this.contract.status = 1;
       let self = this;
       let obj = {
         id:this.User_data.idUsers
@@ -41,14 +39,8 @@ export class CreateTemplateComponent implements OnInit {
             self.Category.push(abc[i]);
           }
         }
-        var $radios = $('input:radio[name=statustemplate]');
-        if($radios.is(':checked') === false) {
-            $radios.filter('[value=1]').prop('checked', true);
-            this.contract.status = '1';
-        }
        },(err)=>{
         this.message='Data Not Found';
-        $('#message').modal('toggle');
         setTimeout(function(){ 
           $('#message').modal('toggle');
         }, 1000);
@@ -59,7 +51,6 @@ export class CreateTemplateComponent implements OnInit {
   }
 
   CreateTemplate() {
-    console.log(this.contract);
     if(!this.contract.Description) {
       this.message = 'description is required';
       $('#message').modal('toggle');
