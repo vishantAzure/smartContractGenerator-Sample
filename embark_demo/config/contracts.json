@@ -2,8 +2,8 @@
   "default": {
     "gas": "auto",
     "contracts": {
-      "MileStoneTracker": {
-        "deploy":true
+      "SimpleStorage": {
+        "deploy":false
       }
     }
   }

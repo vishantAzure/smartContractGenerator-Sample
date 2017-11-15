@@ -1,0 +1,10 @@
+{
+  "default": {
+    "gas": "auto",
+    "contracts": {
+      "SimpleStorage": {
+        "deploy":true
+      }
+    }
+  }
+}
