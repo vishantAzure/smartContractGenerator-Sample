@@ -34,8 +34,8 @@
                         </div>
 
                       <div class="form-group">
-                          <label>Description<span style="color:red">*</span></label>
-                          <ckeditor [(ngModel)]="contract.Description" debounce="500" required [ngModelOptions]="{standalone: true}"></ckeditor>
+                          <label>Description <span style='font-size:12px;'>( Please add placeholders enclosed with "{{ '{}!' }}" for eg : {{ '{Contract Start Date}!' }} )</span><span style="color:red"> *</span></label>
+                          <ckeditor [(ngModel)]="contract.Description" debounce="500"[config]="{extraPlugins:'tokens'}" required [ngModelOptions]="{standalone: true}"></ckeditor>
                       </div>
           
                       <div class="form-group">

@@ -4,12 +4,12 @@
       <app-company-sidemenu></app-company-sidemenu>
           <div class="col-sm-9 right-side">
           <div class="graph-tab customer-das manage-dash-temp">
-              <div class="row mnage-user-forms">
+              <div class="page_heading_row row mnage-user-forms">
                   <div class="col-sm-9">
-                      <h3>Manage Contract List</h3>
+                      <span class='page_heading'>Manage Contract List</span>
                   </div>
                   <div class="col-sm-3">
-                      <button class="btn btn-default" routerLink="/Template" style="width:150px;">Add New Contract</button>
+                      <button class="btn btn-info page_heading_button" routerLink="/Template" >Add New Contract</button>
                 </div>
               </div>
               <div class="table-responsive" *ngIf="Contracts.length==0">
@@ -39,9 +39,6 @@
                             <td>{{u.Contract_Price}}</td>
                             <td>{{u.status==0 ? 'In Progress' : 'Completed'}}</td>
                             <td>
-                                <a data-toggle="tooltip" title="View Milestones" (click)="viewMilestones(u.id)">
-                                    <i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;"></i>
-                                </a>
                                 <a data-toggle="tooltip" title="View Contract Details" (click)="viewContractDetails(u.id)">
                                     <i class="fa fa-info" aria-hidden="true" style="margin-right:10px;"></i>
                                 </a>

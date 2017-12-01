@@ -14,6 +14,8 @@ var app = express();
 var busboy = require('connect-busboy');
 var PDF = require('./routes/PDF');
 
+app.locals.moment=require("moment");
+
 // For XSS Security 
 var helmet = require('helmet')
 app.use(helmet())
@@ -31,7 +33,7 @@ global.IP = config.global_ip;
 
 app.use(logger('dev'));
 app.use(busboy()); 
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', './views');
 app.options('*', cors());
 app.use(cors());

@@ -15,7 +15,7 @@
                       </div>
               </div>
                 <div class="row" *ngIf="MilestoneDetails">
-                  <div class="tab-content" style="padding:30px;">
+                  <div class="tab-content" style="padding:30px;" >
                   <form (ngSubmit)="UpdateMilestone()" #update_milestone_form="ngForm">  
                       <div class="form-group">
                       <label  for="Name">Name<span style="color:red">*</span></label>
@@ -91,19 +91,24 @@
                             <div [hidden]="!penalty.hasError('required')">This Field is required</div>
                         </div>
                         </div>
-                      <div class='row'>
-                        <div class="col-sm-6">
-                            <label for="SDate">Start Date <span style="color:red">*</span></label>
-                            <input type="date" [(ngModel)]="MilestoneDetails.Start_Date"
-                            [ngModelOptions]="{standalone: true}">
+
+                        
+                        <div class="row">
                             
+                            <div class="col-sm-6">
+                                <label for="Price">Start Date<span style="color:red">*</span></label>
+                                <my-date-picker [(ngModel)]="MilestoneDetails.Start_Date" 
+                                [options]="myOptions" [ngModelOptions]="{standalone: true}" required></my-date-picker>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="Price">End Date<span style="color:red">*</span></label>
+                                <my-date-picker [(ngModel)]="MilestoneDetails.End_Date" 
+                                [options]="myOptions" [ngModelOptions]="{standalone: true}" required></my-date-picker>
+                            </div>
+
                         </div>
-                        <div class="col-sm-6">
-                            <label for="EDate">End Date<span style="color:red">*</span></label>
-                            <input type="date" [(ngModel)]="MilestoneDetails.End_Date" value="{{MilestoneDetails.End_Date | date:'yyyy-MM-dd'}}" 
-                            [ngModelOptions]="{standalone: true}">
-                        </div>
-                        </div>
+                      
                       <button type="submit" class="btn btn-success" [disabled]="!update_milestone_form.form.valid">Submit</button>
                   </form>
                   </div>

@@ -37,9 +37,6 @@
                             <td>{{u.Contract_Price}}</td>
                             <td>{{u.status==0 ? 'In Progress' : 'Completed'}}</td>
                             <td>
-                                <a data-toggle="tooltip" title="View Milestones" (click)="viewMilestones(u.id)">
-                                    <i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;"></i>
-                                </a>
                                 <a data-toggle="tooltip" title="View Contract Details" (click)="viewContractDetails(u.id)">
                                     <i class="fa fa-info" aria-hidden="true" style="margin-right:10px;"></i>
                                 </a>

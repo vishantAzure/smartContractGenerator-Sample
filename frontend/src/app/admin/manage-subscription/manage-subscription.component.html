@@ -9,7 +9,7 @@
                         <h3>Manage Subscription</h3>
                 </div>
                 <div class="col-sm-3">
-                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="width:150px;" (click)="formreset(heroFormyyyyy)">Add New Subscription</button>
+                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="min-width:150px;" (click)="formreset(heroFormyyyyy)">Add New Subscription</button>
                 </div>
             </div>
             <div class="table-responsive">
@@ -153,10 +153,10 @@
 
                 <div class="form-group">
                 <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
-                <input type="radio"  name="status" value="Active"
-                id="statusactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">Active<i style="margin-right:20px;"></i>
-                <input type="radio"  name="status" value="InActive"
-                id="statusinactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">InActive
+                <input type="radio"  name="status" value="1"
+                id="statusactive" #status="ngModel" required [(ngModel)]="subscriptionPlan.subscriptionstatus">Active<i style="margin-right:20px;"></i>
+                <input type="radio"  name="status" value="0"
+                id="statusinactive" #status="ngModel" required [(ngModel)]="subscriptionPlan.subscriptionstatus">InActive
                 </div>
     
                 <button type="submit" class="btn btn-success" [disabled]="!heroFormxxxxx.form.valid">Submit</button>
@@ -240,9 +240,9 @@
 
                             <div class="form-group">
                             <label style="margin-right:20px;">Status<span style="color:red">*</span></label>
-                            <input type="radio"  name="status" value="Active"
-                            id="statusactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">Active<i style="margin-right:20px;"></i>
-                            <input type="radio"  name="status" value="InActive"
+                            <input type="radio"  name="status" value="1"
+                            id="statusactive" #status="ngModel" required [(ngModel)]="subscriptionPlan.subscriptionstatus">Active<i style="margin-right:20px;"></i>
+                            <input type="radio"  name="status" value="0"
                             id="statusinactive" #status="ngModel" required [(ngModel)]="subscriptionstatus">InActive
                             </div>
                   

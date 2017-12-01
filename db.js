@@ -3,8 +3,8 @@
     connection: {
         host     : 'localhost',
         user     : 'root',
-        password : 'root',
-        database : 'db_smart_contract',
+        password : 'vishant@123',
+        database : 'smartcontract_gen_db',
         charset: 'utf8'
     }
     });

@@ -13,10 +13,10 @@
 
                     <div class="form-group">
                     <label>Select Customer<span style="color:red">*</span></label>
-                    <select  class="form-control" id="customeremail" [(ngModel)]="CustomerEmailAddress" name="customeremail"
+                    <select  class="form-control" id="customeremail" [(ngModel)]="Template.CustomerEmail" name="customeremail"
                     #customeremail="ngModel">
                         <option [ngValue]="null">--Select--</option>
-                        <option *ngFor="let c of customers">{{c.Email}}</option>
+                        <option *ngFor="let c of customers" [ngValue]="c.idUsers">{{c.Email}}</option>
                     </select>
                     </div>
 
@@ -51,18 +51,15 @@
 
                     <div class="row">
 
-                        <div class="form-group col-sm-6">
-                            <label for="start_date">Start Date<span style="color:red">*</span></label>
-                            <input type="date" style="width:40%;" class="form-control" placeholder="Start Date" required 
-                            name="start_date" [(ngModel)]="Template.Date"
-                            #start_date="ngModel">
+                        <div class="col-sm-6">
+                            <label for="Price">Start Date<span style="color:red">*</span></label>
+                            <my-date-picker name="mydate" [(ngModel)]="Template.Date" (dateChanged)="disableUntil($event)"
+                            [options]="myOptions" required></my-date-picker>
                         </div>
-    
-                        <div class="form-group col-sm-6">
-                            <label for="end_date">End Date<span style="color:red">*</span></label>
-                            <input type="date" style="width:40%;" class="form-control" placeholder="Start Date" required 
-                            name="end_date" [(ngModel)]="Template.end_date" [min]="Template.Date" 
-                            end_date="ngModel">
+                        <div class="col-sm-6">
+                            <label for="Price">End Date<span style="color:red">*</span></label>
+                            <my-date-picker name="myenddate" [(ngModel)]="Template.end_date" (dateChanged)="disableSince($event)"
+                            [options]="myOptions" required></my-date-picker>
                         </div>
 
                     </div>
@@ -167,22 +164,20 @@
                         </div>
 
                         <div class="row">
+                                
+                            <div class="col-sm-6">
+                                <label for="Price">Start Date<span style="color:red">*</span></label>
+                                <my-date-picker name="mymilestonedate{{u.ID}}" [(ngModel)]="u.StartDate" 
+                                [options]="myOptions" required></my-date-picker>
+                            </div>
 
-                            <div class="form-group col-sm-6">
-                                <label for="end_date">Start Date<span style="color:red">*</span></label>
-                                <input type="date" style="width:40%;" class="form-control" placeholder="Start Date" required 
-                                name="start_date{{u.ID}}" [(ngModel)]="u.StartDate" [min]="Template.Date" [max]="Template.end_date"
-                                end_date="ngModel">
+                            <div class="col-sm-6">
+                                <label for="Price">End Date<span style="color:red">*</span></label>
+                                <my-date-picker name="myenddatemilestonedate{{u.ID}}" [(ngModel)]="u.EndDate" 
+                                [options]="myOptions" required></my-date-picker>
                             </div>
-                            
-                            <div class="form-group col-sm-6">
-                                <label for="end_date">End Date<span style="color:red">*</span></label>
-                                <input type="date" style="width:40%;" class="form-control" placeholder="End Date" required 
-                                name="end_date{{u.ID}}" [(ngModel)]="u.EndDate" [min]="u.StartDate" [max]="Template.end_date"
-                                end_date="ngModel">
-                            </div>
+    
                         </div>
-                        
 
                     </div>
 
@@ -191,7 +186,7 @@
                     </div>
 
                     <div *ngFor="let u of Fields">
-                        <div class="form-group" *ngIf="u.INPUT_FIELD!=='ContractName' && u.INPUT_FIELD!=='ContractEmail' && u.INPUT_FIELD!=='ContractPrice' && u.INPUT_FIELD!=='ContractDate'">
+                        <div class="form-group">
                         <label for="{{u.INPUT_FIELD}}">{{u.INPUT_FIELD}}<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="{{u.INPUT_FIELD}}"
                         required

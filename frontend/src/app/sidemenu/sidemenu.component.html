@@ -6,7 +6,6 @@
         <li id="manageuser1" >
             <a style="cursor:pointer;" (click)="Toggle('manageuser1')"><i><img src="assets/images/manage_user.png" alt="icon"/></i> Manage User<span class="pull-right" style="margin-right:15px;"><img src="assets/images/plus.png" alt="img"/></span></a>
           <ul>
-            <li><a routerLink="/admin/manageservice" (click)="setParentId('manageuser1')" [routerLinkActive]="['side_nav_active']" id='manage_services'><i><img src="assets/images/manage_company.png" alt="icon"/></i> Manage Service Provider</a></li>
             <li><a routerLink="/admin/managecustomer" (click)="setParentId('manageuser1')" [routerLinkActive]="['side_nav_active']" id='manage_customer'><i><img src="assets/images/manage_customer.png" alt="icon"/></i> Manage Customer</a></li>
             <li><a routerLink='/admin/managecompany'  (click)="setParentId('manageuser1')" [routerLinkActive]="['side_nav_active']" id='manage_company'><i><img src="assets/images/manage_company.png" alt="icon"/></i> Manage Company</a></li>
           </ul>

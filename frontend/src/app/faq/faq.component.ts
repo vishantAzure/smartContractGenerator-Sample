@@ -3,7 +3,6 @@ import { Router}  from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Modal } from '../modal';
-import { ToasterService} from 'angular2-toaster';
 import * as config from '../../../../config/config';
 
 @Component({
@@ -11,9 +10,7 @@ import * as config from '../../../../config/config';
   templateUrl: './faq.component.html'
 })
 export class FAQComponent implements OnInit {
-    private toasterService: ToasterService;
-        constructor(public http: Http,public router: Router ,toasterService: ToasterService,fb: FormBuilder) { 
-          this.toasterService = toasterService;
+        constructor(public http: Http,public router: Router,fb: FormBuilder) { 
         }
         
         ngOnInit() {}

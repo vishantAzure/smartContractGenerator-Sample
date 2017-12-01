@@ -1,25 +1,46 @@
 <app-header></app-header>
 <section class="admin-dashbord">
-	<div class="container-fluid">
-			<app-company-sidemenu></app-company-sidemenu>
-        
-        <div class="col-sm-9 right-side text-center">
-			<div class="row">
-				<div class="col-sm-6"><h2>Select Template</h2></div>
-				<div class="col-sm-6"><button (click)="backClicked()">Back</button></div>
-			</div>
-        	<div class="contract " *ngFor="let u of Template" style="margin-top:28px;">
-			<div class="col-md-3 col-sm-3 boxt text-center">
-			<div class="templateimage">
-			<a (click)="onChange(u.idTemplate)"><img class="img-responsive center-block" src="assets/images/template.jpg" draggable="false"/></a>
-			</div>
-			<div class="caption">
-			<h3>{{u.Template_Name}}</h3>
-			</div>
-			</div>
-			</div>
-           </div>
-  </div>
-        <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+<div class="container-fluid">
+    <app-company-sidemenu></app-company-sidemenu>
+    <div class="col-sm-9 right-side">
+        <div class="graph-tab customer-das manage-dash-temp">
+        <div class="row page_heading_row">
+                <div class="col-sm-9"><span class='page_heading'>Select Template</span></div>
+                <div class="col-sm-3 page_heading_button"><button class='btn btn-success' (click)="backClicked()">Back</button></div>
+        </div>
+        <div class="contract" *ngFor="let u of Template" style="margin-top:28px;">
+                <div class="col-md-3 col-sm-3 boxt">
+                    <div class="caption_header">
+                        {{u.Template_Name}}
+                    </div>
+                    <div class="templateimage">
+                        <a (click)="onChange(u.idTemplate)"><img class="img-responsive center-block" src="assets/images/template.png" draggable="false"/></a>
+                    </div>
+                    <div class="caption">
+                        <a (click)="onChange(u.idTemplate)">Select</a>
+                        <a [attr.data-target]="'#preview_modal' + u.idTemplate" data-toggle="modal">Preview</a>
+                    </div>
+                
+                   
+                    
+                </div>
+                    <div class="modal fade" id="preview_modal{{u.idTemplate}}" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <button class="close" data-dismiss="modal">X</button>
+                                  <h4 class="modal-title" id="myModalLabel" >Preview Template</h4>
+                                </div>
+                                <div class="modal-body" [innerHTML]="u.Description | safeHtml">                                                           
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+ </div>
+<a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
 </section>
 <app-footer></app-footer>
+    

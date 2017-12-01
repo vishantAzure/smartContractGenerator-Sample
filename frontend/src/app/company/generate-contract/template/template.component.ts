@@ -4,6 +4,17 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Contract } from '../../../modal';
 import {Location} from '@angular/common';
 import * as config from '../../../../../../config/config';
+import { DomSanitizer } from '@angular/platform-browser';
+import {Pipe, PipeTransform} from '@angular/core'
+
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
+}
+
 
 @Component({
   selector: 'app-template',
@@ -26,9 +37,6 @@ export class TemplateComponent implements OnInit {
           this.dashboard='customer';
           break;
       case "Service Provider":
-          this.dashboard='serviceprovider';
-          break;
-      case "Company":
           this.dashboard='company';
           break;
       case "Admin":

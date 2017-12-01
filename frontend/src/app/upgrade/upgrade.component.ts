@@ -21,9 +21,6 @@ export class UpgradeComponent implements OnInit {
           this.dashboard='customer';
           break;
       case "Service_Provider":
-          this.dashboard='serviceprovider';
-          break;
-      case "Company":
           this.dashboard='company';
           break;
       case "Admin":

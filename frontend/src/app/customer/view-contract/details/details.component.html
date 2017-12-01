@@ -2,130 +2,198 @@
 <section class="admin-dashbord">
   <div class="container-fluid">
       <app-company-sidemenu></app-company-sidemenu>
-          <div class="col-sm-9 right-side">
+          <div class="col-sm-9 right-side">              
           <div class="graph-tab customer-das manage-dash-temp" *ngIf="ContractDetails">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <h3>Contract Details</h3>
+              <div class="company-bg">
+                <div class="company-bg-outer">
+                  <div class="conpany-left">
+                    <h1>Service Provider Details</h1>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-user-o" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Name:</div>
+                        <div class="conpany-left-bg-text-right"> {{ ContractDetails.provider.first_name }} </div>
+                      </div>
                     </div>
-                        <div class="col-sm-3"><button (click)="backClicked()">Back</button></div>
-                </div>
-              
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label>Contract Name :</label>
-                        <span>{{ ContractDetails.Contract_Name }}</span>
+                   <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Email: </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.provider.Email }} </div>
+                      </div>
                     </div>
-                    <div class="col-sm-6">
-                        <label>Price ( ETH ) :</label>
-                        <span>{{ ContractDetails.Contract_Price }}</span>
-                    </div>              
-                </div>
-              
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label >Customer Name :</label>
-                        <span>{{ ContractDetails.customer.first_name }}</span>
-                    </div>
-                    <div class="col-sm-6">
-                        <label>Customer Email :</label>
-                        <span>{{ ContractDetails.customer.Email }}</span>
-                
-                    </div>
-                </div>
-              
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label >Start Date :</label>
-                        <span>{{ ContractDetails.Contract_StartDate  | date: 'mediumDate' }}</span>
-                    </div>
-                    <div class="col-sm-6">
-                        <label>End Date :</label>
-                        <span>{{ ContractDetails.contract_end_date | date: 'mediumDate' }}</span>              
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <label >Status :</label>
-                        <span>{{ ContractDetails.status == 0 ? 'In Progress                                                                                                                                                                                                                                                                                                                                                                                                                     ':'Complete' }}</span>
+                     <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Phone: </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.provider.Phone }}</div>
+                      </div>
                     </div>                   
-                </div>
-                <div class="row">
-                    <div class="col-sm-9">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                        <h3>Milestone(s)</h3>
+                  </div>
+                  <!----//End Company Left ---->
+
+                  <div class="conpany-left">
+                    <h1>Customer Details</h1>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-user-o" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Name:</div>
+                        <div class="conpany-left-bg-text-right"> {{ ContractDetails.customer.first_name }} </div>
+                      </div>
                     </div>
+                   <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Email: </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.customer.Email }} </div>
+                      </div>
+                    </div>
+                     <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Phone: </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.customer.Phone }}</div>
+                      </div>
+                    </div>      
+                  </div>
+                  <!----//End Company Right ----> 
+
                 </div>
+                <!----//End Company Outer ----> 
+              </div>
+              <div class="company-bg">
+                <div class="company-bg-outer">
+                  <div class="conpany-left">
+                    <h1>Contract Details</h1>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-user-o" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Contract Name:</div>
+                        <div class="conpany-left-bg-text-right"> {{ ContractDetails.Contract_Name }} </div>
+                      </div>
+                    </div>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Price (ETH): </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.Contract_Price }}</div>
+                      </div>
+                    </div>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left">Start Date: </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.Contract_StartDate  | date: 'mediumDate' }}</div>
+                      </div>
+                    </div>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left">End Date: </div>
+                        <div class="conpany-left-bg-text-right">{{ ContractDetails.contract_end_date  | date: 'mediumDate' }}</div>
+                      </div>
+                    </div>
+                    <div class="conpany-left-bg">
+                      <div class="conpany-left-bg-icon"><i class="fa fa-circle" aria-hidden="true"></i></div>
+                      <div class="conpany-left-bg-text">
+                        <div class="conpany-left-bg-text-left"> Status: </div>
+                        <div class="conpany-left-bg-text-right"> {{ ContractDetails.status == 0 ? 'In Progress':'Complete' }}</div>
+                      </div>
+                    </div>
+                  </div>                  
+                </div>
+                <!----//End Company Outer ----> 
+              </div>
+                
+                
+               <div class='company-bg'>
+                          <h2>
+                              Milestone(s)
+                          </h2>
+                          </div>
+              <div class="clearfix"></div>
               <div class="panel-group" *ngFor="let milestone of ContractDetails.milestones; let row_no = index">
+                   
                 <div class="panel panel-default">
+                    
                     <a data-toggle="collapse" href="#collapse{{row_no + 1}}">
-                        <div class="panel-heading" style="background: lightgray">
+                        <div class="panel-heading" style="border-bottom: 1px solid #eee;">
 
                               <h4 class="panel-title">
                                   {{milestone.name =='' ? 'Milestone ' + (row_no + 1)   : milestone.name }}
                               </h4>
                         </div>
-                    </a>                                                                                                                                                                
+                    </a>                        
                   <div id="collapse{{row_no + 1}}" class="panel-collapse in" style='padding: 10px;' aria-expanded="true">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label >Name :</label>
-                            <span>{{milestone.name =='' ? 'Milestone ' + (row_no + 1)   : milestone.name }}</span>
+                        <div class="btn-approved-absolute"> 
+                            <a *ngIf="milestone.Status==1"  href="javascript:void(0)" class="btn-approved" (click)="ChangeMilestoneStatus(milestone.id,2)"> Approve </a>
+                            <a *ngIf="milestone.Status==1" href="javascript:void(0)" class="btn-disapprove" (click)="Cancel(milestone.id,6)"> Disapprove </a>
+                            <a *ngIf="milestone.Status==3" href="javascript:void(0)" class="btn-edit" (click)="ChangeMilestoneStatus(milestone.id,4)"> Mark Complete </a>
+                            <a *ngIf="milestone.Status==3" href="javascript:void(0)" class="btn-edit" (click)="Cancel(milestone.id,5)"> Reject </a>
+                            <a data-toggle="tooltip" title="View Milestone History" class='btn-edit' (click)="viewMilestoneHistory(milestone.id)">
+                                View History
+                            </a>
                         </div>
-                        <div class="col-sm-6">
-                            <label>Status :</label>
-                            <span>{{ milestone.milestone_status.status_for_customer }}</span>              
+                     
+                        <div class="company-bg-outer">
+                            <div class="conpany-left">
+                              <div class="conpany-left-bg">
+                                <div class="conpany-left-bg-text-left">Name : </div>
+                                <div class="conpany-left-bg-text-right"> {{milestone.name =='' ? 'Milestone ' + (row_no + 1)   : milestone.name }}</div>
+                              </div>
+                              <div class="conpany-left-bg">
+                                <div class="conpany-left-bg-text-left"> Start Date </div>
+                                <div class="conpany-left-bg-text-right">{{ milestone.Start_Date  | date: 'mediumDate' }}</div>
+                              </div>
+                              <div class="conpany-left-bg">
+                                <div class="conpany-left-bg-text-left">Execution of Work: </div>
+                                <div class="conpany-left-bg-text-right">{{ milestone.Milestone_Work_execution }} </div>
+                              </div>
+                              <div class="conpany-left-bg">
+                                <div class="conpany-left-bg-text-left"> Taxes (%):</div>
+                                <div class="conpany-left-bg-text-right">{{ milestone.taxes }} </div>
+                              </div>
+                              <div class="conpany-left-bg">
+                                <div class="conpany-left-bg-text-left">Penalties (%):</div>
+                                <div class="conpany-left-bg-text-right">{{ milestone.penalties }}</div>
+                            </div>
+                                
+                               <div class="conpany-left-bg">
+                                <div class="conpany-left-bg-text-left">Status: </div>
+                                <div class="conpany-left-bg-text-right"> {{ milestone.milestone_status.status_for_customer }} </div>
+                              </div>
+
+                            </div>
+                            <!----//End Company Left ---->
+                            <div class="conpany-left">
+                                <div class="conpany-left-bg">
+                                    <div class="conpany-left-bg-text-left">End Date: </div>
+                                    <div class="conpany-left-bg-text-right"> {{ milestone.End_Date | date: 'mediumDate'  }} </div>
+                                </div>
+                                
+                                <div class="conpany-left-bg">
+                                  <div class="conpany-left-bg-text-left">Schedule: </div>
+                                  <div class="conpany-left-bg-text-right">{{ milestone.Milestone_schedule }}</div>
+                                </div>
+                                <div class="conpany-left-bg">
+                                  <div class="conpany-left-bg-text-left">Fee (ETH): </div>
+                                  <div class="conpany-left-bg-text-right"> {{ milestone.Milestone_fee }} </div>
+                                </div>
+                                <div class="conpany-left-bg">
+                                  <div class="conpany-left-bg-text-left">Payment Status: </div>
+                                  <div class="conpany-left-bg-text-right">{{ milestone.Payment_Status == 0 ? 'Pending':'Complete' }}</div>
+                                </div>
+                            </div>
+                            <div class="conpany-left-full">
+                                <div class="conpany-left-bg">
+                                    <div class="conpany-left-bg-text-left"> Comments:</div>
+                                    <div class="conpany-left-bg-text-right">{{ milestone.comments }}</div>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-                      
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label >Start Date :</label>
-                            <span>{{ milestone.Start_Date  | date: 'mediumDate' }}</span>
-                        </div>
-                        <div class="col-sm-6">
-                            <label>End Date :</label>
-                            <span>{{ milestone.End_Date | date: 'mediumDate'  }}</span>              
-                        </div>
-                    </div>
                     
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label >Execution of Work :</label>
-                            <span><p>{{ milestone.Milestone_Work_execution }}</p></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <label>Schedule :</label>
-                            <span><p>{{ milestone.Milestone_schedule }}</p></span>
-                        </div>
-                    </div>
-                      
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label >Taxes ( % ) :</label>
-                            <span>{{ milestone.taxes }}</span>
-                        </div>
-                        <div class="col-sm-6">
-                            <label>Fees ( ETH ) :</label>
-                            <span>{{ milestone.Milestone_fee }}</span>              
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label >Penalties ( % ) :</label>
-                            <span>{{ milestone.penalties }}</span>
-                        </div>
-                        <div class="col-sm-6">
-                            <label>Payment Status :</label>
-                            <span>{{ milestone.Payment_Status == 0 ? 'Pending':'Complete' }}</span>
-                        </div>
-                    </div>
-                      
-                      <div class="row">
-                        <div class="col-sm-12">
-                            <label>Comments :</label>
-                            <span><p>{{ milestone.comments }} </p></span>
-                        </div>
+                    <div class="clearfix">                      
                     </div>
                       
                   </div>
@@ -137,3 +205,21 @@
           <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
   </section>
 <app-footer></app-footer>
+<div class="modal fade" id="reasoncancel" role="dialog">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Please Enter Reason</h4>
+    </div>
+    <div class="modal-body">
+        <textarea [(ngModel)]="CancelData.ReasonCancel" rows="10" style="width:100%;height:100%;"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-success" (click)="ReasonUpdate()">Submit</button>
+        <button type="button" class="btn btn-warning" (click)="Formreset()">Cancel</button>
+    </div>
+    </div>
+</div>
+</div>
+
+

@@ -54,6 +54,7 @@ export class ViewCustomerContractComponent implements OnInit {
   }
 
   DownloadPDF(name,id) {
+    console.log(name,id);
     window.open('//'+config.global_ip+'/pdf/DownloadPDF?pname='+name+'.pdf');
   }
 

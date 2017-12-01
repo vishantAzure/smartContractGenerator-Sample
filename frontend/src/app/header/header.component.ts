@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router}  from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Modal } from '../modal';
 import * as config from '../../../../config/config';
 import {NgForm} from '@angular/forms';
 
@@ -15,9 +14,9 @@ export class HeaderComponent implements OnInit {
   User_data;
   dashboard;
   message;
-  User = ['Customer','Service Provider','Company'];
+  User = ['Customer','Service Provider'];
       constructor(public http: Http,public router: Router) { 
-        this.model = new Modal();
+        this.model = {};
       }
     
   ngOnInit() {
@@ -28,9 +27,6 @@ export class HeaderComponent implements OnInit {
           this.dashboard='customer';
           break;
       case "Service Provider":
-          this.dashboard='serviceprovider';
-          break;
-      case "Company":
           this.dashboard='company';
           break;
       case "Admin":
@@ -71,9 +67,6 @@ export class HeaderComponent implements OnInit {
               this.router.navigate(['/customer/dashboard']);
               break;
           case "Service Provider":
-              this.router.navigate(['/serviceprovider/dashboard']);
-              break;
-          case "Company":
               this.router.navigate(['/company/dashboard']);
               break;
           case "Admin":
@@ -96,17 +89,7 @@ export class HeaderComponent implements OnInit {
 
   Register() {
     $('#registermodal').modal('toggle');
-    let obj;
-
-    if(this.model.user_type=='company') {
-      obj ={firstname:this.model.firstname,lastname:'Company',email:this.model.email,
-        password:this.model.password,phone:this.model.phone,type:this.model.user_type}
-    }else{
-      obj ={firstname:this.model.firstname,lastname:this.model.lastname,email:this.model.email,
-        password:this.model.password,phone:this.model.phone,type:this.model.user_type}
-    }
-
-    this.http.post('//'+config.global_ip+'/auth/signup',obj).subscribe((res:any)=>{
+    this.http.post('//'+config.global_ip+'/auth/signup',this.model).subscribe((res:any)=>{
       this.model = {};
       var result = JSON.parse(res._body);
       if(result.status==200) {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router}  from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { ToasterService} from 'angular2-toaster';
 import * as config from '../../../../../config/config';
 declare var $;
 @Component({
@@ -9,13 +8,11 @@ declare var $;
   templateUrl: './changepass.component.html',
 })
 export class ChangepassComponent implements OnInit {
-  private toasterService: ToasterService;
   User_data;
   dashboard;
   message;
   model;
-  constructor(public http: Http,public router: Router ,toasterService: ToasterService) { 
-    this.toasterService = toasterService;
+  constructor(public http: Http,public router: Router ) { 
     this.model = {
       CurrentPass:'',
       NewPass:'',

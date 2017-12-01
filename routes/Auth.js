@@ -10,15 +10,17 @@ var salt = bcrypt.genSaltSync(10);
 
 router.post('/signup', function(req, res) {
     var pwhash = bcrypt.hashSync(req.body.password, salt);
-    var ID = crypto.createHash('md5').update(req.body.email+Date.now()).digest('hex');
     var RegistratnVerifyHash = crypto.createHash('md5').update(req.body.phone+req.body.type+Date.now()).digest('hex');
     var ExpireTime = new Date();
-    var sql = "INSERT INTO Users (idUsers, Password, Email, Phone, User_Type, Registration_Verify, Verify,last_name, first_name,Status) VALUES ?";
+    if(!req.body.companyname) {
+      req.body.companyname = '';
+    }
+    var sql = "INSERT INTO Users (Password, Email, Phone, User_Type, Registration_Verify, Verify,last_name, first_name,Status,wallet_address,company_name) VALUES ?";
     var values = [
-      [ID,pwhash,req.body.email,req.body.phone,req.body.type,RegistratnVerifyHash,false,req.body.lastname, req.body.firstname,'Active'],];
+      [pwhash,req.body.email,req.body.phone,req.body.user_type,RegistratnVerifyHash,false,req.body.lastname, req.body.firstname,1,req.body.walletaddress,req.body.companyname],];
 
     global.con.query(sql,[values],function(err,result) {
-      if(err) return res.status(500).send();
+      if(err) return res.send(err);
 
       if(result.affectedRows==1) {
         return res.json({status:200,res:'User Inserted'});
@@ -167,7 +169,7 @@ router.post('/login', function(req, res) {
 
   var sql = 'SELECT * FROM Users WHERE Email = ? AND Status = ?';
 
-    global.con.query(sql,[req.body.email,'Active'],function(err,result) {
+    global.con.query(sql,[req.body.email,1],function(err,result) {
 
     if(err) return res.status(500).send();
     if(result.length>0) {
@@ -209,7 +211,7 @@ router.post('/customer', function(req, res) {
 
   var sql = 'SELECT * FROM Users WHERE User_Type = ? AND Status = ?';
 
-  global.con.query(sql,['Customer','Active'],function(err,result) {
+  global.con.query(sql,['Customer', 1],function(err,result) {
   if(err) return res.status(500).send();
 
   return res.json({status:200,res:result});
@@ -219,7 +221,7 @@ router.post('/customer', function(req, res) {
 router.post('/delete', function(req, res) {
 
   var sql = 'UPDATE Users SET Status = ? WHERE idUsers = ?;'
-  var values = [['InActive',req.body.id],];
+  var values = [[0,req.body.id],];
 
   global.con.query(sql,[values],function(err,result) {
   if(err) return res.status(500).send();

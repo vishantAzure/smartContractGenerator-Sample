@@ -33,9 +33,6 @@ export class SidemenuComponent implements OnInit {
           this.dashboard='customer';
           break;
       case "Service Provider":
-          this.dashboard='serviceprovider';
-          break;
-      case "Company":
           this.dashboard='company';
           break;
       case "Admin":

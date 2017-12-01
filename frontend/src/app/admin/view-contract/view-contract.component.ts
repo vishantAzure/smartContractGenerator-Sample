@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, NavigationExtras} from "@angular/router";
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import * as config from '../../../../../config/config';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-view-contract',

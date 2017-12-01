@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+* {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+body{font-family:'Open Sans'}
+.company-bg{float:left;width:100%;padding-left:30px;padding-right:30px;margin-bottom: 15px;}
+.company-bg-outer{margin-left:-30px; margin-right:-30px;}
+.conpany-left{float:left;width:50%;padding: 0 30px;}
+.conpany-left-full{float:left;width:100%;padding: 0 30px;}
+.conpany-left h1{margin: 0 0 10px 0;padding: 0 0 5px 0;font-size: 20px;color: #5da0bc;border-bottom: 1px solid #eee;font-weight: 600;}
+.conpany-left-bg{float:left;width:100%;margin-bottom: 8px;}
+.conpany-left-bg-icon{float:left;width: 14px;margin-right: 7px;font-size: 14px;color: #198aa5;}
+.conpany-left-bg-text{ overflow:hidden; position:relative; font-size:14px;}
+.conpany-left-bg-text-left{float:left;font-size: 13px;color: #000;font-weight: 600;margin-right: 5px;}
+.conpany-left-bg-text-right{overflow:hidden;font-size: 13px;color: #555;}
+.btn-approved{float:left;padding: 4px 10px;font-size:12px;text-align:center;text-decoration:none;background: #198aa5;color: #fff;margin-right: 5px; border-radius:3px;}
+.btn-disapprove{float:left;padding: 4px 10px;font-size:12px;text-align:center;text-decoration:none;background: #bf8f07;color: #fff;margin-right: 5px; border-radius:3px;}
+.btn-edit{cursor: pointer;margin-right: 5px;float:left;padding: 4px 10px;font-size:12px;text-align:center;text-decoration:none;background: #129c43;color: #fff; border-radius:3px;}
+.btn-approved-absolute{right: 6px;top: 5px;float:right;}
+.company-bg h2{width: 100%;cursor: pointer;font-weight: 600;line-height: normal;font-size: 20px;float: left;margin: 0;padding: 0 0 10px 0;color: #5da0bc;border-bottom: 1px solid #eee;}
+/*
+Accordion css
+*/
+.accordion {float:left;width:100%;margin: 0;padding: 0;}
+.accordion  {border: 1px solid #d9e5e8;position: relative;float: left;width: 100%;list-style: none;}
+.accordion .accordion-body {color: #6b97a4;float: left;width: 100%;padding:10px 15px 3px; position:relative;}
+.accordion h1 {width: 100%;cursor: pointer;font-weight: 600;line-height: normal;font-size: 18px;float: left;margin: 0;padding: 5px 15px;color: #5da0bc;border-bottom: 1px solid #eee;}
+.accordion h1:after {width: 8px;height: 8px;border-right: 1px solid #4a6e78;border-bottom: 1px solid #4a6e78;position: absolute;right: 10px;content: " ";top: 12px;transform: rotate(-45deg);-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;transition: all 0.2s ease-in-out;}
+h1.active:after { transform: rotate(45deg); -webkit-transition: all 0.2s ease-in-out; -moz-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; }
+
+.panel-heading a {color: #6b97a4 !important; text-decoration: none;}

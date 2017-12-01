@@ -76,147 +76,203 @@
                                 </select>
                                 </div>
 
-                                <div *ngIf="model.user_type=='Customer' || model.user_type=='Service Provider'">
+                                <div *ngIf="model.user_type=='Customer'">
+
+                                    <div class="form-group">
+                                        <label  for="firstname">First Name<span style="color:red">*</span></label>
+                                        <input type="text" class="form-control" id="firstname"
+                                        required
+                                        maxlength="20" 
+                                        [(ngModel)]="model.firstname" name="firstname"
+                                        #firstname="ngModel">
+                                        <div [hidden]="firstname.valid || firstname.pristine"
+                                            class="alert alert-danger" style="margin-top:10px;">
+                                            <div [hidden]="!firstname.hasError('required')">FirstName is required</div>
+                                        </div>
+                                        </div>
+        
+        
+                                        <div class="form-group">
+                                        <label for="lastname">Last Name<span style="color:red">*</span></label>
+                                        <input type="text" class="form-control" id="lastname"
+                                        required
+                                        maxlength="20" 
+                                        [(ngModel)]="model.lastname" name="lastname"
+                                        #lastname="ngModel">
+                                        <div [hidden]="lastname.valid || lastname.pristine"
+                                            class="alert alert-danger" style="margin-top:10px;">
+                                            <div [hidden]="!lastname.hasError('required')">LastName is required</div>
+                                        </div>
+                                        </div>
+        
+        
+                                        <div class="form-group">
+                                        <label for="email">Email<span style="color:red">*</span></label>
+                                        <input type="text" class="form-control" id="email" placeholder="abc@efg.com"
+                                        required
+                                        maxlength="50" 
+                                        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                                        [(ngModel)]="model.email" name="email"
+                                        #email="ngModel">
+                                        <div [hidden]="email.valid || email.pristine"
+                                            class="alert alert-danger" style="margin-top:10px;">
+                                            <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
+                                            <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
+                                        </div>
+                                        </div>
 
                                         <div class="form-group">
-                                                <label  for="firstname">First Name<span style="color:red">*</span></label>
-                                                <input type="text" class="form-control" id="firstname"
-                                                required
-                                                maxlength="20" 
-                                                [(ngModel)]="model.firstname" name="firstname"
-                                                #firstname="ngModel">
-                                                <div [hidden]="firstname.valid || firstname.pristine"
-                                                    class="alert alert-danger" style="margin-top:10px;">
-                                                    <div [hidden]="!firstname.hasError('required')">FirstName is required</div>
-                                                </div>
-                                                </div>
-                
-                
-                                                <div class="form-group">
-                                                <label for="lastname">Last Name<span style="color:red">*</span></label>
-                                                <input type="text" class="form-control" id="lastname"
-                                                required
-                                                maxlength="20" 
-                                                [(ngModel)]="model.lastname" name="lastname"
-                                                #lastname="ngModel">
-                                                <div [hidden]="lastname.valid || lastname.pristine"
-                                                    class="alert alert-danger" style="margin-top:10px;">
-                                                    <div [hidden]="!lastname.hasError('required')">LastName is required</div>
-                                                </div>
-                                                </div>
-                
-                
-                                                <div class="form-group">
-                                                <label for="email">Email<span style="color:red">*</span></label>
-                                                <input type="text" class="form-control" id="email" placeholder="abc@efg.com"
-                                                required
-                                                maxlength="50" 
-                                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-                                                [(ngModel)]="model.email" name="email"
-                                                #email="ngModel">
-                                                <div [hidden]="email.valid || email.pristine"
-                                                    class="alert alert-danger" style="margin-top:10px;">
-                                                    <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
-                                                    <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
-                                                </div>
-                                                </div>
-                
-                
-                                                <div class="form-group">
-                                                <label for="password">Password<span style="color:red">*</span></label>
-                                                <input type="password" class="form-control" id="password"
-                                                required
-                                                maxlength="50" 
-                                                [(ngModel)]="model.password" name="password"
-                                                #password="ngModel">
-                                                <div [hidden]="password.valid || password.pristine"
-                                                    class="alert alert-danger" style="margin-top:10px;">
-                                                    <div [hidden]="!password.hasError('required')">Password is required</div>
-                                                </div>
-                                                </div>
-                
-                
-                                                <div class="form-group">
-                                                <label for="phone">Phone<span style="color:red">*</span></label>
-                                                <input type="text" class="form-control" id="phone"
-                                                required
-                                                pattern="[0-9]*"
-                                                minlength="10"
-                                                maxlength="10" 
-                                                [(ngModel)]="model.phone" name="phone"
-                                                #phone="ngModel">
-                                                <div [hidden]="phone.valid || phone.pristine"
-                                                    class="alert alert-danger" style="margin-top:10px;">
-                                                    <div class="ddddddd" [hidden]="!phone.hasError('required')">Phone is required</div>
-                                                    <div class="ddddddd" [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
-                                                    <div [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
-                                                </div>
-                                                </div>
+                                        <label for="walletaddress">Wallet Address<span style="color:red">*</span></label>
+                                        <input type="text" class="form-control" id="walletaddress"
+                                        required
+                                        maxlength="50" 
+                                        pattern="^0x[a-fA-F0-9]{40}$" 
+                                        [(ngModel)]="model.walletaddress" name="walletaddress"
+                                        #walletaddress="ngModel">
+                                        <div [hidden]="walletaddress.valid || walletaddress.pristine"
+                                            class="alert alert-danger" style="margin-top:10px;">
+                                            <div class="ddddddd" [hidden]="!walletaddress.hasError('required')">Wallet Address is required</div>
+                                            <div [hidden]="!walletaddress.hasError('pattern')">Enter a Valid Wallet Address</div>
+                                        </div>
+                                        </div>
+        
+        
+                                        <div class="form-group">
+                                        <label for="password">Password<span style="color:red">*</span></label>
+                                        <input type="password" class="form-control" id="password"
+                                        required
+                                        maxlength="50" 
+                                        [(ngModel)]="model.password" name="password"
+                                        #password="ngModel">
+                                        <div [hidden]="password.valid || password.pristine"
+                                            class="alert alert-danger" style="margin-top:10px;">
+                                            <div [hidden]="!password.hasError('required')">Password is required</div>
+                                        </div>
+                                        </div>
+        
+        
+                                        <div class="form-group">
+                                        <label for="phone">Phone<span style="color:red">*</span></label>
+                                        <input type="text" class="form-control" id="phone"
+                                        required
+                                        pattern="[0-9]*"
+                                        minlength="10"
+                                        maxlength="10" 
+                                        [(ngModel)]="model.phone" name="phone"
+                                        #phone="ngModel">
+                                        <div [hidden]="phone.valid || phone.pristine"
+                                            class="alert alert-danger" style="margin-top:10px;">
+                                            <div class="ddddddd" [hidden]="!phone.hasError('required')">Phone is required</div>
+                                            <div class="ddddddd" [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
+                                            <div [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
+                                        </div>
+                                    </div>
 
                                 </div>
 
-                                <div *ngIf="model.user_type=='Company'">
+                                <div *ngIf="model.user_type=='Service Provider'">
                                         
-                                            <div class="form-group">
-                                            <label for="firstname">Company Name<span style="color:red">*</span></label>
-                                            <input type="text" class="form-control" id="firstname"
-                                            required
-                                            maxlength="20" 
-                                            [(ngModel)]="model.firstname" name="firstname"
-                                            #firstname="ngModel">
-                                            <div [hidden]="firstname.valid || firstname.pristine"
-                                                class="alert alert-danger" style="margin-top:10px;">
-                                                <div [hidden]="!firstname.hasError('required')">Company name is required</div>
-                                            </div>
-                                            </div>
-            
-            
-                                            <div class="form-group">
-                                            <label for="email">Email<span style="color:red">*</span></label>
-                                            <input type="text" class="form-control" id="email" placeholder="abc@efg.com"
-                                            required
-                                            maxlength="50" 
-                                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-                                            [(ngModel)]="model.email" name="email"
-                                            #email="ngModel">
-                                            <div [hidden]="email.valid || email.pristine"
-                                                class="alert alert-danger" style="margin-top:10px;">
-                                                <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
-                                                <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
-                                            </div>
-                                            </div>
-            
-            
-                                            <div class="form-group">
-                                            <label for="password">Password<span style="color:red">*</span></label>
-                                            <input type="password" class="form-control" id="password"
-                                            required
-                                            maxlength="50" 
-                                            [(ngModel)]="model.password" name="password"
-                                            #password="ngModel">
-                                            <div [hidden]="password.valid || password.pristine"
-                                                class="alert alert-danger" style="margin-top:10px;">
-                                                <div [hidden]="!password.hasError('required')">Password is required</div>
-                                            </div>
-                                            </div>
-            
-            
-                                            <div class="form-group">
-                                            <label for="phone">Phone<span style="color:red">*</span></label>
-                                            <input type="text" class="form-control" id="phone"
-                                            required
-                                            pattern="[0-9]*"
-                                            minlength="10"
-                                            maxlength="10" 
-                                            [(ngModel)]="model.phone" name="phone"
-                                            #phone="ngModel">
-                                            <div [hidden]="phone.valid || phone.pristine"
-                                                class="alert alert-danger" style="margin-top:10px;">
-                                                <div class="ddddddd" [hidden]="!phone.hasError('required')">Phone is required</div>
-                                                <div class="ddddddd" [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
-                                                <div class="ddddddd" [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
-                                            </div>
-                                            </div>
+                                    <div class="form-group">
+                                    <label  for="firstname">First Name<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" id="firstname"
+                                    required
+                                    maxlength="20" 
+                                    [(ngModel)]="model.firstname" name="firstname"
+                                    #firstname="ngModel">
+                                    <div [hidden]="firstname.valid || firstname.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div [hidden]="!firstname.hasError('required')">FirstName is required</div>
+                                    </div>
+                                    </div>
+    
+    
+                                    <div class="form-group">
+                                    <label for="lastname">Last Name<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" id="lastname"
+                                    required
+                                    maxlength="20" 
+                                    [(ngModel)]="model.lastname" name="lastname"
+                                    #lastname="ngModel">
+                                    <div [hidden]="lastname.valid || lastname.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div [hidden]="!lastname.hasError('required')">LastName is required</div>
+                                    </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label  for="companyname">Company Name<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" id="companyname"
+                                    required
+                                    maxlength="20" 
+                                    [(ngModel)]="model.companyname" name="companyname"
+                                    #companyname="ngModel">
+                                    <div [hidden]="companyname.valid || companyname.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div [hidden]="!companyname.hasError('required')">CompanyName is required</div>
+                                    </div>
+                                    </div>
+    
+                                    <div class="form-group">
+                                    <label for="email">Email<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" id="email" placeholder="abc@efg.com"
+                                    required
+                                    maxlength="50" 
+                                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                                    [(ngModel)]="model.email" name="email"
+                                    #email="ngModel">
+                                    <div [hidden]="email.valid || email.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div class="ddddddd" [hidden]="!email.hasError('required')">Email is required</div>
+                                        <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
+                                    </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="walletaddress">Wallet Address<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" id="walletaddress"
+                                    required
+                                    maxlength="50" 
+                                    pattern="^0x[a-fA-F0-9]{40}$" 
+                                    [(ngModel)]="model.walletaddress" name="walletaddress"
+                                    #walletaddress="ngModel">
+                                    <div [hidden]="walletaddress.valid || walletaddress.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div class="ddddddd" [hidden]="!walletaddress.hasError('required')">Wallet Address is required</div>
+                                        <div [hidden]="!walletaddress.hasError('pattern')">Enter a Valid Wallet Address</div>
+                                    </div>
+                                    </div>
+    
+    
+                                    <div class="form-group">
+                                    <label for="password">Password<span style="color:red">*</span></label>
+                                    <input type="password" class="form-control" id="password"
+                                    required
+                                    maxlength="50" 
+                                    [(ngModel)]="model.password" name="password"
+                                    #password="ngModel">
+                                    <div [hidden]="password.valid || password.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div [hidden]="!password.hasError('required')">Password is required</div>
+                                    </div>
+                                    </div>
+    
+    
+                                    <div class="form-group">
+                                    <label for="phone">Phone<span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" id="phone"
+                                    required
+                                    pattern="[0-9]*"
+                                    minlength="10"
+                                    maxlength="10" 
+                                    [(ngModel)]="model.phone" name="phone"
+                                    #phone="ngModel">
+                                    <div [hidden]="phone.valid || phone.pristine"
+                                        class="alert alert-danger" style="margin-top:10px;">
+                                        <div class="ddddddd" [hidden]="!phone.hasError('required')">Phone is required</div>
+                                        <div class="ddddddd" [hidden]="!phone.hasError('pattern')">Only Numbers Are Allowed</div>
+                                        <div class="ddddddd" [hidden]="!phone.hasError('minlength')">Enter Atleast 10 Numbers</div>
+                                    </div>
+                                    </div>
 
                             </div>
 

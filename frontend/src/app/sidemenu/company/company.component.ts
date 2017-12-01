@@ -32,9 +32,6 @@ if ( parent_menu_li.is( "li" ) ) {
                   this.dashboard='customer';
                   break;
               case "Service Provider":
-                  this.dashboard='serviceprovider';
-                  break;
-              case "Company":
                   this.dashboard='company';
                   break;
               case "Admin":

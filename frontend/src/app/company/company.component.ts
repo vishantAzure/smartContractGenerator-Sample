@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router}  from '@angular/router';
-import { ToasterService} from 'angular2-toaster';
 
 declare var $;
 @Component({
@@ -8,11 +7,9 @@ declare var $;
   templateUrl: './company.component.html'
 })
 export class CompanyComponent implements OnInit {
-    private toasterService: ToasterService
   dashboard;
   User_data;
-  constructor(public router: Router,toasterService: ToasterService) { 
-    this.toasterService = toasterService
+  constructor(public router: Router) { 
   }
   
     ngOnInit() {

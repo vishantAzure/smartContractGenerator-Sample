@@ -11,9 +11,8 @@ var mg = new Mailgun('key-001902229d1f3c9beb6653254fa477e2');
 // var Model = require('../model');
 
 router.post('/AdminManageSubscription', function(req, res) {
-    console.log(req.body);
     var sql = "INSERT INTO Subscriptions (packageName, packagePrice, numberOfContract, renewalFrequency, status) VALUES ?";
-    var values = [[req.body.packageName, req.body.packagePrice, req.body.numberOfContract, req.body.renewalFrequency, req.body.status],];
+    var values = [[req.body.packageName, req.body.packagePrice, req.body.numberOfContract, req.body.renewalFrequency, req.body.subscriptionstatus],];
 
     global.con.query(sql,[values],function(err,result) {
       if(err) return res.status(500).send();
@@ -29,15 +28,10 @@ router.post('/AdminManageSubscription', function(req, res) {
 
 
 router.post('/AdminviewSubscription', function(req, res) {
-    
-    AllSubscriptionsPromise = new Model.Subscriptions().fetchAll();
-    AllSubscriptionsPromise.then(function(subscriptions){
-        console.log(subscriptions.toJSON());       
-    });
   var sql = 'SELECT * FROM Subscriptions ;'
   
   global.con.query(sql, function(err,result) {
-    if(err) return res.status(500).send();
+    if(err) return res.send(err);
     
       if(result.length>0) {
         return res.json({status:200,res:result});
@@ -53,7 +47,7 @@ router.post('/AdminDeleteSubscription', function(req, res) {
   var values = [['0',req.body.id],];
 
   global.con.query(sql,[values],function(err,result) {
-    if(err) return res.status(500).send();
+    if(err) return res.send(err);
     
     if(result.affectedRows==1) {
       return res.json({status:200,res:result});
@@ -89,8 +83,8 @@ router.post('/addCategory', function(req, res) {
   }else{
     parentcategory = req.body.parentcategory;
   }
-  var sql = "INSERT INTO template_category (name, parent_category, created_at, updated_at, Status, deleted) VALUES ?";
-  var values = [[req.body.name,parentcategory,createdat, ,req.body.status,0],];
+  var sql = "INSERT INTO template_category (name, parent_category, created_at, updated_at, Status, deleted, blockchain_id) VALUES ?";
+  var values = [[req.body.name,parentcategory,createdat, ,req.body.status,0,req.body.BlockChainID],];
 
 
   global.con.query(sql,[values],function(err,result) {
