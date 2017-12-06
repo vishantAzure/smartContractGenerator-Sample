@@ -29,7 +29,9 @@
                             <td>{{u.Template_Name}}</td>
                             <td>{{u.Category_Name}}</td>
                             <td>{{u.Status==0 ?'InActive':'Active'}}</td>
-                            <td><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;" (click)="changePage(u)"></i> <i class="fa fa-trash" aria-hidden="true" (click)="ConfirmDelete(u.idTemplate)"></i></td>
+                            <td><a href='javascript:void(0)' (click)="changePage(u)"><i class="fa fa-pencil" aria-hidden="true" style="margin-right:10px;"></i></a>
+                                <a href='javascript:void(0)' (click)="ConfirmDelete(u.idTemplate)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                </td>
                         </tr>
                     </tbody>
                 </table>
@@ -61,10 +63,10 @@
     <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Message</h4>
+        <h4 class="modal-title">Confirm</h4>
     </div>
     <div class="modal-body">
-        <h4>Do you Want To Delete</h4>
+        <h4>Are you sure to delete this template ?</h4>
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-success" (click)="DeleteTemplate()">Delete</button>

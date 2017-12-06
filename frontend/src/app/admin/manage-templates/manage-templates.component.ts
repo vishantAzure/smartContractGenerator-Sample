@@ -64,11 +64,7 @@ export class ManageTemplatesComponent implements OnInit {
   changePage(data) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
-          "idTemplates": data.idTemplate,
-          "TemplateName":data.Template_Name,
-          "Category_Name":data.Category_Name,
-          "Status":data.Status,
-          "Description":data.Description
+          "idTemplates": data.idTemplate,          
       }
   };
   this.router.navigate(["/admin/editTemplate"], navigationExtras);

@@ -18,19 +18,17 @@ export class EditComponent implements OnInit {
     message;
     Category;
     selected;
+    TemplateDetails;
     constructor(public router: Router,public http: Http,public route: ActivatedRoute) { 
       this.contract = {};
       this.route.queryParams.subscribe(params => {
         this.contract.id = params["idTemplates"];
-        this.contract.Name=params["TemplateName"];
-        this.contract.categoryName= params["Category_Name"];
-        this.contract.Description = params["Description"];
-        this.contract.status=parseInt(params["Status"]);
+       
     });
     }
   
     ngOnInit() {
-      console.log(this.contract);
+      
       this.User_data = JSON.parse(localStorage.getItem('User'));
       if(this.User_data) {
 
@@ -48,6 +46,22 @@ export class EditComponent implements OnInit {
             $('#message').modal('toggle');
           }, 1000);
          });
+
+           this.http.post('//'+config.global_ip+'/ApI/getTemplateToUpdate',{id:this.contract.id}).subscribe((res:any)=>{
+                var template_details = JSON.parse(res._body).res;                
+                
+                if(template_details.length == 0) {                    
+                    
+                }else {
+                    this.TemplateDetails = template_details[0];
+                    console.log(this.TemplateDetails.Category_Name);
+                    
+                }
+
+           },(err)=>{
+            
+           });
+
     }else{
         console.log('ll');
     }
@@ -56,7 +70,7 @@ export class EditComponent implements OnInit {
     CreateTemplate() {
       let self = this;
 
-      this.http.post('//'+config.global_ip+'/pdf/UpdateTemplate',this.contract).subscribe((res:any)=>{
+      this.http.post('//'+config.global_ip+'/pdf/UpdateTemplate',this.TemplateDetails).subscribe((res:any)=>{
         this.contract={};  
         var result = JSON.parse(res._body);
       

@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="tab-content" style="padding:30px;">
-                    <form (ngSubmit)="CreateTemplate()" #heroFormmmmmmmmmm="ngForm">  
+                    <form (ngSubmit)="InitializeTemplate()" #heroFormmmmmmmmmm="ngForm">  
                         <div class="form-group">
                         <label  for="Name">Template Name<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="Name"
@@ -32,7 +32,7 @@
                         required
                         #categoryName="ngModel">
                             <option [ngValue]="null">Select Category</option>
-                            <option *ngFor="let u of Category" [ngValue]="u">{{u.name}}</option>
+                            <option *ngFor="let u of Category" [ngValue]="u.id">{{u.name}}</option>
                         </select>
                         </div>
 
@@ -50,7 +50,7 @@
                         #statustemplate="ngModel" >InActive
                         </div>
 
-                        <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+                        <button type="submit" class="btn btn-success" [disabled]="!create_template_form.form.valid">Submit</button>
                     </form>
                     </div>
               </div>

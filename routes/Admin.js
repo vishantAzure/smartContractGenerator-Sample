@@ -7,6 +7,7 @@ var fs = require('fs');
 var Mailgun = require('mailgun').Mailgun;
 var PDFDocument = require('pdfkit');
 var mg = new Mailgun('key-001902229d1f3c9beb6653254fa477e2');
+var Model = require('../model');
 // model configuration
 // var Model = require('../model');
 
@@ -146,5 +147,37 @@ router.post('/retrieveCategory', function(req, res) {
 
   });
 });
+
+router.post('/retrieveCategoryById', function(req, res) {
+  var sql = 'SELECT blockchain_id FROM template_category WHERE id = ?'
+  var values = [[req.body.id],];
+
+  global.con.query(sql,[values],function(err,result) {
+    if(err) return res.status(500).send();
+
+    return res.json({status:200,res:result});
+
+  });
+});
+
+router.post('/getTemplateToUpdate', function(req, res) {
+    console.log(req.body.id);
+    TemplatePromise = new Model.Template().where({idTemplate: req.body.id }).fetchAll();
+    TemplatePromise.then(function(template_details) {
+        
+        if(template_details==null) {
+            console.log("ok failed");
+            return res.json({status:300,res:'', error:'No template found'});
+        }else {            
+            
+            return res.json({status:200,res:template_details});
+        }
+    }).catch(function(err) {
+        console.log(err);
+        return res.json({status:300,res:'', error:'No template found'});
+    });	
+});
+
+
 
 module.exports = router;

@@ -8,17 +8,17 @@
             <div class="graph-tab customer-das manage-dash-temp">
               <div class="row mnage-user-forms">
                   <div class="col-sm-9">
-                    <h3>Create Template</h3>
+                    <h3>Update Template</h3>
                   </div>
               </div>
               <div class="row">
                   <div class="tab-content" style="padding:30px;">
-                  <form (ngSubmit)="CreateTemplate()" #heroFormmmmmmmmmm="ngForm">  
+                  <form (ngSubmit)="CreateTemplate()" #edit_template_form="ngForm" *ngIf="TemplateDetails">  
                       <div class="form-group">
                       <label  for="Name">Template Name<span style="color:red">*</span></label>
                       <input type="text" class="form-control" id="Name"
                       required
-                      [(ngModel)]="contract.Name" name="Name"
+                      [(ngModel)]="TemplateDetails.Template_Name" name="Name"
                       #Name="ngModel">
                       <div [hidden]="Name.valid || Name.pristine"
                           class="alert alert-danger" style="margin-top:10px;">
@@ -28,26 +28,26 @@
           
                       <div class="form-group">
                             <label>Select Category<span style="color:red">*</span></label>
-                            <select [(ngModel)]="contract.categoryName" [ngModelOptions]="{standalone: true}" class="form-control">
-                                <option *ngFor="let u of Category" [value]="u.id" [selected]="contract.categoryName == u.id">{{u.name}}</option>
+                            <select [(ngModel)]="TemplateDetails.Category_Name" [ngModelOptions]="{standalone: true}" class="form-control">
+                                <option *ngFor="let u of Category" [value]="u.id" [selected]="TemplateDetails.Category_Name == u.id">{{u.name}}</option>
                             </select>
                         </div>
 
                       <div class="form-group">
                           <label>Description <span style='font-size:12px;'>( Please add placeholders enclosed with "{{ '{}!' }}" for eg : {{ '{Contract Start Date}!' }} )</span><span style="color:red"> *</span></label>
-                          <ckeditor [(ngModel)]="contract.Description" debounce="500"[config]="{extraPlugins:'tokens'}" required [ngModelOptions]="{standalone: true}"></ckeditor>
+                          <ckeditor [(ngModel)]="TemplateDetails.Description" debounce="500"[config]="{extraPlugins:'tokens'}" required [ngModelOptions]="{standalone: true}"></ckeditor>
                       </div>
           
                       <div class="form-group">
                       <label style="margin-right:20px;"> Status <span style="color:red">*</span></label>
-                      <input type="radio"  [value]="1" id="templatestatusinactive" [(ngModel)]="contract.status" name="statustemplate"
+                      <input type="radio"  [value]="1" id="templatestatusinactive" [(ngModel)]="TemplateDetails.Status" name="statustemplate"
                       #statustemplate="ngModel" >Active<i style="margin-right:20px;"></i>
               
-                      <input type="radio"  [value]="0" id="templatestatusactive" [(ngModel)]="contract.status" name="statustemplate"
+                      <input type="radio"  [value]="0" id="templatestatusactive" [(ngModel)]="TemplateDetails.Status" name="statustemplate"
                       #statustemplate="ngModel" >InActive
                       </div>
 
-                      <button type="submit" class="btn btn-success" [disabled]="!heroFormmmmmmmmmm.form.valid">Submit</button>
+                      <button type="submit" class="btn btn-success" [disabled]="!edit_template_form.form.valid">Submit</button>
                   </form>
                   </div>
             </div>

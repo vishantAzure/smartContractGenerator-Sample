@@ -13,8 +13,8 @@ var Model = require('../model');
 
 
 router.post('/CreateTemplate', function(req, res) {
-    var sql = "INSERT INTO Templates (Template_Name, Description, Category_Name, Status) VALUES ?";
-    var values = [[req.body.Name,req.body.Description,req.body.categoryName,req.body.status],];
+    var sql = "INSERT INTO Templates (Template_Name, Description, Category_Name, Status, blockchain_id) VALUES ?";
+    var values = [[req.body.Name,req.body.Description,req.body.categoryName,req.body.status, req.body.blockchain_id],];
 
     global.con.query(sql,[values],function(err,result) { 
         if(err) return res.send(err);
@@ -40,8 +40,9 @@ router.post('/CreateTemplate', function(req, res) {
 });
 
 router.post('/UpdateTemplate', function(req, res) {
+    console.log(req.body);
     var sql = 'UPDATE Templates SET Template_Name = ?, Category_Name = ?, Status = ?, Description = ? WHERE idTemplate = ?';
-    global.con.query(sql,[req.body.Name, req.body.categoryName ,req.body.status, req.body.Description , req.body.id],function(err,result) {
+    global.con.query(sql,[req.body.Template_Name, req.body.Category_Name ,req.body.Status, req.body.Description , req.body.idTemplate],function(err,result) {
         if(err) return res.send(err);
 
         if(result.affectedRows==1) {
@@ -462,6 +463,21 @@ router.get('/demoejs', function(req, res) {
      });
     
  });
+
+
+router.post('/getStats', function(req, res) {
+    console.log("ok tested");
+    var sql = "SELECT * FROM (SELECT COUNT(id) AS milestone_total FROM Milestones ) a, \n\
+    (SELECT COUNT(id) AS milestone_completed FROM Milestones WHERE Status = 4) b, \n\
+    (SELECT COUNT(*) AS service_providers FROM Users WHERE User_Type = 'Service Provider') c,\n\
+    (SELECT COUNT(*) AS total_customers FROM Users WHERE User_Type = 'Customer') d,\n\
+    (SELECT COUNT(*) AS total_contract FROM Users WHERE User_Type = 'Customer') e";
+    global.con.query(sql, function(err,result) {
+        if(err) return res.send(err);
+            return res.json({status:300,res:result});
+    });
+ });
+
 
 
 module.exports = router;

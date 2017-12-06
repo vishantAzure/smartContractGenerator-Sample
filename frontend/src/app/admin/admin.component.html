@@ -2,23 +2,67 @@
 <section class="admin-dashbord">
 	<div class="container-fluid">
             <app-sidemenu></app-sidemenu>
-        <div class="col-sm-9 right-side">
-        	<div class="top-content">
-            	<h4>Dashboard</h4>
-                <p>Welcome to Smart Contract Generator Admin Panel</p>
+        <div class="col-sm-9 right-side" *ngIf="Stats">
+            <div class="top-content">
+                <h4>Dashboard</h4>                
             </div>
-            <div class="row user-box">
+            <div class="user-box" style="margin-top: 20px;">
             	<div class="col-sm-3">
                 	<div class="box-user clearfix">
                     	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
-                        <div class="pull-right">
-                        	<span>31,570</span>
-                            <p>Registered User</p>
+                        <div class="pull-left">
+                        	<span>{{Stats.total_customers}}</span>
+                            <p>Registered Customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-box">
+            	<div class="col-sm-3">
+                	<div class="box-user clearfix">
+                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
+                        <div class="pull-left">
+                        	<span>{{Stats.service_providers}}</span>
+                            <p>Registered Service Providers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-box">
+            	<div class="col-sm-3">
+                	<div class="box-user clearfix">
+                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
+                        <div class="pull-left">
+                        	<span>{{Stats.milestone_total}}</span>
+                            <p>Total Milestone Created</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-box">
+            	<div class="col-sm-3">
+                	<div class="box-user clearfix">
+                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
+                        <div class="pull-left">
+                        	<span>{{Stats.milestone_completed}}</span>
+                            <p>Milestone Completed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-box">
+            	<div class="col-sm-3">
+                	<div class="box-user clearfix">
+                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
+                        <div class="pull-left">
+                        	<span>{{Stats.total_contract}}</span>
+                            <p>Total Contract Generated</p>
                         </div>
                     </div>
                 </div>
             </div>
             
+            <div class="clearfix"></div><br/><br/><br/><br/>
             <div class="row graph-wrapper">
                <div class="col-sm-6">
                	<div class="graph-tab">
@@ -58,5 +102,7 @@
 </section>
 <!--======================Footer start here=========================-->
 <app-footer></app-footer>
-
+<style>
+        .user-box .col-sm-3 {margin-top: 10px;}
+</style>
 
