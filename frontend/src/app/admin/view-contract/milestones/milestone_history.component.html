@@ -4,14 +4,16 @@
       <app-company-sidemenu></app-company-sidemenu>
           <div class="col-sm-9 right-side">
           <div class="graph-tab customer-das manage-dash-temp">
-              <div class="row mnage-user-forms">
-                  <div class="col-sm-9">
-                      <h3>Milestone History</h3>
+              
+              <div class="page_heading_row mnage-user-forms">
+                    <div class="col-sm-9">
+                        <span class='page_heading'>View Milestone History</span>
+                    </div>
+                    <div class="row page_heading_row">
+                      <div class="col-sm-3 page_heading_button"><button class='btn btn-success' (click)="backClicked()">Back</button></div>
                   </div>
-                  <div class="col-sm-3">
-                    <div class="col-sm-12"><button (click)="backClicked()">Back</button></div>
-              </div>
-              </div>
+                </div>
+              
               <div class="table-responsive">
                   <table class="table table-bordered">
                       <thead>
@@ -39,8 +41,7 @@
               </div>
           </div>
           </div>
-      </div>
-          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+      </div>          
   </section>
 <app-footer></app-footer>
 

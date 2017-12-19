@@ -15,9 +15,9 @@ router.post('/signup', function(req, res) {
     if(!req.body.companyname) {
       req.body.companyname = '';
     }
-    var sql = "INSERT INTO Users (Password, Email, Phone, User_Type, Registration_Verify, Verify,last_name, first_name,Status,wallet_address,company_name) VALUES ?";
+    var sql = "INSERT INTO Users (Password, Email, Phone, User_Type, Registration_Verify, Verify,last_name, first_name,Status,wallet_address,company_name,blockchain_id) VALUES ?";
     var values = [
-      [pwhash,req.body.email,req.body.phone,req.body.user_type,RegistratnVerifyHash,false,req.body.lastname, req.body.firstname,1,req.body.walletaddress,req.body.companyname],];
+      [pwhash,req.body.email,req.body.phone,req.body.user_type,RegistratnVerifyHash,false,req.body.lastname, req.body.firstname,1,req.body.walletaddress,req.body.companyname,req.body.blockchain_id],];
 
     global.con.query(sql,[values],function(err,result) {
       if(err) return res.send(err);

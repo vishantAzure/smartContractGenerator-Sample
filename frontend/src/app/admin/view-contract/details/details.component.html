@@ -129,7 +129,7 @@
                     </a>                        
                   <div id="collapse{{row_no + 1}}" class="panel-collapse in" style='padding: 10px;' aria-expanded="true">
                         <div class="btn-approved-absolute"> 
-                            <a *ngIf="milestone.Status==2"  href="javascript:void(0)" class="btn-approved" (click)="ChangeMilestoneStatus(milestone.id,3)"> Complete </a>
+                            <a *ngIf="milestone.Status==2"  href="javascript:void(0)" class="btn-approved" (click)="ChangeMilestoneStatus(milestone.id,3,milestone.blockchain_id)"> Complete </a>
                             <a *ngIf="milestone.Status==6"  data-toggle="tooltip" title="Update Milestone" class='btn-edit' (click)="updateMilestone(milestone.id)">
                                 Edit
                             </a>
@@ -204,8 +204,7 @@
               </div>
           </div>
           </div>
-      </div>
-          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+      </div>          
   </section>
 <app-footer></app-footer>
 

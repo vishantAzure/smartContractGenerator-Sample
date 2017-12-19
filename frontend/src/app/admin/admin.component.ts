@@ -3,6 +3,8 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router}  from '@angular/router';
 import * as config from '../../../../config/config';
 
+declare var $;
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html'
@@ -11,6 +13,9 @@ export class AdminComponent implements OnInit {
     Stats;
     User_data;
     constructor(public http: Http,public router: Router) { 
+        
+    }
+    onCountoEnd() {
         
     }
 

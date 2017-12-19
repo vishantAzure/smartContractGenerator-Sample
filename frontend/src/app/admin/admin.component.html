@@ -6,103 +6,62 @@
             <div class="top-content">
                 <h4>Dashboard</h4>                
             </div>
-            <div class="user-box" style="margin-top: 20px;">
-            	<div class="col-sm-3">
-                	<div class="box-user clearfix">
-                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
-                        <div class="pull-left">
-                        	<span>{{Stats.total_customers}}</span>
-                            <p>Registered Customers</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-box">
-            	<div class="col-sm-3">
-                	<div class="box-user clearfix">
-                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
-                        <div class="pull-left">
-                        	<span>{{Stats.service_providers}}</span>
-                            <p>Registered Service Providers</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-box">
-            	<div class="col-sm-3">
-                	<div class="box-user clearfix">
-                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
-                        <div class="pull-left">
-                        	<span>{{Stats.milestone_total}}</span>
-                            <p>Total Milestone Created</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-box">
-            	<div class="col-sm-3">
-                	<div class="box-user clearfix">
-                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
-                        <div class="pull-left">
-                        	<span>{{Stats.milestone_completed}}</span>
-                            <p>Milestone Completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="user-box">
-            	<div class="col-sm-3">
-                	<div class="box-user clearfix">
-                    	<span class="pull-left"><img src="assets/images/user.png" alt="image"/></span>
-                        <div class="pull-left">
-                        	<span>{{Stats.total_contract}}</span>
-                            <p>Total Contract Generated</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            
+            <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box1">
+          <h2>Registered Customers</h2>
+          <i class="fa icmn-users counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timersddsss" id='reg_customer_count' data-from="10" data-to="100" data-speed="10000">{{Stats.total_customers}}</span> </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box2">
+          <h2>Registered Service Providers</h2>
+          <i class="fa icmn-user counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timer_count_down" data-from="10" id='reg_provider_count' data-to="50" data-speed="10000">{{Stats.service_providers}}</span> </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box3">
+          <h2>Total Milestone Created</h2>
+          <i class="fa icmn-cash counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timer_count_down" data-from="10" id='milestone_count' data-to="250" data-speed="10000">{{Stats.milestone_total}}</span> </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box4">
+          <h2>Milestone Completed</h2>
+          <i class="fa icmn-stats-growth counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timer_count_down" data-from="10" id='milestone_completed_count' data-to="250" data-speed="10000">{{Stats.milestone_completed}}</span> </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box5">
+          <h2>Total Contract Generated</h2>
+          <i class="fa icmn-stairs-up counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timer_count_down" data-from="5" id='contract_generated_count' data-to="25" data-speed="10000">{{Stats.total_contract}}</span> </div>
+        </div>
+      </div>
+      
+      
+    </div>
+            
+            
+            
             
             <div class="clearfix"></div><br/><br/><br/><br/>
-            <div class="row graph-wrapper">
-               <div class="col-sm-6">
-               	<div class="graph-tab">
-                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Weekly Stats</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Monthly Stats</a></li>
-                </ul>
-                 <div class="tab-content">
-                <div id="home" class="tab-pane fade in active">
-                  <span><img src="assets/images/graph.jpg" alt="image"/></span>
-                </div>
-                <div id="menu1" class="tab-pane fade">
-                  <span><img src="assets/images/graph.jpg" alt="image"/></span>
-                </div>
-              </div>
-              	</div>
-                </div>
-                <div class="col-sm-6">
-                	<div class="message-box">
-                    	<h4>Messages </h4>
-                        <div class="row details">
-                        	<div class="col-sm-2 image-are">
-                            	<span></span>
-                            </div>
-                            <div class="col-sm-10 contenta-area">
-                            	<h5>Jane Doe</h5>
-                            	<p>Forem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod loma tempor incididunt ut labore et dolore magna aliqua...</p>
-                            </div>
-                        </div>
-                        <!-- looping here -->
-                    </div>
-                </div>
-            </div>
+            
         </div>
-    </div>
-        <a class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+    </div>        
 </section>
 <!--======================Footer start here=========================-->
 <app-footer></app-footer>
 <style>
         .user-box .col-sm-3 {margin-top: 10px;}
 </style>
-

@@ -126,10 +126,10 @@
                     </a>                        
                   <div id="collapse{{row_no + 1}}" class="panel-collapse in" style='padding: 10px;' aria-expanded="true">
                         <div class="btn-approved-absolute"> 
-                            <a *ngIf="milestone.Status==1"  href="javascript:void(0)" class="btn-approved" (click)="ChangeMilestoneStatus(milestone.id,2)"> Approve </a>
-                            <a *ngIf="milestone.Status==1" href="javascript:void(0)" class="btn-disapprove" (click)="Cancel(milestone.id,6)"> Disapprove </a>
-                            <a *ngIf="milestone.Status==3" href="javascript:void(0)" class="btn-edit" (click)="ChangeMilestoneStatus(milestone.id,4)"> Mark Complete </a>
-                            <a *ngIf="milestone.Status==3" href="javascript:void(0)" class="btn-edit" (click)="Cancel(milestone.id,5)"> Reject </a>
+                            <a *ngIf="milestone.Status==1"  href="javascript:void(0)" class="btn-approved" (click)="ApproveMilestone(milestone.id,2,milestone.blockchain_id,milestone.Milestone_fee)"> Approve </a>
+                            <a *ngIf="milestone.Status==1" href="javascript:void(0)" class="btn-disapprove" (click)="Cancel(milestone.id,6,milestone.blockchain_id)"> Disapprove </a>
+                            <a *ngIf="milestone.Status==3" href="javascript:void(0)" class="btn-edit" (click)="SetWorkDone(milestone.id,4,milestone.blockchain_id)"> Mark Complete </a>
+                            <a *ngIf="milestone.Status==3" href="javascript:void(0)" class="btn-edit" (click)="Cancel(milestone.id,5,milestone.blockchain_id)"> Reject </a>
                             <a data-toggle="tooltip" title="View Milestone History" class='btn-edit' (click)="viewMilestoneHistory(milestone.id)">
                                 View History
                             </a>
@@ -201,8 +201,7 @@
               </div>
           </div>
           </div>
-      </div>
-          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+      </div>          
   </section>
 <app-footer></app-footer>
 <div class="modal fade" id="reasoncancel" role="dialog">

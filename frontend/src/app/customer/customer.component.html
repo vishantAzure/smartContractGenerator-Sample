@@ -2,79 +2,52 @@
 <section class="admin-dashbord">
 	<div class="container-fluid">
             <app-company-sidemenu></app-company-sidemenu>
-        <div class="col-sm-9 right-side">
-          <div class="graph-tab customer-das">
-              <div class="row">
-                  <h3>Dashboard</h3>
-              </div>
-  <div class="tab-content">
-   
-    <div id="menu2" class="tab-pane fade in active">
-      <div class="row date-frm">
-        <div class="col-sm-2">
-         <div class="input-group">
-        <input class="form-control" id="date" name="date" placeholder="From" type="text"/>
-        <div class="input-group-addon">
-         <i class="fa fa-calendar">
-         </i>
-        </div>
-       </div></div>
-        <div class="col-sm-2">
-        	<div class="input-group">
-                <input class="form-control" id="date" name="date" placeholder="To" type="text"/>
-                 <div class="input-group-addon">
-                 <i class="fa fa-calendar"></i>
-                </div>
+        <div class="col-sm-9 right-side" *ngIf="Stats">
+            <div class="top-content">
+                <h4>Dashboard</h4>                
             </div>
-       </div>
-        <div class="col-sm-4" style="padding-right:0;">
-        	<select class="form-control">
-                <option>Services</option>
-                <!-- looping here -->
-            </select>
-        </div>
-        <div class="col-sm-4">
-        	<select class="form-control">
-            	<option>Company name</option>
-                <!-- looping here -->
-            </select>
+            
+            
+            <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box1">
+          <h2>Total Contracts</h2>
+          <i class="fa icmn-users counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timersddsss" id='reg_customer_count' data-from="10" data-to="100" data-speed="10000">{{Stats[0].total_contract}}</span> </div>
         </div>
       </div>
-      <div class="table-responsive">
-      	<table class="table table-bordered">
-        	<thead>
-                <tr class="active">
-                    <th>Contract ID</th>
-                    <th>Contract Title</th>
-                    <th>Contract Price</th>
-                    <th>Company/ Service Provider Name</th>
-                    <th>Services</th>
-                    <th>Start Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- looping here -->
-            	<tr>
-                	<td>#110011</td>
-                    <td>Lump Sum Contract</td>
-                    <td>ETH 13542</td>
-                    <td>Construction Company</td>
-                    <td>Building material</td>
-                    <td>01/08/2017</td>
-                </tr>
-            </tbody>
-        </table>
-      </div>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
-  
+      
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <div class="timer-box timer-box2">
+            <h2>Total Milestones</h2>
+            <i class="fa icmn-user counter-icon" aria-hidden="true"></i>
+            <div class="counter-count"> <span class="timer_count_down" data-from="10" id='reg_provider_count' data-to="50" data-speed="10000">{{Stats[0].total_count}}</span> </div>
           </div>
         </div>
+        <div *ngFor="let company_stats of Stats">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                <div class="timer-box timer-box2">
+                  <h2>{{ company_stats.status_for_customer}}</h2>
+                  <i class="fa icmn-user counter-icon" aria-hidden="true"></i>
+                  <div class="counter-count"> <span class="timer_count_down" data-from="10" id='reg_provider_count' data-to="50" data-speed="10000">{{company_stats.total_milestones_by_status}}</span> </div>
+                </div>
+            </div>
+        </div>
+      
+      
+      
     </div>
-        <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+            
+            
+            
+            
+            <div class="clearfix"></div><br/><br/><br/><br/>
+            
+        </div>
+    </div>        
 </section>
+<!--======================Footer start here=========================-->
 <app-footer></app-footer>
+<style>
+        .user-box .col-sm-3 {margin-top: 10px;}
+</style>

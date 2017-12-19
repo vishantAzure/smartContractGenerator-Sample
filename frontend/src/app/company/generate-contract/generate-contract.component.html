@@ -3,23 +3,31 @@
     <div class="container-fluid">
             <app-company-sidemenu></app-company-sidemenu>
           <div class="col-sm-9 right-side">
-                <div class="row">
-                    <div class="col-sm-6"><h3>Generate Contract</h3></div>
-                    <div class="col-sm-6"><button (click)="backClicked()">Back</button></div>
+              <div class="graph-tab customer-das manage-dash-temp">
+                <div class="page_heading_row row mnage-user-forms">
+                    <div class="col-sm-9">
+                        <span class='page_heading'>Generate Contract</span>
+                    </div>
+                    <div class="row page_heading_row">
+                      <div class="col-sm-3 page_heading_button"><button class='btn btn-success' (click)="backClicked()">Back</button></div>
+                  </div>
                 </div>
+
         <div class="row">
           <div class="tab-content" style="padding:30px;">
-                <form #heroFormxxxx="ngForm">  
-
+                <form #genereate_contract_form="ngForm">  
+                    <div class="row">
+                        <div class="col-md-6">
                     <div class="form-group">
                     <label>Select Customer<span style="color:red">*</span></label>
                     <select  class="form-control" id="customeremail" [(ngModel)]="Template.CustomerEmail" name="customeremail"
                     #customeremail="ngModel">
                         <option [ngValue]="null">--Select--</option>
-                        <option *ngFor="let c of customers" [ngValue]="c.idUsers">{{c.Email}}</option>
+                        <option *ngFor="let c of customers" [ngValue]="c.blockchain_id">{{c.Email}}</option>
                     </select>
                     </div>
-
+                    </div>
+<div class="col-md-6">
                     <div class="form-group">
                     <label  for="ContractName">Contract Name<span style="color:red">*</span></label>
                     <input type="text" class="form-control" id="ContractName"
@@ -32,8 +40,11 @@
                         <div [hidden]="!ContractName.hasError('required')">Contract Name is required</div>
                     </div>
                     </div>
+</div></div>
 
-
+ <div class="row">
+                        <div class="col-md-6">
+                   
                     <div class="form-group">
                     <label for="email">Email<span style="color:red">*</span></label>
                     <input type="text" class="form-control" id="email"
@@ -48,6 +59,27 @@
                         <div [hidden]="!email.hasError('pattern')">Enter a Valid Email Pattern</div>
                     </div>
                     </div>
+            </div>
+     
+         <div class="col-md-6">
+              <div class="form-group">
+                        <label for="Price">Price ( ETH )<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="Price"
+                        required
+                        pattern="[0-9]*"
+                        maxlength="10" 
+                        [(ngModel)]="Template.Price" name="Price"
+                        #Price="ngModel">
+                        <div [hidden]="Price.valid || Price.pristine"
+                            class="alert alert-danger" style="margin-top:10px;">
+                            <div class="ddddddd" [hidden]="!Price.hasError('required')">This Field is required</div>
+                            <div class="ddddddd" [hidden]="!Price.hasError('pattern')">Only Numbers Are Allowed</div>
+                            <div [hidden]="!Price.hasError('minlength')">Only 10 Numbers</div>
+                        </div>
+                    </div>
+
+        </div>
+    </div>
 
                     <div class="row">
 
@@ -65,27 +97,14 @@
                     </div>
                     
                     
-                    <div class="form-group">
-                        <label for="Price">Price ( ETH )<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="Price"
-                        required
-                        pattern="[0-9]*"
-                        maxlength="10" 
-                        [(ngModel)]="Template.Price" name="Price"
-                        #Price="ngModel">
-                        <div [hidden]="Price.valid || Price.pristine"
-                            class="alert alert-danger" style="margin-top:10px;">
-                            <div class="ddddddd" [hidden]="!Price.hasError('required')">This Field is required</div>
-                            <div class="ddddddd" [hidden]="!Price.hasError('pattern')">Only Numbers Are Allowed</div>
-                            <div [hidden]="!Price.hasError('minlength')">Only 10 Numbers</div>
-                        </div>
-                    </div>
+                   
 
-
-                    <div *ngFor="let u of Milestones" style="margin-bottom:20px; padding:10px;background-color:blanchedalmond">
+                    <div *ngFor="let u of Milestones" style="margin-bottom:20px; padding:10px;background-color:#f1f1f1;">
                         <li class="btn btn-success" style="margin-left:90%;" (click)="RemoveMilestone()">Remove</li>
                         <h4>Milestone {{u.ID}}</h4>
 
+                        <div class="row">
+                            <div class="col-md-6">
                         <div class="form-group">
                         <label for="milestonename">Name<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="milestonename"
@@ -97,7 +116,8 @@
                             <div [hidden]="!milestonename.hasError('required')">This Field is required</div>
                         </div>
                         </div>
-        
+                            </div>
+                            <div class="col-md-6">
 
                         <div class="form-group">
                         <label for="EOW">Execution of Work<span style="color:red">*</span></label>
@@ -110,7 +130,11 @@
                             <div [hidden]="!EOW.hasError('required')">This Field is required</div>
                         </div>
                         </div>
-
+                            </div>
+                        </div>
+                    
+                   <div class="row">
+                            <div class="col-md-6">
                         <div class="form-group">
                         <label for="schedule">Schedule<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="schedule"
@@ -122,7 +146,8 @@
                             <div [hidden]="!schedule.hasError('required')">This Field is required</div>
                         </div>
                         </div>
-
+                            </div>
+                        <div class="col-md-6">
                         <div class="form-group">
                         <label for="taxes">Taxes ( % )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="taxes"
@@ -134,7 +159,11 @@
                             <div [hidden]="!taxes.hasError('required')">This Field is required</div>
                         </div>
                         </div>
-
+                   </div>
+                    </div>  
+                        <div class="row">
+                            <div class="col-md-6">
+                        
                         <div class="form-group">
                         <label for="fees">Fees ( ETH )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="fees"
@@ -150,7 +179,8 @@
                             <div [hidden]="!fees.hasError('minlength')">Only 10 Numbers</div>
                         </div>
                         </div>
-
+                            </div>
+                            <div class="col-md-6">
                         <div class="form-group">
                         <label for="penalty">Penalties ( % )<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="penalty"
@@ -162,7 +192,8 @@
                             <div [hidden]="!penalty.hasError('required')">This Field is required</div>
                         </div>
                         </div>
-
+                            </div>
+                        </div>
                         <div class="row">
                                 
                             <div class="col-sm-6">
@@ -185,22 +216,28 @@
                         <li class="btn btn-success" (click)="AddMilestone()">Add Milestone(s)</li>
                     </div>
 
-                    <div *ngFor="let u of Fields">
-                        <div class="form-group">
+                    
+                        <div class="row">
+                        
+                            <div class="col-md-6" *ngFor="let u of Fields">
+                                 <div class="form-group">
                         <label for="{{u.INPUT_FIELD}}">{{u.INPUT_FIELD}}<span style="color:red">*</span></label>
                         <input type="text" class="form-control" id="{{u.INPUT_FIELD}}"
                         required
-                        [(ngModel)]="u.Value_Input" name="{{u.INPUT_FIELD}}"
+                        [(ngModel)]="u.Value_Input" name="{{u.INPUT_FIELD}}" [ngModelOptions]="{standalone: true}"
                         #u.INPUT_FIELD="ngModel">
                         </div>
+                        </div>
+                        
                     </div>
 
-                    <button type="submit" class="btn btn-success" (click)= "CreatePDF()" [disabled]="!heroFormxxxx.form.valid">Submit</button>
-                    <button type="submit" class="btn btn-success" (click)= "PreviewContract()" [disabled]="!heroFormxxxx.form.valid">Preview</button>
+                    <button type="submit" class="btn btn-success" (click)= "CreatePDF()" [disabled]="!genereate_contract_form.form.valid">Submit</button>                    
+                    <button type="submit" class="btn btn-success" (click)= "PreviewContract()">Preview</button>                    
                 </form>
-          </div>
+                </div>
+            </div>
+            </div>
         </div>
-          </div>
     </div>      
 </section>
 <app-footer></app-footer>

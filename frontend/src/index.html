@@ -19,14 +19,19 @@
   <link rel="stylesheet" href="assets/js/JqueryUI.css">  
   <script src="assets/js/JqueryUi.js"></script>
   <script src="assets/js/ckeditor/ckeditor.js"></script>  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/5.0.0/bignumber.min.js"></script>  
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/5.0.0/bignumber.min.js"></script>
+  <script src="assets/js/jquery.blockUI.js"></script>    
+  <script src="assets/js/notify.js"></script>    
+  <script src="assets/js/jquery.countTo.js"></script>    
+  <link href="assets/css/layout.css" rel="stylesheet"/>
+  <link href="assets/css/fonts.css" rel="stylesheet"/>
 </head>
 <body>
   <app-root></app-root>
 
 <script>
-$(document).ready(function() {
+$(document).ready(function() {      
+    
 $('.side_nav_active').parent().parent().show();
 var parent_menu_li = $('.side_nav_active').parent().parent().parent();
 if ( parent_menu_li.is( "li" ) ) {
@@ -38,6 +43,8 @@ $('.manage-user').on('click',function(){
 //alert('sds')
 $(this).find('ul').slideToggle();
 });
+
+
 $('.owl-carousel').owlCarousel({
 loop: true,
 margin: 10,

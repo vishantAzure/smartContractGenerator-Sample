@@ -16,6 +16,7 @@ export class EditMilestoneComponent implements OnInit {
     MilestoneId;
     MilestoneDetails;
     User_data;
+    validated;
     myOptions: IMyOptions = {
         dateFormat: 'yyyy.mm.dd',
     };
@@ -73,24 +74,40 @@ export class EditMilestoneComponent implements OnInit {
         return JSON.parse(JSON.stringify(this.myOptions));
     }
 
+    validateAmount() {
+        
+    }
+
     UpdateMilestone() {
         this.MilestoneDetails.Start_Date = moment(this.MilestoneDetails.Start_Date.formatted).format();
         this.MilestoneDetails.End_Date = moment(this.MilestoneDetails.End_Date.formatted).format();
-        this.http.post('//'+config.global_ip+'/pdf/updateMilestone',this.MilestoneDetails).subscribe((res:any)=>{
+            
+            this.http.post('//'+config.global_ip+'/pdf/validateAmount',this.MilestoneDetails).subscribe((res:any)=>{
+                var validated = JSON.parse(res._body);
+                
+                if(validated.status) {
+                    this.http.post('//'+config.global_ip+'/pdf/updateMilestone',this.MilestoneDetails).subscribe((res:any)=>{
+                        var result = JSON.parse(res._body);
+                        if(result.status==200) {
+                            let navigationExtras = {
+                            queryParams: {
+                                "contractID": result.res.Contract_ID
+                            }
+                            };
+                            this.router.navigate(["/viewContractDetails"], navigationExtras);
+                        }
 
-        var result = JSON.parse(res._body);
-        if(result.status==200) {
-            let navigationExtras = {
-            queryParams: {
-                "contractID": result.res.Contract_ID
-            }
-            };
-            this.router.navigate(["/viewContractDetails"], navigationExtras);
-        }
+                    },(err)=>{
+                        $.notify("Unable to update milestone", 'error');
+                    });
 
-        },(err)=>{
-            $('#message').modal('toggle');
-        });
+                }else {
+                    $.notify(validated.error_message, 'error');  
+                }
+
+            
+            },(err)=>{
+                $.notify("could not validate milestone", 'error');  
+            });
     }
-
 }

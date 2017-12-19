@@ -17,6 +17,7 @@ export class EditComponent implements OnInit {
     templatestatus;
     message;
     Category;
+    CategoryTree;
     selected;
     TemplateDetails;
     constructor(public router: Router,public http: Http,public route: ActivatedRoute) { 
@@ -29,17 +30,67 @@ export class EditComponent implements OnInit {
   
     ngOnInit() {
       
+    let self = this;
+
+    function hasChildren(element, arr) {
+        var ret = false;
+        Object.keys(arr).forEach(function(key) {
+            if(arr[key].parent_category == element.id) {
+                ret =  true;
+            }
+        });
+        
+        return ret;
+    }
+
+    function getChild(final_categories, arr, element, count) {
+        var children = [];
+        
+        Object.keys(arr).forEach(function(key) {
+            if(arr[key].parent_category == element.id) {
+                for(var i=0; i < count; i++) {
+                    arr[key].name = " - "+arr[key].name;
+                }
+                final_categories.push(arr[key]);
+                
+                if(hasChildren(arr[key], arr)) {
+                    count ++;                    
+                    var children = getChild(final_categories, arr, arr[key], count);
+                    final_categories = children;
+                }else{
+                    count--;
+                }
+            }
+        });
+        
+        return final_categories;
+    };
+
       this.User_data = JSON.parse(localStorage.getItem('User'));
       if(this.User_data) {
 
         this.http.post('//'+config.global_ip+'/ApI/retrieveCategory',{id:this.User_data.idUsers}).subscribe((res:any)=>{
           let abc = JSON.parse(res._body).res;
-          this.Category = [];
+          self.Category = [];
           for(var i=0;i<abc.length;i++) {
             if(abc[i].Status==1) {
-              this.Category.push(abc[i]);
+              self.Category.push(abc[i]);
             }
           }
+
+        var final_categories = [];
+        self.Category.forEach(function(element) {            
+            if(element.parent_category == 0) {
+                final_categories.push(element);
+                var children_arr = getChild(final_categories, self.Category, element, 1);  
+                if(children_arr.length > 0) {
+                    final_categories = children_arr;
+                }
+            }
+        });
+        
+        this.CategoryTree = final_categories;
+
          },(err)=>{
           this.message='Data Not Found';
           setTimeout(function(){ 

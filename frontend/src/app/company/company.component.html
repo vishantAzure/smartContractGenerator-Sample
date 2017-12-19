@@ -1,42 +1,53 @@
 <app-header></app-header>
-    <section class="admin-dashbord">
-        <div class="container-fluid">
-                <app-company-sidemenu></app-company-sidemenu>
-              <div class="col-sm-9 right-side" style="margin-bottom: 100px;">
-                <div class="graph-tab customer-das manage-dash-temp">
-                  <div class="row mnage-user-forms">
-                    <div class="col-sm-9">
-                            <h3>Company Dashboard</h3>
-                    </div>
-                  </div>
-                  <div class="table-responsive">
-                      <table class="table" style="border: 1px solid #ccc;">
-                          <thead>
-                              <tr class="active">
-                                  <th>SNo</th>
-                                  <th width= "25%">User Name</th>
-                                  <th width= "56%">Contract Description</th>
-                                  <th width= "100px">Action</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr class="bg-wht">
-                                  <td>#</td>
-                                  <td>Construction Company</td>
-                                  <td>The terms and conditions are defined step-wise and has confirm step/job completion,..</td>
-                                  <td><i class="fa fa-eye" aria-hidden="true" style="margin-right:10px;" (click)="popup()"></i></td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                </div>
-              </div>
+<section class="admin-dashbord">
+	<div class="container-fluid">
+            <app-company-sidemenu></app-company-sidemenu>
+        <div class="col-sm-9 right-side" *ngIf="Stats">
+            <div class="top-content">
+                <h4>Dashboard</h4>                
+            </div>
+            
+            
+            <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="timer-box timer-box1">
+          <h2>Total Contracts</h2>
+          <i class="fa icmn-users counter-icon" aria-hidden="true"></i>
+          <div class="counter-count"> <span class="timersddsss" id='reg_customer_count' data-from="10" data-to="100" data-speed="10000">{{Stats[0].total_contract}}</span> </div>
+        </div>
+      </div>
+      
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+          <div class="timer-box timer-box2">
+            <h2>Total Milestones</h2>
+            <i class="fa icmn-user counter-icon" aria-hidden="true"></i>
+            <div class="counter-count"> <span class="timer_count_down" data-from="10" id='reg_provider_count' data-to="50" data-speed="10000">{{Stats[0].total_count}}</span> </div>
           </div>
-              <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
-      </section>
-      <app-footer></app-footer>
-
-
-
-
-
+        </div>
+        <div *ngFor="let company_stats of Stats">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                <div class="timer-box timer-box2">
+                  <h2>{{ company_stats.status_for_company}}</h2>
+                  <i class="fa icmn-user counter-icon" aria-hidden="true"></i>
+                  <div class="counter-count"> <span class="timer_count_down" data-from="10" id='reg_provider_count' data-to="50" data-speed="10000">{{company_stats.total_milestones_by_status}}</span> </div>
+                </div>
+            </div>
+        </div>
+      
+      
+      
+    </div>
+            
+            
+            
+            
+            <div class="clearfix"></div><br/><br/><br/><br/>
+            
+        </div>
+    </div>        
+</section>
+<!--======================Footer start here=========================-->
+<app-footer></app-footer>
+<style>
+        .user-box .col-sm-3 {margin-top: 10px;}
+</style>

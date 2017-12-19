@@ -2,7 +2,7 @@
 <section class="admin-dashbord">
   <div class="container-fluid">
       <app-sidemenu></app-sidemenu>
-        <div class="col-sm-9 right-side">
+        <div class="col-sm-9 right-side">        
           <div class="graph-tab customer-das manage-dash-temp">
             <div class="row mnage-user-forms">
                 <div class="col-sm-9">
@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      <tr class="bg-wht"  *ngFor="let u of Category; let row_no = index">
+                      <tr class="bg-wht"  *ngFor="let u of ParentCategory; let row_no = index">
                             <td>{{row_no + 1}}</td>
                             <td>{{u.name}}</td>
                             <td>{{u.created_at | date: 'mediumDate'}}</td>
@@ -36,8 +36,7 @@
               </div>
           </div>
         </div>
-    </div>
-        <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+    </div>        
 </section>
 <app-footer></app-footer>
 
@@ -67,7 +66,8 @@
         <div class="form-group">
             <label>Parent Category<span style="color:red">*</span></label>
             <select [(ngModel)]="contract.parentcategory" [ngModelOptions]="{standalone: true}" class="form-control">
-                <option *ngFor="let u of ParentCategory" [value]="u.id" [selected]="contract.parentcategory == u.id">{{u.name}}</option>
+                <option [value]="0">Please Select</option>
+                <option *ngFor="let cat of CategoryTree" [value]="cat.id" [selected]="contract.parentcategory == cat.id">{{cat.name}}</option>
             </select>
         </div>
 
@@ -110,8 +110,9 @@
 
           <div class="form-group">
             <label>Parent Category<span style="color:red">*</span></label>
-            <select [(ngModel)]="contract.parentcategory" [ngModelOptions]="{standalone: true}" class="form-control">
-                <option *ngFor="let u of ParentCategory" [value]="u.id" [selected]="contract.parentcategory == u.id">{{u.name}}</option>
+            <select [(ngModel)]="contract.CategoryTree" [ngModelOptions]="{standalone: true}" class="form-control">
+                <option [value]="0">Please Select</option>
+                <option *ngFor="let cat of CategoryTree" [value]="cat.id" [selected]="contract.parentcategory == cat.id">{{cat.name}}</option>
             </select>
           </div>
 

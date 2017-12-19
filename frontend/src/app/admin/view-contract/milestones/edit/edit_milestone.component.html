@@ -6,14 +6,15 @@
           
           <div class="col-sm-9 right-side">
             <div class="graph-tab customer-das manage-dash-temp">
-              <div class="row mnage-user-forms">
-                  <div class="col-sm-9">
-                    <h3>Update Milestone</h3>
+                <div class="page_heading_row mnage-user-forms">
+                    <div class="col-sm-9">
+                        <span class='page_heading'>Update Milestone</span>
+                    </div>
+                    <div class="row page_heading_row">
+                      <div class="col-sm-3 page_heading_button"><button class='btn btn-success' (click)="backClicked()">Back</button></div>
                   </div>
-                  <div class="col-sm-3">
-                        <div class="col-sm-12"><button (click)="backClicked()">Back</button></div>
-                      </div>
-              </div>
+                </div>
+                
                 <div class="row" *ngIf="MilestoneDetails">
                   <div class="tab-content" style="padding:30px;" >
                   <form (ngSubmit)="UpdateMilestone()" #update_milestone_form="ngForm">  
@@ -115,8 +116,7 @@
             </div>
             </div>
           </div>
-      </div>
-          <a href="#" class="footer-logo"><img src="assets/images/footer-logo.png" alt="logo-footer"/></a>
+      </div>          
   </section>
 </section>
 <app-footer></app-footer>   

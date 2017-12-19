@@ -55,6 +55,7 @@ import { ViewMilestoneHistory } from './admin/view-contract/milestones/milestone
 import { ViewCustomerMilestoneHistory } from './customer/view-contract/milestones/milestone_history.component';
 import { EditMilestoneComponent } from './admin/view-contract/milestones/edit/edit_milestone.component';
 import { safeHtml } from './safe-html';
+import { CountoModule }  from 'angular2-counto';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,7 @@ import { safeHtml } from './safe-html';
     ViewMilestoneHistory,
     ViewCustomerMilestoneHistory,
     EditMilestoneComponent,
-    safeHtml
+    safeHtml,    
   ],
   imports: [
     
@@ -112,6 +113,7 @@ import { safeHtml } from './safe-html';
     appRouterModule,
     HttpModule,
     FormsModule,
+    CountoModule
   ],
   exports: [CKEditorComponent],
   providers: [CustomerRouteGuard,CompanyRouteGuard,AdminRouteGuard,SidenavigationService],

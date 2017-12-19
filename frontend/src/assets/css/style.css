@@ -110,12 +110,14 @@ padding: 10px;
 border: 1px solid #ccc;
 border-radius: 5px;
 }
-.color-blue{ color:#54a1b7;
-font-weight: 300;
-margin-bottom: 50px;
+.color-blue {
+    color: #54a1b7;
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin-top: 15px;
 }
 #demos{padding: 29px 0px;}
-.pricing-plane{ background-color:#e9faff; border-bottom:1px solid #ddd; border-top:1px solid #ddd;  border-bottom:1px solid #ddd; padding:30px 0px; padding-bottom:50px;}
+.pricing-plane{ background-color:#f5f5f5; padding:30px 0px; padding-bottom:50px;}
 .blue-btn{ background:#54a1b7; color:#fff;}
 
 .price-box{
@@ -197,7 +199,7 @@ margin: 28px auto 0;
 	margin-bottom: 50px;
 }
 .free-30days button:hover{ background:#333; color:#fff;}
-footer{ background-color:#54a1b7; padding:30px 0px;}
+footer{ background-color:#0f7f92; padding:30px 0px;}
 footer .footer-nav{ margin-top:20px; margin-bottom:20px;}
 footer .footer-nav a{ font-size:12px; color:#fff; margin:10px 10px; display:inline-block;}
 .social-icon a{ 
@@ -208,14 +210,14 @@ footer .footer-nav a{ font-size:12px; color:#fff; margin:10px 10px; display:inli
 	height: 40px;
 	margin-right: 6px;
 	color: #54a1b7;
-	line-height: 40px;
-	font-size: 20px;
+	line-height: 47px;
+	font-size: 14px;
 	text-align: center;
 	
 }
 .social-icon a i{transition:all 0.5s;}
 .social-icon a:hover i{ transform:rotate(360deg);}
-.copy-right{ background:#505050;}
+.copy-right{ background:#0c6c7b;}
 .copy-right p{ margin:0; padding:10px 0px; color:#fff;}
 #myModal .modal-dialog{ width:700px;}
 #myModal .modal-body{ padding:0;}
@@ -329,7 +331,7 @@ margin-bottom: 25px;
 
 /*==========================admin dashboard start here=================*/
 
-.admin-dashbord{ background:#f2f2f2; position:relative;}
+.admin-dashbord{position:relative;}
 .admin-dashbord .footer-logo{
 	display: block;
 	background: #f2f2f2;
@@ -352,25 +354,22 @@ margin-bottom: 25px;
 	width: 51%;
 }
 .admin-dashbord .container-fluid{ padding-left:0; padding-right:0;}
-.admin-dashbord .left-side{
-	background: #fff;
-min-height: 600px;
-}
+.admin-dashbord .left-side{background:#e2e2e2;min-height: 600px;}
 ul{ list-style:none; padding:0;}
 
 
 /*==========================admin dashboard ends here=================*/
-#top{ background:#57a3bd; min-height:75px; margin-bottom: 0;}
+#top{ background:#0e8092; min-height:75px; margin-bottom: 0;}
 .navbar-brand img{ width:200px;}
 .admin-dashbord .left-side{padding: 0;}
 .admin-dashbord .left-side aside{}
 .admin-dashbord .left-side aside li.active{ background: #e4f8ff;}
 .admin-dashbord .left-side aside li.active a{ color:#57a3bd;}
-.admin-dashbord .left-side aside li:hover{ background: #e4f8ff; text-indent: 10px;}
+.admin-dashbord .left-side aside li:hover{ background:#f3f3f2; text-indent: 10px;}
 .admin-dashbord .left-side aside li ul{display:none;}
 .admin-dashbord .left-side aside li.manage-user:hover{ background: transparent;}
 .admin-dashbord .left-side aside li{
-	padding-left: 15px;    
+	padding-left:0px;    
 	border-bottom:1px solid #f1f1f1;
 	transition:all 0.5s;
 	}
@@ -389,7 +388,7 @@ ul{ list-style:none; padding:0;}
     }
     .admin-dashbord .left-side aside li a:hover {
         color:#000;
-        background: #57a3bd;
+        background: #fdfdfd;
     }    
 a:hover{ text-decoration:none;}
 .top-content h4{ color:#54a1b7; font-weight:500; margin-top:20px; font-family: 'Roboto', sans-serif;}
@@ -406,7 +405,7 @@ a:hover{ text-decoration:none;}
     color: #585858;
     font-weight: 400;
 	}
-.graph-tab{ background-color:#fff; border: 1px solid #e1e1e1; min-height: 253px;}
+.graph-tab{ background-color:#fff; min-height: 253px;}
 .graph-tab ul{ border:none; margin-left: 5px;}
 .graph-tab ul li a{border-bottom:2px solid #e1e1e1; color:#585858;}
 .graph-tab ul li.active a{border-bottom:2px solid #57a3bd !important;
@@ -643,7 +642,7 @@ margin-bottom: 15px;
         }
         .side_nav_active {
             color:#000;
-            background: #9adcf3;
+            background: #fdfdfd;
         }
         .active_parent_menu:before {
             background: #57a3bd;
@@ -666,3 +665,9 @@ margin-bottom: 15px;
         .page_heading {font-size: 24px;}
         .page_heading_button {width:150px;float: right;}
         .page_heading_row {margin-bottom: 10px;}
+        .navbar-nav>li ul {right: 0;top: 63px;background: #fff;box-shadow: 1px 3px 5px #ccc;}
+        #dropdown button{border-radius:0px !important; background:#fff; color: #000; border:0; font-size:14px;}
+        #dropdown button:hover{background:#f2f2f2 !important; color: #000; }
+        .getstrted button{background: transparent !important; border:0px !important; font-size: 28px; outline:0px !important;}                        
+        .table-responsive {margin-top: 15px;}
+        .h1, .h2, .h3, h1, h2, h3{margin-top:0px; margin-bottom: 0px; line-height:34px;font-weight:300;}
